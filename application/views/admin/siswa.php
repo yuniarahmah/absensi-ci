@@ -15,23 +15,38 @@
 </a> -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
-</li>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <div>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      </div>
     </form>
   </div>
 </nav>
@@ -74,25 +89,48 @@
             </div>
         </div>
 
-    <div class="row container py-3 h-auto">
-      <tr>
-          <h1>SISWA</h1>
+    <div class="container py-3 h-auto">
+          <h1 style="background-color:blue; height: 60px; text-align:center;">SISWA</h1>
       <table class="table">
         <thead>
-            <th scope="col">nama siswa</th>
-            <th scope="col">kelas</th>
-            <th scope="col">jurusan</th>
-            </tr>
+            <th scope="col" >No</th>
+            <th scope="col" >Nama siswa</th>
+            <th scope="col" >Nisn</th>
+            <th scope="col" >Gender</th>
+            <th scope="col" >Id_kelas</th>
+            <th scope="col" >Aksi</th>
+          </tr>
+
         </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>rahma</td>
-                <td>10</td>
-                <td>TKJ</td>
+        <tbody classs="table-grup-divider">
+          <?php $no=0; foreach($siswa as $row ): $no++ ?>
+          <tr>
+            <td><?php echo $no ?></td>
+            <td><?php echo $row ->nama_siswa ?></td>
+            <td><?php echo $row->nisn ?></td>
+            <td><?php echo $row->gender?></td>
+            <td><?php echo tampil_full_kelas_byid($row->id_kelas)?></td>
+            <td>
+                <a href="<?php echo base_url('admin/update')?>" class="btn btn-primary">Update</a>
+                <button onclick="hapus(<?php echo $row-> id_siswa ?>)"
+                class="btn btn-danger">
+              Hapus
+             </button>
+            </td>
             </tr>
-           
+           <?php endforeach ?>
         </tbody>
-    </table>
+      </table>
+      <a href="<?php echo base_url('admin/tambah_siswa')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
     </div>
 </div>
+<script>
+    function hapus(id){
+        var yes = confirm('Yakin Di Hapus?');
+        if(yes == true) {
+            window.location.href = "<?php echo base_url('admin/hapus_siswa/')?>" + id;
+        }
+    }
+</script>
+</body>
+</html>
