@@ -111,8 +111,8 @@
             <td><?php echo $row->gender?></td>
             <td><?php echo tampil_full_kelas_byid($row->id_kelas)?></td>
             <td>
-                <a href="<?php echo base_url('admin/update')?>" class="btn btn-primary">Update</a>
-                <button onclick="hapus(<?php echo $row-> id_siswa ?>)"
+                <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary">Ubah</a>
+                <button onclick="hapus(<?php echo $row->id_siswa ?>)"
                 class="btn btn-danger">
               Hapus
              </button>

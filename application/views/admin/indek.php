@@ -15,20 +15,39 @@
 </a> -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav ml-50% mt-2 mt-lg-0">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
-</li>
-    </ul> 
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <div>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      </div>
+    </form>
   </div>
 </nav>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -40,7 +59,16 @@
     </ul>
   </div>
 </nav>
-<div class="d-flex">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<iv class="d-flex">
         <div class="col-12 bg-dark" style="width: 15%;">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -72,36 +100,37 @@
 
     <div class="row container py-3">
         <div class="col-3">
-            <div class="card">
-                <img class="card-img-top" src="https://3.bp.blogspot.com/--qQ_pbSFEWA/VkE89PogKjI/AAAAAAAAAAg/YbrmKZaYcw0/s1600/gambar-sekolah-sehat-1.gif" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>  
+        <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+             <div class="card-header">Jumlah Siswa</div>
+               <div class="card-body">
+                 <p class="card-text"><?php echo $siswa;?></p>
+             </div>
+        </div>            
         </div>
         <div class="col-3">
-            <div class="card">
-                <img class="card-img-top" src="https://tse3.mm.bing.net/th?id=OIP.YPYBEWBJWTA6_SJZ-SrvhgHaDt&pid=Api&P=0&h=180" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>  
+        <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+             <div class="card-header">Jumlah Mapel</div>
+               <div class="card-body">
+                 <p class="card-text"><?php echo $mapel;?></p>
+             </div>
+        </div>            
         </div>
         <div class="col-3">
-            <div class="card">
-                <img class="card-img-top" src="https://tse3.mm.bing.net/th?id=OIP.tE96-FOYf78B5BOUDSF1CQHaFj&pid=Api&P=0&h=180" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>  
+        <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+             <div class="card-header">Jumlah Kelas</div>
+               <div class="card-body">
+                 <p class="card-text"><?php echo $kelas;?></p>
+             </div>
+        </div>            
         </div>
         <div class="col-3">
-            <div class="card">
-                <img class="card-img-top" src="https://lh3.googleusercontent.com/proxy/7oT0n4grX02MDzBDPV5YP6_e_bHaDPPSYntDEIkB1exRSmh9b5ULQIPZ-w-foxcvM-hI1PnXbrz3Wf96nORH4w1eIAtTiCo0DlaGkVrikxNUA5equO9qFYKOSmtbqxvoQ4AtYQt_nagklyUhOt0N54JvfCUhAdcVVQT6ruVYaWE1i41paFju=w1200-h630-p-k-no-nu" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>  
+        <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+             <div class="card-header">Jumlah Guru</div>
+               <div class="card-body">
+                 <p class="card-text"><?php echo $guru;?></p>
+             </div>
+        </div>            
         </div>
     </div>
-</div>
+</body>
+</html>
