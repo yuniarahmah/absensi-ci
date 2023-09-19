@@ -6,8 +6,8 @@ class Register extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper('my_helper');
-        $this->load->library('form_validation');
+        // $this->load->helper('my_helper');
+        // $this->load->library('form_validation');
 
         $this->load->model('m_model');
     }
@@ -17,37 +17,26 @@ class Register extends CI_Controller
         $this->load->view('auth/register');
     }
 
-    public function register()
+    public function aksi_register()
     {
-        $this->form_validation->set_rules('nama_pengguna', 'trim|required|alpha');
-        $this->form_validation->set_rules('email', 'trim|required|valid_email|is_unique[users.email]');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required');
-        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'trim|required|matches[password]');
-        if($this->form_validation->run() == FALSE)
-        {
-            // failed
-            $this->index();
-        }
-        else
-        {
-            $data = array(
-                'nama_pengguna' => $this->input->post('nama_pengguna'),
-                'email' => $this->input->post('email'),
-                'password' => $this->input->post('password')
+		$nama_pengguna = $this->input->post('nama_pengguna');
+        $email = $this->input->post('email');
+		$password = $this->input->post('password');
+		$role = $this->input->post('role');
+
+        if (strlen($password < 8)) {
+            redirect('register');
+        } else {
+            $kode_pass = md5($password);
+            $data = array (
+                "nama_pengguna" => $nama_pengguna,
+                "email"         => $email,
+                "password"      => $kode_pass,
+                "role"          => $role,
             );
-            $register_user = new UserModel;
-            $checking = $register_user->registerUser($data);
-            if($checking)
-            {
-                $this->session->set_flashdata('status','Registered Successfully.! Go to Login');
-                redirect(base_url('register'));
-            }
-            else
-            {
-                $this->session->set_flashdata('status','Something Went Wrong.!');
-                redirect(base_url('register'));
-            }
-        }
+            $this->m_model->register($data);
+            redirect('auth/login');
+        };
     }
 }
 

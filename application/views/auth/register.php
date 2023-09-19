@@ -31,7 +31,7 @@
         <div class="container">
           <h1 style="text-align:center;background-color:bisque;">Registrasi</h1>
           <br>
-            <form action="<?php echo base_url()?>Auth/register" method="post" style="text-align:center;">
+            <form action="<?php echo base_url('Register/aksi_register')?>" method="post" style="text-align:center;">
                 <label><font color='white'><b>
                     nama_pengguna
                     </b></label><br>@<br></font>
@@ -44,9 +44,10 @@
                     Password
                     </br></label>?<br></font>
                 <input type="password" id="password" name="password"><br>
+                <input type="hidden" id="role" name="role" value="admin"><br>
                 <label><b>
                 <br>
-                <button name="submit" type="submit">Registrasi</button>
+                <button name="submit" type="submit">Log in</button>
             </form>
 </body>
   </div>

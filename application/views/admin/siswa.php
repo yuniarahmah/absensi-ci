@@ -15,7 +15,7 @@
 </a> -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -75,14 +75,13 @@
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 </ul>
                             </li>
-                            <li>
-                                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fa-solid fa-house"></i> <span class="ms-1 d-none d-sm-inline">home</span></a>
-                                    
-                            </li>
                     <li>
                         <a href="<?php echo base_url('admin/siswa') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-graduation-cap"></i> <span class="ms-1 d-none d-sm-inline">Siswa</span></a>
+                        <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">Siswa</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('admin/guru') ?>" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-user-tie"></i> <span class="ms-1 d-none d-sm-inline">Guru</span></a>
                     </li>
                 </ul>
                 <hr>
@@ -90,10 +89,9 @@
         </div>
 
     <div class="container py-3 h-auto">
-          <h1 style="background-color:blue; height: 60px; text-align:center;">SISWA</h1>
+          <h1 style="background-color:lightblue; height: 60px; text-align:center;">SISWA</h1>
       <table class="table">
         <thead>
-            <th scope="col" >No</th>
             <th scope="col" >Nama siswa</th>
             <th scope="col" >Nisn</th>
             <th scope="col" >Gender</th>
@@ -105,7 +103,6 @@
         <tbody classs="table-grup-divider">
           <?php $no=0; foreach($siswa as $row ): $no++ ?>
           <tr>
-            <td><?php echo $no ?></td>
             <td><?php echo $row ->nama_siswa ?></td>
             <td><?php echo $row->nisn ?></td>
             <td><?php echo $row->gender?></td>

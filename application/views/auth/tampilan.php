@@ -24,17 +24,20 @@
         <h1 style="text-align: center;">Pendaftaran Online</h1>
        
         <center>
-            <img src="https://serpong.binus.sch.id/wp-content/themes/binus-2019-169-school-v2/assets/images/default/logo--semarang-2.png" widht="350px" height="200px">
-            <h2 style="text-align: center; background-color:lightblue;">HIGT SCHOOL BINUSA</h2>
+            <img src="https://serpong.binus.sch.id/wp-content/themes/binus-2019-169-school-v2/assets/images/default/logo--semarang-2.png" widht="250px" height="150px">
+            <br>
+            <h2 style="text-align: center;"><font color='white'>HIGT SCHOOL BINUSA</font></h2>
+            <br>
             <P style="background-color: darkgrey; width:40%; margin-rigth:0%;">
                 <i>
                 A Little Description About Binusa School
                 </i>
                 <br>
+                <br>
                 binusa school is a school that has students who are bright, well-mannered, virtuous and achievement. we can learn many things. Although not a foreign school but binusa is also not inferior to a state school with good fasilistas  
             </P>
             <br>
-            <a class="btn btn-primary" href="<?php echo base_url() ?>login " style="text-align: center;">Login</a>
+            <a class="btn btn-primary" href="<?php echo base_url('register') ?> " style="text-align: center;">register</a>
         </div>
     </center>
 </body>
