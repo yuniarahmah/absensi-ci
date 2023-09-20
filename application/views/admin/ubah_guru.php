@@ -34,16 +34,7 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
     </div>
     <div class="mb-3 col-6">
     <label for="kelas" class="form-label">Mapel</label>
-    <select name="mapel" class="form-select">    
-        <option selected value="<?php echo $data_guru->mapel?>">
-        <?php echo $data_guru->mapel ?>
-    </option>     
-        <?php foreach($guru as $row):?>
-            <option value="<?php echo $row->mapel?>">
-           <?php echo $row->mapel ?>
-        </option>
-        <?php endforeach ?>
-    </select>
+   <input type="text" class="form-control" id="mapel" name="mapel" value="<?php echo $data_guru->mapel?>">
 </div>
 <button type="submit" class="btn btn-primary w-25" name="submit">ubah</button>
 </form>

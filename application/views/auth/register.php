@@ -20,8 +20,10 @@
     border-radius:50px
   }
     
-    .boy{
-     background-color:black;
+  body{
+    background-image: url("https://static.vecteezy.com/system/resources/previews/000/544/710/original/black-abstract-background-vector-gray-abstract-modern-design-background-for-report-and-project-presentation-template-vector-illustration-graphic-dot-and-circular-shape-product-advertising-present.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
     }
 
    </style>
@@ -47,7 +49,7 @@
                 <input type="hidden" id="role" name="role" value="admin"><br>
                 <label><b>
                 <br>
-                <button name="submit" type="submit">Log in</button>
+                <button name="submit" type="submit">Registrasi</button>
             </form>
 </body>
   </div>

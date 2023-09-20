@@ -53,7 +53,7 @@ class M_model extends CI_Model {
     }
     public function tambah_guru( $table, $data )
      {
-        $this->projek1->insert( $table, $data );
+        $this->projek1->get( $table, $data );
         return $this->projek1->insert_id( $table );
     }
     public function get_by_id_guru($tabel, $id_column, $id)
@@ -61,11 +61,11 @@ class M_model extends CI_Model {
         $data=$this->projek1->where($id_column, $id)->get($tabel);
         return $data;
     }
-    public function ubah_guru($tabel, $data, $where)
-    {
-        $data=$this->projek1->update($tabel, $data, $where);
-        return $this->projek1->affected_rows();
-    }
+    // public function ubah_guru($tabel, $data, $where)
+    // {
+    //     $data=$this->projek1->update($tabel, $data, $where);
+    //     return $this->projek1->affected_rows();
+    // }
 }
 ?>
 

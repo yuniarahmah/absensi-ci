@@ -11,7 +11,7 @@
     padding: 20px 25px;
     width: 300px;
 
-    background-image: url("");
+    background-image: url();
     background-repeat: no-repeat;
     background-size:cover;
     width: 20%;
@@ -20,13 +20,15 @@
     border-radius:50px
   }
     
-    .boy{
-     background-color:black;
+    body{
+      background-image: url("http://wallpapercave.com/wp/K7tq1CL.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
     }
 
    </style>
-  <div class="ba">
-  <body style="background-color:darkgrey;">
+  <body>
+    <div>
     <img src="https://anexia.com/blog/wp-content/uploads/2015/01/codeigniter_logo.png" style="width:700px; text-align:center;">
         <div class="container">
           <h1 style="text-align:center;background-color:bisque;">Log In</h1>
@@ -48,6 +50,7 @@
                 <br>
                 <button name="submit" type="submit">Log In</button>
             </form>
-</body>
+       </div>
   </div>
+      </body>
 </html>

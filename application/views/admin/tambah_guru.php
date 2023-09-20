@@ -30,8 +30,7 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
     </div>
     <div class="mb-3 col-6">
     <label for="mapel" class="form-label">Mapel</label>
-     <input type="text" class="from-control" id="mapel" name="mapel">
-</div>
+    <input type="text" class="form-control" id="mapel" name="mapel">
 <button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button>
 </form>
 </div>

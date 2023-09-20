@@ -7,9 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
+<script>
+  myInput.onfocus = function() {
+    document.getElementById("message").style.display = "block";
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+  }
+</script>
 <body>
-    
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,9 +85,9 @@
                       
                     </li>
                     <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <a href="<?php echo base_url('admin') ?>" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                            <ul class="collapse show nav flex-column ms-1" id="admin">
                                 </ul>
                             </li>
                     <li>
@@ -100,7 +110,7 @@
                <div class="card-body">
                  <p class="card-text"><?php echo $siswa;?> <i class="fa-solid fa-user"></i></p>
                  <div class="card-footer text-muted">
-                    <a href="#" class="btn btn-primary">info lengkap</a>
+                    <a href="<?php echo base_url('admin/detail_siswa')?>" class="btn btn-primary">info lengkap</a>
                   </div>
              </div>
         </div>            
@@ -111,7 +121,7 @@
                <div class="card-body">
                  <p class="card-text"><?php echo $kelas;?> <i class="fa-solid fa-door-closed"></i></p>
                  <div class="card-footer text-muted">
-                    <a href="#" class="btn btn-primary">info lengkap</a>
+                    <a href="<?php echo base_url('admin/kelas')?>" class="btn btn-primary">info lengkap</a>
                   </div>
              </div>
         </div>            
@@ -122,41 +132,12 @@
                <div class="card-body">
                  <p class="card-text"><?php echo $guru;?> <i class="fa-solid fa-user-tie"></i></p>
                  <div class="card-footer text-muted">
-                    <a href="#" class="btn btn-primary">info lengkap</a>
+                    <a href="<?php echo base_url('admin/detail_guru')?>" class="btn btn-primary">info lengkap</a>
                   </div>
              </div>
         </div>            
         </div>
     </div>
-        <div class="col">
-        <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
-             <div class="card-header">Mapel</div>
-               <div class="card-body">
-                 <p class="card-text"><?php echo $guru->mapel;?> <i class="fa-solid fa-user-tie"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="#" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>            
-        </div>
-    </div>
-    <div class="row py-3 col-8">
-        <div class="col">
-        <div class="card text-bg-secondary mb-3" style="max-width: 19rem;">
-             <div class="card-header">Jumlah Siswa</div>
-               <div class="card-body">
-                 <p class="card-text"><?php echo $siswa;?> <i class="fa-solid fa-user"></i></p>
-             </div>
-        </div>            
-        </div>
-        <div class="col">
-          <div class="card text-bg-secondary mb-3" style="max-width: 19rem;">
-               <div class="card-header">Jumlah Kelas</div>
-                 <div class="card-body">
-                   <p class="card-text"><?php echo $kelas;?> <i class="fa-solid fa-door-closed"></i></p>
-               </div>
-          </div>            
-          </div>
     </div>
   </div>
 </body>

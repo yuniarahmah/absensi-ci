@@ -24,7 +24,7 @@ class Auth extends CI_Controller {
 		$password = $this->input->post('password', true);
 		$data =  ['email' => $email ];
 		$query = $this->m_model->getwhere('admin', $data);
-		$result = $query->row_array();
+		$result = $query->row_array();	
 		
 		if(!empty($result) && md5($password) === $result['password']) {
 			$data = [
@@ -46,6 +46,7 @@ class Auth extends CI_Controller {
 					redirect(base_url(). "auth");
 				}
 			}
+
 			function logout(){
 				$this->session->sess_destroy();
 				redirect(base_url('auth'));
