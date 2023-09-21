@@ -91,7 +91,6 @@
             <th scope="col" >Nama siswa</th>
             <th scope="col" >Nisn</th>
             <th scope="col" >Gender</th>
-            <th scope="col" >Id_kelas</th>
             <th scope="col" >Aksi</th>
           </tr>
 
@@ -102,7 +101,6 @@
             <td><?php echo $row ->nama_siswa ?></td>
             <td><?php echo $row->nisn ?></td>
             <td><?php echo $row->gender?></td>
-            <td><?php echo tampil_full_kelas_byid($row->id_kelas)?></td>
             <td>
                 <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary">Ubah</a>
                 <button onclick="hapus(<?php echo $row->id_siswa ?>)"

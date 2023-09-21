@@ -29,7 +29,7 @@
                                             <th scope="col">Nama </th>
                                             <th scope="col">NISN </th>
                                             <th scope="col"> Gender </th>
-                                            <th scope="col"> Kelas </th>
+                                            <!-- <th scope="col"> Kelas </th> -->
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
@@ -47,11 +47,9 @@
                                             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                                                 <?php echo $row->gender ?>
                                             </td>
+                                           
                                             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                                                <?php echo tampil_full_kelas_byid($row->id_kelas) ?>
-                                            </td>
-                                            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                                                <a href="<?php echo base_url('ADMIN/update_siswa/') . $row->id_siswa ?>"
+                                                <a href="<?php echo base_url('admin/update_siswa/') . $row->id_siswa ?>"
                                                     class="btn btn-sm btn-primary">Ubah</a>
 
                                                 <button onclick="hapus(<?php echo $row->id_siswa ?>)"
@@ -63,7 +61,7 @@
                                     </tbody>
                                 </table>
 
-                                <a href="<?php echo base_url('project/tambah_siswa') ?>"
+                                <a href="<?php echo base_url('admin/tambah_siswa') ?>"
                                     class="inline-block rounded bg-sky-600 px-4 py-2 text-xs font-medium text-white hover:bg-sky-700 text-center btn btn-primary">Tambah</a>
                             </div>
                             </form>
@@ -74,6 +72,23 @@
                     </div>
 
                 </div>
+                
+                <script>
+                    Swal.fire({
+  title: 'Do you want to save the changes?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Save',
+  denyButtonText: `Don't save`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    Swal.fire('Saved!', '', 'success')
+  } else if (result.isDenied) {
+    Swal.fire('Changes are not saved', '', 'info')
+  }
+})
+                            </script>
                 <br>
 </body>
 </html>

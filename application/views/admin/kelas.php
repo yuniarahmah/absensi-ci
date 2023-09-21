@@ -16,10 +16,6 @@
                         <div class="card-body min-vh-100  align-items-center">
                             <div class="card w-100 m-auto p-5">
                                 <?php echo $this->session->set_flashdata('message'); ?>
-
-                             
-
-
                                 <br>
                                 <br>
                                 <table class="table  table-striped">
@@ -28,6 +24,7 @@
                                             <th scope="col">No </th>
                                             <th scope="col">Tingkat Kelas </th>
                                             <th scope="col">Jurusan Kelas </th>
+                                            <th scope="col"> Aksi </th>
                                     </thead>
                                     <tbody>
                                         <?php
@@ -41,29 +38,29 @@
                                             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                                                 <?php echo $row->jurusan_kelas ?></td>
                                             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                                                <a href="<?php echo base_url('admin/update_kelas/') . $row->kelas ?>"
+                                                <a href="<?php echo base_url('admin/ubah_kelas/') . $row->id_kelas ?>"
                                                     class="btn btn-sm btn-primary">Ubah</a>
-
-                                                <button onclick="hapus(<?php echo $row->kelas ?>)"
-                                                    class="btn btn-sm btn-danger">Hapus</button>
+                                                <button onclick="hapus(<?php echo $row->id_kelas ?>)"
+                                                 class="btn btn-sm btn-danger">Hapus</button>
                                             </td>
 
                                         </tr><?php endforeach ?>
-
-                                    </tbody>
+                                     </tbody>
                                 </table>
-
                                 <a href="<?php echo base_url('admin/tambah_kelas') ?>"
                                     class="inline-block rounded bg-sky-600 px-4 py-2 text-xs font-medium text-white hover:bg-sky-700 text-center btn btn-primary">Tambah</a>
                             </div>
                             </form>
-
-
-
-                        </div>
                     </div>
-
-                </div>
+                </div>   
+<script>
+    function hapus(id){
+        var yes = confirm('Yakin Di Hapus?');
+        if(yes == true) {
+            window.location.href = "<?php echo base_url('admin/hapus_kelas/')?>" + id;
+        }
+    }
+</script>
                 <br>
 </body>
 </html>

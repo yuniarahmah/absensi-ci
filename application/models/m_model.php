@@ -61,6 +61,33 @@ class M_model extends CI_Model {
         $data=$this->projek1->where($id_column, $id)->get($tabel);
         return $data;
     }
+
+
+    function get_data_kelas( $table ) {
+        return $this->projek1->get( $table );
+    }
+
+    function getwre( $table, $data )
+    {
+        return $this->projek1->get_where( $table, $data );
+
+    }
+
+    public function buang( $table, $field, $id )
+     {
+        $data = $this->projek1->delete( $table, array( $field => $id ) );
+        return $data;
+    }
+    public function tambah_kelas( $table, $data )
+     {
+        $this->projek1->get( $table, $data );
+        return $this->projek1->insert_id( $table );
+    }
+    public function get_by_id_kelas($tabel, $id_column, $id)
+    {
+        $data=$this->projek1->where($id_column, $id)->get($tabel);
+        return $data;
+    }
     // public function ubah_guru($tabel, $data, $where)
     // {
     //     $data=$this->projek1->update($tabel, $data, $where);

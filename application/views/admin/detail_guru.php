@@ -73,6 +73,14 @@
                     </div>
 
                 </div>
+                <script>
+                            function hapus(id) {
+                                var yes = confirm("Yakin Ingin Menghapus Data Anda")
+                                if (yes === true) {
+                                    window.location.href = "<?php echo base_url('admin/hapus_detail_guru/') ?>" + id;
+                                }
+                            }
+                            </script>
                 <br>
 </body>
 </html>
