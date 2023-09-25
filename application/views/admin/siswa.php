@@ -9,50 +9,22 @@
 </head>
 <body>
    
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <div>
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      </div>
-    </form>
-  </div>
-</nav>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
+<nav class="navbar navbar-expand-lg" style="background:darkgrey" >
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout');?>">
+          <i class="fa-solid fa-house-chimney"></i>Home</a>
+          <a class="nav-link active" aria-current="page" style="text-align:center;margin-left: 200px;"><h1>WELCOME TO THE WEB SIS RAHMA</h1>
+          <hr></a>
+        </li>
+      </ul>
+    </div>
+    
   </div>
 </nav>
 <div class="d-flex">
@@ -66,7 +38,7 @@
                       
                     </li>
                     <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <a href="<?php echo base_url('admin') ?>" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 </ul>
@@ -86,11 +58,15 @@
 
     <div class="container py-3 h-auto">
           <h1 style="background-color:lightblue; height: 60px; text-align:center;">SISWA</h1>
+          <a href="<?php echo base_url('admin/tambah_siswa')?>"><button type="submit" class="btn btn-primary w-15" name="submit">Tambah <i class="fa-solid fa-file-circle-plus"></i></button></a>
+ 
       <table class="table">
         <thead>
+            <th scope="col" >No</th>
             <th scope="col" >Nama siswa</th>
             <th scope="col" >Nisn</th>
             <th scope="col" >Gender</th>
+            <th scope="col" >Kelas</th>
             <th scope="col" >Aksi</th>
           </tr>
 
@@ -98,30 +74,52 @@
         <tbody classs="table-grup-divider">
           <?php $no=0; foreach($siswa as $row ): $no++ ?>
           <tr>
+            <td><?php echo $no?></td>
             <td><?php echo $row ->nama_siswa ?></td>
             <td><?php echo $row->nisn ?></td>
-            <td><?php echo $row->gender?></td>
+            <td><?php echo $row->gender?></td> 
+            <td><?php echo tampil_full_kelas_byid($row->id_kelas)?></td>       
             <td>
-                <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary">Ubah</a>
+                <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary"><i class="fa-solid fa-square-pen"></i></a>
                 <button onclick="hapus(<?php echo $row->id_siswa ?>)"
                 class="btn btn-danger">
-              Hapus
+              Hapus  <i class="fa-solid fa-trash"></i>
              </button>
             </td>
             </tr>
            <?php endforeach ?>
         </tbody>
       </table>
-      <a href="<?php echo base_url('admin/tambah_siswa')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
-    </div>
+         </div>
 </div>
-<script>
-    function hapus(id){
-        var yes = confirm('Yakin Di Hapus?');
-        if(yes == true) {
-            window.location.href = "<?php echo base_url('admin/hapus_siswa/')?>" + id;
-        }
-    }
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+    <script>
+            function hapus(id) {
+           swal.fire({
+               title: 'Yakin untuk menghapus data ini?',
+               text: "Data ini akan terhapus permanen",
+               icon: 'warning',
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               cancelButtonText: 'Batal',
+               confirmButtonText: 'Ya Hapus'
+           }).then((result) => {
+               if (result.isConfirmed) {
+                   Swal.fire({
+                       icon: 'success',
+                       title: 'Berhasil Dihapus',
+                       showConfirmButton: false,
+                       timer: 1500,
+   
+                   }).then(function() {
+                       window.location.href = "<?php echo base_url('Admin/hapus_siswa/')?>" + id;
+                   });
+               }
+           });
+       }
+    </script>
 </script>
 </body>
 </html>

@@ -25,7 +25,9 @@ class Auth extends CI_Controller {
 		$data =  ['email' => $email ];
 		$query = $this->m_model->getwhere('admin', $data);
 		$result = $query->row_array();	
-		
+		// didalam if terdapat validasi jika empty kosong dan passwor
+		// dnya mengguna md5 maka result berisi password yang sudah berubah menjadi md5 atau 
+		// password tidak dapat dilihat seperti ketika mengetikan password yang pertama
 		if(!empty($result) && md5($password) === $result['password']) {
 			$data = [
 				'loged_in' => TRUE,

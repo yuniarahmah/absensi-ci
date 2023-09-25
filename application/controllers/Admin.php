@@ -42,14 +42,14 @@ function __construct(){
 		 redirect(base_url('admin/siswa'));
 	}
 	public function hapus_siswa($id){
-		$this->m_model->delete('siswa', 'id_siswa', $id_kelas);
+		$this->m_model->delete('siswa', 'id_siswa', $id);
 		redirect(base_url('admin/siswa'));
 	}
 
 	public function ubah_siswa($id)
 	{
 		$data['siswa'] = $this->m_model->get_by_id('siswa', 'id_siswa', $id)->result();
-		$data['kelas'] = $this->m_model->get_data('kelas')->result();
+		$data['kelas'] = $this->m_model->get_data('kelas', $id)->result();
          $this->load->view('admin/ubah_siswa', $data);
 	}
 	
@@ -59,7 +59,7 @@ function __construct(){
       'nama_siswa' => $this->input->post('nama'),
       'nisn' => $this->input->post('nisn'),
       'gender' => $this->input->post('gender'),
-      'id_kelas' => $this->input->post('id_kelas'),
+      'id_kelas' => $this->input->post('kelas'),
     );
 
     $eksekusi = $this->m_model->ubah_data
@@ -73,7 +73,7 @@ function __construct(){
     }
   }
 
-
+// untuk menghubungkan guru dengan sql
   public function guru()
 	{
 		$data['guru'] = $this->m_model->get_data('guru')->result();
@@ -95,7 +95,7 @@ function __construct(){
 		 $this->m_model->tambah_data('guru', $data);
 		 redirect(base_url('admin/guru'));
 	}
-	public function hapus_guru($id){
+	public function hapus_guru($id){    
 		$this->m_model->delete('guru', 'id_guru', $id);
 		redirect(base_url('admin/guru'));
 	}
@@ -136,6 +136,7 @@ function __construct(){
   public function detail_guru()
   {
 	  $data['guru'] = $this->m_model->get_data('guru')->result();
+	  $data['mapel'] = $this->m_model->get_data('mapel')->result();
 	  $this->load->view('admin/detail_guru', $data);
   }
 
@@ -151,6 +152,7 @@ function __construct(){
   {
     $data['title'] = 'Update Guru';
 
+	  $data['mapel'] = $this->m_model->get_data('mapel')->result();
     $data['guru'] = $this->m_model->get_by_id('guru', 'id_guru', $id)->result();
     $this->load->view('admin/ubah_detail_guru', $data);
   }
@@ -160,7 +162,7 @@ function __construct(){
       'nama_guru' => $this->input->post('nama_guru'),
       'nik' => $this->input->post('nik'),
       'gender' => $this->input->post('gender'),
-      'mapel' => $this->input->post('mapel'),
+      'id_mapel' => $this->input->post('mapel'),
     );
     $eksekusi = $this->m_model->ubah_data(
       'guru',
@@ -186,6 +188,7 @@ function __construct(){
 	$this->m_model->delete('guru', 'id_guru', $id);
 	redirect(base_url('admin/detail_guru'));
   }
+  
 
 //update detail siswa
   public function update_siswa($id)
@@ -193,6 +196,7 @@ function __construct(){
     $data['title'] = 'Update siswa';
 
     $data['siswa'] = $this->m_model->get_by_id('siswa', 'id_siswa', $id)->result();
+    $data['kelas'] = $this->m_model->get_by_id('kelas', 'id_kelas', $id)->result();
     $this->load->view('admin/ubah_detail_siswa', $data);
   }
   public function aksi_update_siswa()
@@ -302,6 +306,11 @@ function __construct(){
   {
   $this->m_model->delete('kelas', 'id_kelas', $id);
   redirect(base_url('admin/kelas'));
+  }
+//from untuk logout
+  function logout_dashboard(){
+    $this->session->sess_destroy();
+    redirect(base_url('admin/dashboard/'));
   }
 
 }

@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <style>
         .background {
-            background-color:cyan;
+            background-color:beige;
         }
         .background-image-black {
         height: 10px;
@@ -24,7 +24,9 @@
         <center>
             <img src="https://serpong.binus.sch.id/wp-content/themes/binus-2019-169-school-v2/assets/images/default/logo--semarang-2.png" widht="250px" height="150px">
             <br>
-            <h2 style="text-align: center;"><font color='black'>HIGT SCHOOL BINUSA</font></h2>
+            <h2 style="text-align: center;"><font color='black'> WELCOME TO SIS THE SCHOOL BINUSA</font></h2>
+            <br>
+            <font color='red'>CERDAS SANTUN BERBUDI LUHUR</font>
             <br>
             <P style="background-color: silver; width:40%; margin-rigth:0%;">
                 <i>
@@ -32,7 +34,8 @@
                 </i>
                 <br>
                 <br>
-                binusa school is a school that has students who are bright, well-mannered, virtuous and achievement. we can learn many things. Although not a foreign school but binusa is also not inferior to a state school with good fasilistas  
+                binusa school is a school that has students who are bright, well-mannered, virtuous and achievement. we can learn many things. Although not a foreign school but binusa is also not inferior to a state school with good fasilistas 
+                binusa is also famous for its basic principle which is to make intelligent disciples well-mannered and virtuous
             </P>
             <br>
             <a class="btn btn-primary" href="<?php echo base_url('register') ?> " style="text-align: center;">Register</a>

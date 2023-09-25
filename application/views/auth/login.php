@@ -21,7 +21,7 @@
   }
     
     body{
-      background-image: url("http://wallpapercave.com/wp/K7tq1CL.jpg");
+      background-image: url("https://static.vecteezy.com/system/resources/previews/000/833/525/original/grey-abstract-background-with-layers-vector.jpg");
     background-repeat: no-repeat;
     background-size:cover;
     }
@@ -34,19 +34,30 @@
           <h1 style="text-align:center;background-color:bisque;">Log In</h1>
           <br>
             <form action="<?php echo base_url('Auth/fungsi_login')?>" method="post" style="text-align:center;">
-                <label><font color='white'><b>
+                <!-- <label><font color='white'><b>
                     nama_pengguna
                     </b></label><br>@<br></font>
-                <input type="text" id="nama_pengguna" name="nama_pengguna"><br>
+                <input type="text" id="nama_pengguna" name="nama_pengguna"><br> -->
                 <label><font color='white'><b>
-                    email
+                    Email
                     </br></label>#<br></font>
                 <input type="text" id="email" name="email"><br>
-                <label><font color='white'><b>
-                    Password
-                    </br></label>?<br></font>
-                <input type="password" id="password" name="password"><br>
-                <label><b>
+        <p style="color:white">Password:</p>
+         <input type="password" name="password" id="inputPassword">
+        <br><br>
+        <input type="checkbox" onclick="myFunction()"><font color='white'>Tampilkan Password</font>
+        </font>
+          
+        <script>
+            function myFunction() {
+                var x = document.getElementById("inputPassword");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
                 <br>
                 <button name="submit" type="submit">Log In</button>
             </form>
