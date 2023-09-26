@@ -6,9 +6,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
 </head>
+
+
 <body>
-    <!-- <h1>selamat datang <?php echo $this->session->userdata('username') ?></h1>
+  <?php foreach($admin as $users): ?>
+ <!-- <h1>selamat datang <?php echo $this->session->userdata('username') ?></h1>
     <a href="<?php echo base_url('auth/logout');?>"
         class="btn btn-primary">
         loguot
@@ -57,58 +61,35 @@
                     </li>
                 </ul>
                 <hr>
-                <a href="<?php echo base_url('admin');?>"class="btn btn-primary">loguot</a>
+                
+<a href="<?php echo base_url('admin');?>"class="btn btn-primary">loguot</a>
             </div>
-        </div>
+        </div> 
+        
+        <div class = 'card w-50 m-auto p-3'>
 
-    <div class="row container py-3">
-    <div class="container py-3 h-auto">
-                  <h1 style="background-color:blue; height: 60px; text-align:center;">SISWA</h1>
-              <table class="table">
-                <thead>
-                    <th scope="col" >No</th>
-                    <th scope="col" >foto</th>
-                    <th scope="col" >Nama siswa</th>
-                    <th scope="col" >Nisn</th>
-                    <th scope="col" >Gender</th>
-                    <th scope="col" >Id_kelas</th>
-                    <th scope="col" >Aksi</th>
-                  </tr>
-          
-                </thead>
-                <tbody classs="table-grup-divider">
-                  <?php $no=0; foreach($siswa as $row ): $no++ ?>
-                  <tr>
-                    <td><?php echo $no ?></td>
-                    <td><img src="<?php echo base_url('images/siswa/'. $row->foto)?>" width="50px"></td>
-                    <td><?php echo $row ->nama_siswa ?></td>
-                    <td><?php echo $row->nisn ?></td>
-                    <td><?php echo $row->gender?></td>
-                    <td><?php echo tampil_full_kelas_byid($row->id_kelas)?></td>
-                    <td>
-                        <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary">Ubah</a>
-                        <button onclick="hapus(<?php echo $row->id_siswa ?>)"
-                        class="btn btn-danger">
-                      Hapus
-                     </button>
-                    </td>
-                    </tr>
-                   <?php endforeach ?>
-                </tbody>
-              </table>
-              <a href="<?php echo base_url('admin/tambah_siswa')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
-            </div>
+<h3 class = 'text-center '>Akun <?php echo $this->session->userdata('username')?></h3>   
+<form  action="<?php echo base_url('admin/aksi_ubah_akun')?>" method="post" enctype="multipart/from-data">
+    <div class="mb-3 col-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" name="email" value="<?php  echo $users->email?>">
+    </div>
+    <div class="mb-3 col-6">
+     <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" value="<?php echo $users->username ?>">
+    </div>
+    <div class="mb-3 col-6">
+     <label for="password_baru" class="form-label">Password Baru</label>
+      <input type="text" class="form-control" id="password_baru" name="password_baru" value="">
+    </div>
+    <div class="mb-3 col-6">
+     <label for="konfirmasi_password" class="form-label">Konfirmasi Password</label>
+      <input type="text" class="form-control" id="konfirmasi_password" name="konfirmasi_password" value="">
     </div>
 
-      <script>
-        function hapus(id){
-          var yes = confirm('Yakin Di Hapus?');
-          if(yes == true) {
-            window.location.href = "<?php echo base_url('admin/hapus_siswa/')?>" + id;
-        }
-    }
-</script>
+<button type="submit" class="btn btn-dark w-25" name="submit">ubah</button>
+</form>
+</div>
+  <?php endforeach ?>
 </body>
 </html>
-
-           
