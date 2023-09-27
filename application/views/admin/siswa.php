@@ -43,7 +43,7 @@
                       
                     </li>
                     <li>
-                        <a href="/index.php/" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <a href="/codeigniter-3/admin/" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu"></ul>
                     </li>
@@ -53,7 +53,11 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url('admin/account') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-graduation-cap"></i> <span class="ms-1 d-none d-sm-inline">Account</span></a>
+                        <i class="fa-solid fa-house-user"></i> <span class="ms-1 d-none d-sm-inline">Account</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('admin/') ?>" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
                     </li>
                 </ul>
                 <hr>
