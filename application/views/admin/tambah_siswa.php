@@ -13,7 +13,7 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
 <h3 class = 'text-center '>Tambah Siswa</h3>   
 <form  action="<?php echo base_url('admin/aksi_tambah_siswa')?>" method="post" enctype="multipart/from-data">
     <div class="mb-3 col-6">
-        <label for="nama" class="form-label">nama Siswa</label>
+        <label for="nama" class="form-label">Nama Siswa</label>
         <input type="text" class="form-control" id="nama" name="nama">
     </div>
     <div class="mb-3 col-6">

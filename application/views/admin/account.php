@@ -58,8 +58,12 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
                             <i class="fa-solid fa-house-user"></i> <span class="ms-1 d-none d-sm-inline">Account</span></a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('admin/') ?>" class="nav-link px-0 align-middle">
+                        <a href="<?php echo base_url('keuangan/index') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i> <span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
                     </li>
                 </ul>
                 <hr>

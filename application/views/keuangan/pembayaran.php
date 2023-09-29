@@ -59,6 +59,10 @@
                         <a href="<?php echo base_url('keuangan/index') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
+                    </li>
                 </ul>
                 <hr>
                 <a href="<?php echo base_url('admin');?>"class="btn btn-primary">loguot</a>
@@ -67,31 +71,27 @@
 
     <div class="row container py-3">
     <div class="container py-3 h-auto">
-                  <h1 style="background-color:blue; height: 60px; text-align:center;">SISWA</h1>
+                  <h1 style="background-color:blue; height: 60px; text-align:center;">Pembayaran</h1>
               <table class="table">
                 <thead>
                     <th scope="col" >No</th>
-                    <th scope="col" >foto</th>
-                    <th scope="col" >Nama siswa</th>
-                    <th scope="col" >Nisn</th>
-                    <th scope="col" >Gender</th>
-                    <th scope="col" >Id_kelas</th>
+                    <th scope="col" >Nama_siswa</th>
+                    <th scope="col" >Jenis Pembayaran</th>
+                    <th scope="col" >Total Pembayaran</th>
                     <th scope="col" >Aksi</th>
                   </tr>
           
                 </thead>
                 <tbody classs="table-grup-divider">
-                  <?php $no=0; foreach($siswa as $row ): $no++ ?>
+                  <?php $no=0; foreach($pembayaran as $row ): $no++ ?>
                   <tr>
                     <td><?php echo $no ?></td>
-                    <td><img src="<?php echo base_url('images/siswa/'. $row->foto)?>" width="50px"></td>
-                    <td><?php echo $row ->nama_siswa ?></td>
-                    <td><?php echo $row->nisn ?></td>
-                    <td><?php echo $row->gender?></td>
-                    <td><?php echo tampil_full_kelas_byid($row->id_kelas)?></td>
+                    <td><?php echo $row ->id_siswa ?></td>
+                    <td><?php echo $row->jenis_pembayaran ?></td>
+                    <td><?php echo $row->total_pembayaran?></td>
                     <td>
-                        <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary">Ubah</a>
-                        <button onclick="hapus(<?php echo $row->id_siswa ?>)"
+                        <a href="<?php echo base_url('keuangan/ubah_pembayaran/').$row->id?>" class="btn btn-primary">Ubah</a>
+                        <button onclick="hapus(<?php echo $row->id?>)"
                         class="btn btn-danger">
                       Hapus
                      </button>
@@ -100,7 +100,7 @@
                    <?php endforeach ?>
                 </tbody>
               </table>
-              <a href="<?php echo base_url('admin/tambah_siswa')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
+              <a href="<?php echo base_url('keuangan/tambah_pembayaran')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
             </div>
     </div>
 
@@ -108,7 +108,7 @@
         function hapus(id){
           var yes = confirm('Yakin Di Hapus?');
           if(yes == true) {
-            window.location.href = "<?php echo base_url('admin/hapus_siswa/')?>" + id;
+            window.location.href = "<?php echo base_url('keuangan/hapus_pembayaran/')?>" + id;
         }
     }
 </script>

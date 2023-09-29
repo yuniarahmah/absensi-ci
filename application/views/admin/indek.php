@@ -56,8 +56,12 @@
                         <i class="fa-solid fa-house-user"></i><span class="ms-1 d-none d-sm-inline">Account</span></a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('admin/') ?>" class="nav-link px-0 align-middle">
+                        <a href="<?php echo base_url('keuangan/index') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
                     </li>
                 </ul>
                 <hr>
@@ -96,16 +100,7 @@
                <div class="card-body">
                  <p class="card-text"><?php echo $guru;?></p>
              </div>
-            </div>
-            <div class="col-">
-            <div class="card text-bg-warning mb-3" style="max-width: 18rem; margin-bottom:60%;">
-                 <div class="card-header">keuangan</div>
-                   <div class="card-body">
-                     <p class="card-text">1</p>
-                 </div>
-          </div>
-          </div>            
-        </div>            
+            </div>            
     </div>
 </body>
 </html>

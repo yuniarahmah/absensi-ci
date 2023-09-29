@@ -53,11 +53,15 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url('admin/account') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-house-user"></i> <span class="ms-1 d-none d-sm-inline">Account</span></a>
+                        <i class="fa-solid fa-house-user"></i><span class="ms-1 d-none d-sm-inline">Account</span></a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('keuangan/index') ?>" class="nav-link px-0 align-middle">
+                        <a href="<?php echo base_url('keuangan/') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
                     </li>
                 </ul>
                 <hr>
@@ -65,54 +69,31 @@
             </div>
         </div>
 
-    <div class="row container py-3">
-    <div class="container py-3 h-auto">
-                  <h1 style="background-color:blue; height: 60px; text-align:center;">SISWA</h1>
-              <table class="table">
-                <thead>
-                    <th scope="col" >No</th>
-                    <th scope="col" >foto</th>
-                    <th scope="col" >Nama siswa</th>
-                    <th scope="col" >Nisn</th>
-                    <th scope="col" >Gender</th>
-                    <th scope="col" >Id_kelas</th>
-                    <th scope="col" >Aksi</th>
-                  </tr>
-          
-                </thead>
-                <tbody classs="table-grup-divider">
-                  <?php $no=0; foreach($siswa as $row ): $no++ ?>
-                  <tr>
-                    <td><?php echo $no ?></td>
-                    <td><img src="<?php echo base_url('images/siswa/'. $row->foto)?>" width="50px"></td>
-                    <td><?php echo $row ->nama_siswa ?></td>
-                    <td><?php echo $row->nisn ?></td>
-                    <td><?php echo $row->gender?></td>
-                    <td><?php echo tampil_full_kelas_byid($row->id_kelas)?></td>
-                    <td>
-                        <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary">Ubah</a>
-                        <button onclick="hapus(<?php echo $row->id_siswa ?>)"
-                        class="btn btn-danger">
-                      Hapus
-                     </button>
-                    </td>
-                    </tr>
-                   <?php endforeach ?>
-                </tbody>
-              </table>
-              <a href="<?php echo base_url('admin/tambah_siswa')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
-            </div>
+    <div class="row container py-4">
+     <div class="col-3">
+        <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+             <div class="card-header">Jumlah pembayaran Spp</div>
+               <div class="card-body">
+                 <p class="card-text">Rp 250.000.00</p>
+             </div>
+        </div>            
+        </div>
+        <div class="col-3">
+        <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+             <div class="card-header">Jumlah pembayaran Uang Gedung</div>
+               <div class="card-body">
+                 <p class="card-text">Rp 50.000</p>
+             </div>
+        </div>            
+        </div>
+        <div class="col-3">
+        <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+             <div class="card-header">Jumlah pembayaran Uang Sragam</div>
+               <div class="card-body">
+                 <p class="card-text">Rp 2.250.000.00</p>
+             </div>
+        </div>                      
+        </div>            
     </div>
-
-      <script>
-        function hapus(id){
-          var yes = confirm('Yakin Di Hapus?');
-          if(yes == true) {
-            window.location.href = "<?php echo base_url('admin/hapus_siswa/')?>" + id;
-        }
-    }
-</script>
 </body>
 </html>
-
-           

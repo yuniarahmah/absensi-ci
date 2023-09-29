@@ -34,6 +34,9 @@ class Auth extends CI_Controller {
 			if($this->session->userdata('roll') == 'admin'){
 				redirect(base_url(). "admin");
 			}
+			elseif ($this->session->userdata('roll') == 'keuangan' ) {
+				redirect(base_url(). "keuangan");
+			}
 			else {
 					redirect (base_url(). "auth");
 			}
