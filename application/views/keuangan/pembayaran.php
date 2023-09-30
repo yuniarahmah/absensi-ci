@@ -86,7 +86,7 @@
                   <?php $no=0; foreach($pembayaran as $row ): $no++ ?>
                   <tr>
                     <td><?php echo $no ?></td>
-                    <td><?php echo $row ->id_siswa ?></td>
+                    <td><?php echo $row ->nama_siswa ?></td>
                     <td><?php echo $row->jenis_pembayaran ?></td>
                     <td><?php echo $row->total_pembayaran?></td>
                     <td>
@@ -102,16 +102,15 @@
               </table>
               <a href="<?php echo base_url('keuangan/tambah_pembayaran')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
             </div>
-    </div>
-
-      <script>
+            
+            <script>
         function hapus(id){
           var yes = confirm('Yakin Di Hapus?');
           if(yes == true) {
-            window.location.href = "<?php echo base_url('keuangan/hapus_pembayaran/')?>" + id;
+            window.location.href = "<?php echo base_url('keuangan/delete_pembayaran/')?>" + id;
         }
     }
-</script>
+    </script>
 </body>
 </html>
 

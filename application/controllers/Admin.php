@@ -260,9 +260,4 @@ class Admin extends CI_Controller {
         redirect( base_url( 'admin' ) );
     }
 }
-
-// public function keuangan() {
-//     $this->load->view( 'admin/keuangan' );
-// }
-
 ?>

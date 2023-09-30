@@ -30,9 +30,9 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
     </select>
     </div>
     <div class="mb-3 col-6">
-     <label for="total_pembayaran" class="form-label">Total Pembayaran </label>
-      <input type="text" class="form-control" id="total_pembayaran" name="total_pembayaran">
-    </div>
+            <label for="total_pembayaran" class="form-label">Total Pembayaran</label>
+            <input type="number" class="form-control" id="total_pembayaran" name="total_pembayaran">
+        </div>
 <button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button>
 </form>
 </div>

@@ -10,35 +10,60 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
 
 <body class = 'min-vh-100 d-flex align-items-center'>
 <div class = 'card w-50 m-auto p-3'>
-<h3 class = 'text-center '>Ubah Pembayaran</h3>  
-<?php foreach($pembayaran_id as $data_siswa): ?>
-<form  action="<?php echo base_url('keuangan/aksi_ubah_pembayaran')?>" method="post" enctype="multipart/from-data">
-<div class="mb-3 col-6">
-    <label for="nama_siswa" class="form-label">Nama Siswa</label>
-    <select name="nama_siswa" class="form-select">
-        <option selected> Pilih Siswa </option><?php foreach ($siswa as $data):?>
-        <option value="<?php echo $data_siswa->id_siswa?>"><?php echo $data_siswa->nama_siswa?></option>
-        <?php endforeach;?>
-    </select>
+<h3 class="text-center">Update Data </h3>
+        <?php foreach ($pembayaran as $data_pembayaran) : ?>
+        <form method="post" action="<?php echo base_url('keuangan/aksi_update_pembayaran') ?>"
+            enctype="multipart/form_data">
+            <input name="id" type="hidden" value="<?php echo $data_pembayaran->id?>">
+            <div class="mb-3 col-6">
+                <label for="kelas" class="form-label">Siswa</label>
+                <select name="id_siswa" class="form-select">
+                    <option selected value="<?php echo $data_pembayaran->id_siswa ?>">
+                        <?php echo $data_pembayaran->id_siswa ?></option>
+                    <?php foreach ($siswa as $row) : ?>
+                    <option value="<?php echo $row->id_siswa ?>">
+                        <?php echo $row->nama_siswa ?>
+                    </option>
+                    <?php endforeach ?>
+                </select>
+
+            </div>
+            <div class="mb-3 col-6">
+                <label for="kelas" class="form-label">Jenis Pembayaran</label>
+                <select name="jenis_pembayaran" class="form-select">
+                    <option selected value="<?php echo $data_pembayaran->jenis_pembayaran ?>">
+                        <?php echo $data_pembayaran->jenis_pembayaran ?></option>
+                    <option value="Pembayaran SPP ">Pembayaran SPP</option>
+                    <option value="Pembayaran Uang Gedung ">Pembayaran Uang Gedung</option>
+                    <option value="Pembayaran Uang Sragam ">Pembayaran Uang Sragam</option>
+                </select>
+
+            </div>
+            <div class="mb-3">
+                <div class="mb-3">
+                    <label for="total_pembayaran" class="form-label">Total Pembayaran</label>
+                    <input type="number" class="form-control" id="total_pembayaran" name="total_pembayaran"
+                        value="<?php echo $data_pembayaran->total_pembayaran ?> ">
+                </div>
+
+
+
+                <div class="flex justify-content-between">
+                    <div>
+                        <a href="<?php echo base_url('keuangan/pembayaran'); ?>"
+                            class=" flex items-center p-2 m-10 w-auto bg-red-500 hover:bg-red-700 text-white font-bold py-2  rounded w-7/6">
+                            <span>Kembali</span>
+                        </a>
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="flex items-center p-2 m-10 w-auto bg-primary text-white font-bold py-2  rounded w-7/6"
+                            name="submit">Confirm</button>
+                    </div>
+                </div>
+
+        </form>
+        <?php endforeach ?>
     </div>
-    <div class="mb-3 col-6">
-    <label for="jenias_pembayaran" class="form-label">Jenis Pembayaran</label>
-    <select name="jenias_pembayaran" class="form-select">
-        <option selected> Jenis Pembayaran </option>
-        <option value="<?php echo $data_siswa->jenis_pembayaran?>"><?php echo $data_siswa->jenis_pembayaran?></option>
-        
-        <option value="jumlah_pembayaran_spp">Jumlah Pembayaran SPP</option>
-        <option value="jumlah_pembayaran_uang_gedung">Jumlah pembayaran Uang gedung</option>
-        <option value="jumlah_pembayaran_uang_sragam">Jumlah pembayaran Uang Sragam</option>
-    </select>
-    </div>
-    <div class="mb-3 col-6">
-     <label for="total_pembayaran" class="form-label">Total Pembayaran </label>
-      <input type="text" class="form-control" id="total_pembayaran" name="total_pembayaran" value="<?php echo $data_siswa->total_pembayaran ?>">
-    </div>
-<button type="submit" class="btn btn-primary w-25" name="submit">Ubah</button>
-</form>
-<?php endforeach?>
-</div>
 </body>
 </html>
