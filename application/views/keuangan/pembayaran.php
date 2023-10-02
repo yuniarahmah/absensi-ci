@@ -71,9 +71,9 @@
 
     <div class="row container py-3">
     <div class="container py-3 h-auto">
-                  <h1 style="background-color:blue; height: 60px; text-align:center;">Pembayaran</h1>
+                  <h1 style="background-color:blue; height: 60px; text-align:center;">DATA PEMBAYARAN</h1>
               <table class="table">
-                <thead>
+                <thead class="table-primary ">
                     <th scope="col" >No</th>
                     <th scope="col" >Nama_siswa</th>
                     <th scope="col" >Jenis Pembayaran</th>
@@ -85,24 +85,23 @@
                 <tbody classs="table-grup-divider">
                   <?php $no=0; foreach($pembayaran as $row ): $no++ ?>
                   <tr>
-                    <td><?php echo $no ?></td>
-                    <td><?php echo $row ->nama_siswa ?></td>
+                    <td><?php echo $no?></td>
+                    <td><?php echo $row->nama_siswa ?></td>
                     <td><?php echo $row->jenis_pembayaran ?></td>
                     <td><?php echo $row->total_pembayaran?></td>
                     <td>
                         <a href="<?php echo base_url('keuangan/ubah_pembayaran/').$row->id?>" class="btn btn-primary">Ubah</a>
                         <button onclick="hapus(<?php echo $row->id?>)"
                         class="btn btn-danger">
-                      Hapus
-                     </button>
+                        Hapus
+                      </button>
+                      <a href="<?php echo base_url('keuangan/export/').$row->id?>" class="btn btn-primary">export</a>
                     </td>
                     </tr>
                    <?php endforeach ?>
                 </tbody>
               </table>
-              <a href="<?php echo base_url('keuangan/tambah_pembayaran')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
             </div>
-            
             <script>
         function hapus(id){
           var yes = confirm('Yakin Di Hapus?');
