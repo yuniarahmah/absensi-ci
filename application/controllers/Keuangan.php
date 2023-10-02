@@ -10,9 +10,9 @@ class Keuangan extends CI_Controller {
  {
         parent::__construct();
         $this->load->model( 'm_model' );
-        if ( $this->session->userdata( 'loged_in' ) != true && $this->session->userdata( 'role' ) != 'keuangan' ) {
-            redirect( base_url().'auth' );
-        }
+        // if ( $this->session->userdata( 'loged_in' ) != true && $this->session->userdata( 'role' ) != 'keuangan' ) {
+        //     redirect( base_url().'auth' );
+        // }
 
     }
 
@@ -77,7 +77,7 @@ class Keuangan extends CI_Controller {
     }
     public function export() {
         $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActivSheet();
+        $sheet = $spreadsheet->getActiveSheet();
         
         $style_col = [
             'font' => ['bold' => true],
@@ -107,15 +107,15 @@ class Keuangan extends CI_Controller {
         ];
 
         //TITEL
-        $sheet->setCellVale('A1', "DATA PEMBAYARAN");
-        $sheet->mareCell('A1:E1');
+        $sheet->setCellValue('A1', "DATA PEMBAYARAN");
+        $sheet->mergeCells('A1:E1');
         $sheet->getStyle('A1')->getFont()->setBold(true);
 
-        $sheet->setCellVale('A3', "ID   ");
-        $sheet->setCellVale('B3', 'JENIS PEMBAYARAN');
-        $sheet->setCellVale('C3', 'TOTAL PEMBAYARAN');
-        $sheet->setCellVale('D3', 'Siswa');
-        $sheet->setCellVale('E3', 'Kelas');
+        $sheet->setCellValue('A3', "ID   ");
+        $sheet->setCellValue('B3', 'JENIS PEMBAYARAN');
+        $sheet->setCellValue('C3', 'TOTAL PEMBAYARAN');
+        $sheet->setCellValue('D3', 'Siswa');
+        $sheet->setCellValue('E3', 'Kelas');
 
         $sheet->getStyle('A3')->applyFromArray($style_col);
         $sheet->getStyle('B3')->applyFromArray($style_col);
@@ -127,11 +127,11 @@ class Keuangan extends CI_Controller {
         $no = 1;
         $numrow = 4;
         foreach($data_pembayaran as $data){
-            $sheet->setCellVale('A'.$numrow, $data->id);
-            $sheet->setCellVale('b'.$numrow, $data->jenis_pembayaran);
-            $sheet->setCellVale('C'.$numrow, $data->total_pembayaran);
-            $sheet->setCellVale('D'.$numrow, $data->id_siswa);
-            $sheet->setCellVale('E'.$numrow, $data->id_kelas);
+            $sheet->setCellValue('A'.$numrow, $data->id);
+            $sheet->setCellValue('b'.$numrow, $data->jenis_pembayaran);
+            $sheet->setCellValue('C'.$numrow, $data->total_pembayaran);
+            $sheet->setCellValue('D'.$numrow, $data->id_siswa);
+            $sheet->setCellValue('E'.$numrow, $data->id_kelas);
 
             $sheet->getStyle('A')->applyFromArray($style_row);
             $sheet->getStyle('B')->applyFromArray($style_row);
