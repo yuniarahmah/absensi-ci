@@ -19,7 +19,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse">
+    <!-- <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout');?>">
@@ -28,7 +28,7 @@
           <hr></a>
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </nav> 
 
@@ -43,11 +43,11 @@
                       
                     </li>
                     <li>
-                        <a href="/codeigniter-3/admin/" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <a href="/codeigniter-3/keuangan/" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu"></ul>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="<?php echo base_url('admin/siswa') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-graduation-cap"></i> <span class="ms-1 d-none d-sm-inline">Siswa</span></a>
                     </li>
@@ -58,7 +58,7 @@
                     <li>
                         <a href="<?php echo base_url('keuangan/index') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
@@ -71,11 +71,11 @@
 
     <div class="row container py-3">
     <div class="container py-3 h-auto">
-                  <h1 style="background-color:blue; height: 60px; text-align:center;">Pembayaran</h1>
+                  <h1 style="background-color:secondary; height: 60px; text-align:center;"></h1>
               <table class="table">
-                <thead>
+                <thead class="table-primary ">
                     <th scope="col" >No</th>
-                    <th scope="col" >Nama_siswa</th>
+                    <th scope="col" >Nama siswa</th>
                     <th scope="col" >Jenis Pembayaran</th>
                     <th scope="col" >Total Pembayaran</th>
                     <th scope="col" >Aksi</th>
@@ -85,8 +85,8 @@
                 <tbody classs="table-grup-divider">
                   <?php $no=0; foreach($pembayaran as $row ): $no++ ?>
                   <tr>
-                    <td><?php echo $no ?></td>
-                    <td><?php echo $row ->nama_siswa ?></td>
+                    <td><?php echo $no?></td>
+                    <td><?php echo $row->nama_siswa ?></td>
                     <td><?php echo $row->jenis_pembayaran ?></td>
                     <td><?php echo $row->total_pembayaran?></td>
                     <td>
@@ -102,7 +102,6 @@
               </table>
               <a href="<?php echo base_url('keuangan/tambah_pembayaran')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
             </div>
-            
             <script>
         function hapus(id){
           var yes = confirm('Yakin Di Hapus?');

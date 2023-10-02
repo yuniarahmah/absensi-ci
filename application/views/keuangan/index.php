@@ -19,7 +19,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse">
+    <!-- <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout');?>">
@@ -28,7 +28,7 @@
           <hr></a>
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </nav> 
 
@@ -43,11 +43,11 @@
                       
                     </li>
                     <li>
-                        <a href="/codeigniter-3/admin/" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <a href="/codeigniter-3/keuangan" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu"></ul>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="<?php echo base_url('admin/siswa') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-graduation-cap"></i> <span class="ms-1 d-none d-sm-inline">Siswa</span></a>
                     </li>
@@ -58,7 +58,7 @@
                     <li>
                         <a href="<?php echo base_url('keuangan/') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>

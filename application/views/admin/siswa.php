@@ -67,7 +67,7 @@
 
     <div class="row container py-3">
     <div class="container py-3 h-auto">
-                  <h1 style="background-color:blue; height: 60px; text-align:center;">SISWA</h1>
+                  <h1 style="background-color:info ; height: 60px; text-align:center;">SISWA</h1>
               <table class="table">
                 <thead>
                     <th scope="col" >No</th>
