@@ -123,7 +123,7 @@ class Keuangan extends CI_Controller {
 
         //GET DATA FROM DATABASE
         $data_pembayaran =  $this->m_model->get_data('pembayaran')->result();
-
+//test
         $no = 1;
         $numrow = 4;
         foreach($data_pembayaran as $data){
