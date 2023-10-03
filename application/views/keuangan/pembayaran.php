@@ -76,7 +76,7 @@
                     <th scope="col" >Total Pembayaran</th>
                     <th scope="col" >Aksi</th>
                   </tr>
-          
+        <!-- test -->
                 </thead>
                 <tbody classs="table-grup-divider">
                   <?php $no=0; foreach($pembayaran as $row ): $no++ ?>
