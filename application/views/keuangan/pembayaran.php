@@ -33,7 +33,7 @@
 </nav> 
 
 <div class="d-flex">
-        <div class="col-12 bg-dark" style="width: 15%;">
+        <div class="col-10 bg-dark" style="width: 15%;">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">INFO SEKOLAH</span>
@@ -53,7 +53,7 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url('admin/account') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-house-user"></i> <span class="ms-1 d-none d-sm-inline">Account</span></a>
+                        <i class="fa-solid fa-house-user"></i><span class="ms-1 d-none d-sm-inline">Account</span></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('keuangan/index') ?>" class="nav-link px-0 align-middle">
@@ -61,19 +61,19 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
+                        <i class="fa-solid fa-cash-register"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
                     </li>
                 </ul>
                 <hr>
-                <a href="<?php echo base_url('admin');?>"class="btn btn-primary">loguot</a>
+                <a href="<?php echo base_url('admin');?>"class="btn btn-outline-primary">loguot <i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
         </div>
 
     <div class="row container py-3">
     <div class="container py-3 h-auto">
-                  <h1 style="background-color:blue; height: 60px; text-align:center;">DATA PEMBAYARAN</h1>
+                  <h1 style="background-color:blue; height: 60px; text-align:center;"><font color='white'>DATA PEMBAYARAN</font></h1>
               <table class="table">
-                <thead class="table-primary ">
+                <thead class="table-info ">
                     <th scope="col" >No</th>
                     <th scope="col" >Nama_siswa</th>
                     <th scope="col" >Jenis Pembayaran</th>
@@ -90,17 +90,26 @@
                     <td><?php echo $row->jenis_pembayaran ?></td>
                     <td><?php echo $row->total_pembayaran?></td>
                     <td>
-                        <a href="<?php echo base_url('keuangan/ubah_pembayaran/').$row->id?>" class="btn btn-primary">Ubah</a>
+                        <a href="<?php echo base_url('keuangan/ubah_pembayaran/').$row->id?>" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                         <button onclick="hapus(<?php echo $row->id?>)"
-                        class="btn btn-danger">
-                        Hapus
+                        class="btn btn-outline-danger">
+                        <i class="fa-regular fa-trash-can"></i>
                       </button>
-                      <a href="<?php echo base_url('keuangan/export/').$row->id?>" class="btn btn-primary">export</a>
+                     
                     </td>
-                    </tr>
-                   <?php endforeach ?>
+                  </tr>
+                  <?php endforeach ?>
+                  <!-- Button trigger modal -->
+                  <a href="<?php echo base_url('keuangan/export/').$row->id?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
                 </tbody>
               </table>
+              <form method="post" enctype="multipart/form-data" action="<?php base_url('keuangan/import') ?>">
+          <div class="modal-body">
+            <input type="file" name="file">
+            <input type="submit" class="btn btn-outline-secondary" value="import" />
+          </div>
+        </form>
+               <a href="<?php echo base_url('keuangan/tambah_pembayaran/').$row->id?>" class="btn btn-primary">Tambah <i class="fa-solid fa-square-plus"></i> </a>
             </div>
             <script>
         function hapus(id){

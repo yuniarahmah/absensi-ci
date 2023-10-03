@@ -62,6 +62,20 @@ class M_model extends CI_Model {
         $data = $this->db->update( $tabel, $data, $where );
         return $this->db->affected_rows();
     }
+
+    public function get_by_nisn(){
+        $this->db->select('id_siswa');
+        $this->db->from('siswa');
+        $this->db->where('nisn', $nisn);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            $result = $query-row();
+            return $result->id_siswa;
+        } else{
+            return false;
+        }
+    }
 }
 ?>
 

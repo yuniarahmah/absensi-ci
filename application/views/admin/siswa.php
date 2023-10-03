@@ -59,6 +59,10 @@
                         <a href="<?php echo base_url('keuangan/index') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-cash-register"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
+                    </li>
                 </ul>
                 <hr>
                 <a href="<?php echo base_url('admin');?>"class="btn btn-primary">loguot</a>
@@ -67,7 +71,7 @@
 
     <div class="row container py-3">
     <div class="container py-3 h-auto">
-                  <h1 style="background-color:info ; height: 60px; text-align:center;">SISWA</h1>
+                  <h1 style="background-color:blue ; height: 60px; text-align:center;"><font color='white'>SISWA</font></h1>
               <table class="table">
                 <thead>
                     <th scope="col" >No</th>

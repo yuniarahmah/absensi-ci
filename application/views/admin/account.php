@@ -63,7 +63,7 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
                     </li>
                     <li>
                         <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
+                        <i class="fa-solid fa-cash-register"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
                     </li>
                 </ul>
                 <hr>
