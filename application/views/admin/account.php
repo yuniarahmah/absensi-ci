@@ -22,7 +22,7 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse">
+    <!-- <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout');?>">
@@ -31,7 +31,7 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
           <hr></a>
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </nav> 
     <div class="d-flex">
@@ -57,14 +57,14 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
                         <a href="<?php echo base_url('admin/account') ?>" class="nav-link px-0 align-middle">
                             <i class="fa-solid fa-house-user"></i> <span class="ms-1 d-none d-sm-inline">Account</span></a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="<?php echo base_url('keuangan/index') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i> <span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
-                    </li>
+                    </li> -->
                 </ul>
                 <hr>
                 <a href="<?php echo base_url('admin');?>"class="btn btn-primary">loguot</a>
