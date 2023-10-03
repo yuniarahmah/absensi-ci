@@ -8,9 +8,9 @@ class Admin extends CI_Controller {
         $this->load->model( 'm_model' );
         $this->load->helper( 'my_helper' );
         $this->load->library( 'upload' );
-        if ( $this->session->userdata( 'loged_in' ) !=true && $this->session->userdata('role') != 'admin' ) {
-            redirect( base_url().'auth' );
-        }
+        // if ( $this->session->userdata( 'loged_in' ) !=true && $this->session->userdata('role') != 'admin' ) {
+        //     redirect( base_url().'auth' );
+        // }
     }
 
     public function index()
@@ -58,35 +58,31 @@ class Admin extends CI_Controller {
     //fungsi untuk ubah foto didalam ubah siswa
 
     public function aksi_tambah_siswa()
- {
-        $file_name = $_FILES[ 'foto' ][ 'name' ];
-        $file_temp = $_FILES[ 'foto' ][ 'tmp_name' ];
-        $kode = round( microtime( true ) * 1000 );
-        $file_name = $kode . '_' . $file_name;
-        $upload_path = './images/siswa/' . $file_name;
-
-        if ( move_uploaded_file( $file_temp, $upload_path ) ) {
-            $data = [
-                'foto' => $file_name,
-                'nama_siswa' => $this->input->post( 'nama' ),
-                'nisn' => $this->input->post( 'nisn' ),
-                'gender' => $this->input->post( 'gender' ),
-                'id_kelas' => $this->input->post( 'kelas' ),
-            ];
-            $this->m_model->tambah_data( 'siswa', $data );
-            redirect( base_url( 'admin/siswa' ) );
-        } else {
-            $data = [
-                'foto' => 'User.png',
-                'nama_siswa' => $this->input->post( 'nama' ),
-                'nisn' => $this->input->post( 'nisn' ),
-                'gender' => $this->input->post( 'gender' ),
-                'id_kelas' => $this->input->post( 'kelas' ),
-            ];
-            $this->m_model->tambah_data( 'siswa', $data );
-            redirect( base_url( 'admin/siswa' ) );
-        }
+{
+    $foto = $this->upload_img('foto');
+    
+    if ($foto[0] == false) {
+        $data = [
+            'foto' => 'User.png',
+            'nama_siswa' => $this->input->post('nama'),
+            'nisn' => $this->input->post('nisn'),
+            'gender' => $this->input->post('gender'),
+            'id_kelas' => $this->input->post('kelas'),
+        ];
+        $this->m_model->tambah_data('siswa', $data);
+        redirect(base_url('admin/siswa'));
+    } else {
+        $data = [
+            'foto' => $foto[1],
+            'nama_siswa' => $this->input->post('nama'),
+            'nisn' => $this->input->post('nisn'),
+            'gender' => $this->input->post('gender'),
+            'id_kelas' => $this->input->post('kelas'),
+        ];
+        $this->m_model->tambah_data('siswa', $data);
+        redirect(base_url('admin/siswa'));
     }
+}
 
     public function ubah_siswa( $id )
  {
