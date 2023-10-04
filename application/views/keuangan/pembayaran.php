@@ -64,7 +64,7 @@
                 <a href="<?php echo base_url('admin');?>"class="btn btn-outline-primary">loguot <i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
         </div>
-<!-- test -->
+
     <div class="row container py-3">
     <div class="container py-3 h-auto">
                   <h1 style="background-color:blue; height: 60px; text-align:center;"><font color='white'>DATA PEMBAYARAN</font></h1>
@@ -76,6 +76,7 @@
                     <th scope="col" >Total Pembayaran</th>
                     <th scope="col" >Aksi</th>
                   </tr>
+          
                 </thead>
                 <tbody classs="table-grup-divider">
                   <?php $no=0; foreach($pembayaran as $row ): $no++ ?>
