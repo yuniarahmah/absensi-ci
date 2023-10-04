@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 <?php
 defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
  
-=======
-<?php defined('BASEPATH') or exit('No direct script access allowed');
-
->>>>>>> 1d988fd05497c353a2ee7cd735b7d566f3d47433
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -21,72 +16,7 @@ class Keuangan extends CI_Controller
         // }
 
     }
-<<<<<<< HEAD
     public function export() {
-=======
-
-    public function index()
-    {
-        $data['siswa'] = $this->m_model->get_data('siswa')->num_rows();
-        $this->load->view('keuangan/index');
-    }
-
-    public function pembayaran()
-    {
-        $data['pembayaran'] = $this->m_model->get_pembayaran();
-        $this->load->view('keuangan/pembayaran', $data);
-    }
-
-    public function ubah_pembayaran($id)
-    {
-        $data['pembayaran'] = $this->m_model->get_by_id('pembayaran', 'id', $id)->result();
-        $data['siswa'] = $this->m_model->get_data('siswa')->result();
-        $this->load->view('keuangan/ubah_pembayaran', $data);
-    }
-
-    public function aksi_update_pembayaran()
-    {
-        $data = [
-            'id_siswa' => $this->input->post('id_siswa'),
-            'jenis_pembayaran' => $this->input->post('jenis_pembayaran'),
-            'total_pembayaran' => $this->input->post('total_pembayaran'),
-        ];
-        $eksekusi = $this->m_model->ubah_data('pembayaran', $data, ['id' => $this->input->post('id')]);
-        if ($eksekusi) {
-            $this->session->set_flashdata('sukses', 'berhasil');
-            redirect(base_url('keuangan/pembayaran'));
-        } else {
-            $this->session->set_flashdata('sukses', 'berhasil');
-            redirect(base_url('keuangan/ubah_pembayaran/' . $this->input->post('id')));
-        }
-    }
-
-    public function tambah_pembayaran()
-    {
-        $data['siswa'] = $this->m_model->get_data('siswa')->result();
-        $this->load->view('keuangan/tambah_pembayaran', $data);
-    }
-
-    public function aksi_tambah_pembayaran()
-    {
-        $data = [
-            'id_siswa' => $this->input->post('nama_siswa'),
-            'jenis_pembayaran' => $this->input->post('jenis_pembayaran'),
-            'total_pembayaran' => $this->input->post('total_pembayaran'),
-        ];
-        $this->m_model->tambah_data('pembayaran', $data);
-        redirect(base_url('keuangan/pembayaran'));
-    }
-
-
-    public function delete_pembayaran($id)
-    {
-        $this->m_model->delete('pembayaran', 'id', $id);
-        redirect(base_url('Keuangan/pembayaran'));
-    }
-    public function export()
-    {
->>>>>>> 1d988fd05497c353a2ee7cd735b7d566f3d47433
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
@@ -125,11 +55,8 @@ class Keuangan extends CI_Controller
         $sheet->setCellValue('A3', "ID   ");
         $sheet->setCellValue('B3', 'JENIS PEMBAYARAN');
         $sheet->setCellValue('C3', 'TOTAL PEMBAYARAN');
-<<<<<<< HEAD
         $sheet->setCellValue('D3', 'Siswa');
         // $sheet->setCellValue('E3', 'Kelas');
-=======
->>>>>>> 1d988fd05497c353a2ee7cd735b7d566f3d47433
 
         $sheet->getStyle('A3')->applyFromArray($style_col);
         $sheet->getStyle('B3')->applyFromArray($style_col);
@@ -142,7 +69,6 @@ class Keuangan extends CI_Controller
 
         $no = 1;
         $numrow = 4;
-<<<<<<< HEAD
         foreach($data_pembayaran as $data){
             $sheet->setCellValue('A'.$numrow, $data->id);
             $sheet->setCellValue('b'.$numrow, $data->jenis_pembayaran);
@@ -155,16 +81,6 @@ class Keuangan extends CI_Controller
             $sheet->getStyle('C')->applyFromArray($style_row);
             $sheet->getStyle('D')->applyFromArray($style_row);
             // $sheet->getStyle('E')->applyFromArray($style_row);
-=======
-        foreach ($data_pembayaran as $data) {
-            $sheet->setCellValue('A' . $numrow, $data->id);
-            $sheet->setCellValue('b' . $numrow, $data->jenis_pembayaran);
-            $sheet->setCellValue('C' . $numrow, $data->total_pembayaran);
-
-            $sheet->getStyle('A')->applyFromArray($style_row);
-            $sheet->getStyle('B')->applyFromArray($style_row);
-            $sheet->getStyle('E')->applyFromArray($style_row);
->>>>>>> 1d988fd05497c353a2ee7cd735b7d566f3d47433
 
             $no++;
             $numrow++;
@@ -188,32 +104,32 @@ class Keuangan extends CI_Controller
         $writer->save('php://output');
     }
     public function import()
-  {
-    if(isset($_FILES["file"]["name"])) {
-      $path = $_FILES["file"]["tmp_name"];
-      $object = PhpOffice\PhpSpreadsheet\IOFactory::load($path);
-      foreach($object->getWorksheetIterator() as $worksheet) {
-        $highestRow = $worksheet->getHighestRow();
-        $highestColumn = $worksheet->getHighestColumn();
-        for($row=2; $row<=$highestRow; $row++) {
-          $jenis_pembayaran = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-          $total_pembayaran = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-          $nisn = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-
-          $get_id_by_nisn = $this->m_model->get_by_nisn($nisn);
-          $data = array(
-            'jenis_pembayaran' => $jenis_pembayaran,
-            'total_pembayaran' => $total_pembayaran,
-            'id_siswa' => $get_id_by_nisn
-          );
-          $this->m_model->tambah_data('pembayaran', $data);
+    {
+      if(isset($_FILES["file"]["name"])) {
+        $path = $_FILES["file"]["tmp_name"];
+        $object = PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+        foreach($object->getWorksheetIterator() as $worksheet) {
+          $highestRow = $worksheet->getHighestRow();
+          $highestColumn = $worksheet->getHighestColumn();
+          for($row=2; $row<=$highestRow; $row++) {
+            $jenis_pembayaran = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+            $total_pembayaran = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+            $nisn = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+  
+            $get_id_by_nisn = $this->m_model->get_by_nisn($nisn);
+            $data = array(
+              'jenis_pembayaran' => $jenis_pembayaran,
+              'total_pembayaran' => $total_pembayaran,
+              'id_siswa' => $get_id_by_nisn
+            );
+            $this->m_model->tambah_data('pembayaran', $data);
+          }
         }
+        redirect(base_url('keuangan/pembayaran'));
+      } else {
+        echo 'Invalid File';
       }
-      redirect(base_url('keuangan/pembayaran'));
-    } else {
-      echo 'Invalid File';
     }
-<<<<<<< HEAD
     public function index()
     {
         $this->load->view( 'keuangan/index' );
@@ -273,35 +189,5 @@ class Keuangan extends CI_Controller
     $this->m_model->delete('pembayaran', 'id', $id);
     redirect(base_url('Keuangan/pembayaran'));
     }
-    
-    public function import()
-    {
-      if(isset($_FILES["file"]["name"])) {
-        $path = $_FILES["file"]["tmp_name"];
-        $object = PhpOffice\PhpSpreadsheet\IOFactory::load($path);
-        foreach($object->getWorksheetIterator() as $worksheet) {
-          $highestRow = $worksheet->getHighestRow();
-          $highestColumn = $worksheet->getHighestColumn();
-          for($row=2; $row<=$highestRow; $row++) {
-            $jenis_pembayaran = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-            $total_pembayaran = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-            $nisn = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-  
-            $get_id_by_nisn = $this->m_model->get_by_nisn($nisn);
-            $data = array(
-              'jenis_pembayaran' => $jenis_pembayaran,
-              'total_pembayaran' => $total_pembayaran,
-              'id_siswa' => $get_id_by_nisn
-            );
-            $this->m_model->tambah_data('pembayaran', $data);
-          }
-        }
-        redirect(base_url('keuangan/pembayaran'));
-      } else {
-        echo 'Invalid File';
-      }
-    }
-=======
-  }
->>>>>>> 1d988fd05497c353a2ee7cd735b7d566f3d47433
 }
+?>
