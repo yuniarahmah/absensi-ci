@@ -11,125 +11,129 @@ class Keuangan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('m_model');
-        // if ( $this->session->userdata( 'loged_in' ) != true && $this->session->userdata( 'role' ) != 'keuangan' ) {
-        //     redirect( base_url().'auth' );
-        // }
-
-    }
-    public function export() {
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-
-        $style_col = [
-            'font' => ['bold' => true],
-            'aligment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'Vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-            ],
-            'borders' => [
-                'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-            ]
-        ];
-        $style_row = [
-            'font' => ['bold' => true],
-            'aligment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'Vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-            ],
-            'borders' => [
-                'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-            ]
-        ];
-
-        //TITEL
-        $sheet->setCellValue('A1', "DATA PEMBAYARAN");
-        $sheet->mergeCells('A1:E1');
-        $sheet->getStyle('A1')->getFont()->setBold(true);
-
-        $sheet->setCellValue('A3', "ID   ");
-        $sheet->setCellValue('B3', 'JENIS PEMBAYARAN');
-        $sheet->setCellValue('C3', 'TOTAL PEMBAYARAN');
-        $sheet->setCellValue('D3', 'Siswa');
-        // $sheet->setCellValue('E3', 'Kelas');
-
-        $sheet->getStyle('A3')->applyFromArray($style_col);
-        $sheet->getStyle('B3')->applyFromArray($style_col);
-        $sheet->getStyle('C3')->applyFromArray($style_col);
-        $sheet->getStyle('D3')->applyFromArray($style_col);
-        // $sheet->getStyle('E3')->applyFromArray($style_col);
-
-        //GET DATA FROM DATABASE
-        $data_pembayaran =  $this->m_model->get_data('pembayaran')->result();
-
-        $no = 1;
-        $numrow = 4;
-        foreach($data_pembayaran as $data){
-            $sheet->setCellValue('A'.$numrow, $data->id);
-            $sheet->setCellValue('b'.$numrow, $data->jenis_pembayaran);
-            $sheet->setCellValue('C'.$numrow, $data->total_pembayaran);
-            $sheet->setCellValue('D'.$numrow, $data->id_siswa);
-            // $sheet->setCellValue('E'.$numrow, $data->kelas);
-
-            $sheet->getStyle('A')->applyFromArray($style_row);
-            $sheet->getStyle('B')->applyFromArray($style_row);
-            $sheet->getStyle('C')->applyFromArray($style_row);
-            $sheet->getStyle('D')->applyFromArray($style_row);
-            // $sheet->getStyle('E')->applyFromArray($style_row);
-
-            $no++;
-            $numrow++;
+        if ( $this->session->userdata( 'loged_in' ) != true && $this->session->userdata( 'role' ) != 'keuangan' ) {
+            redirect( base_url().'auth' );
         }
-        $sheet->getColumnDimension('A')->setWidth(5);
-        $sheet->getColumnDimension('B')->setWidth(25);
-        $sheet->getColumnDimension('C')->setWidth(25);
-        $sheet->getColumnDimension('D')->setWidth(25);
-        // $sheet->getColumnDimension('E')->setWidth(15);
 
-        $sheet->getDefaultRowDimension()->setRowHight(-1);
-
-        $sheet->getPageSetup()->setOrienttation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
-
-        $sheet->getTitle('LAPORAN DATA PEMBAYARAN');
-
-        header('content-Type: application/vnd.openxmlformats-officedocument.speradsheetml.sheet');
-        header('Content-Disposition: attachment; filename="PEMBAYARAN.xlsx"');
-
-        $writer = new XLsx($spreadsheet);
-        $writer->save('php://output');
     }
-    public function import()
+    public function export()
     {
-      if(isset($_FILES["file"]["name"])) {
-        $path = $_FILES["file"]["tmp_name"];
-        $object = PhpOffice\PhpSpreadsheet\IOFactory::load($path);
-        foreach($object->getWorksheetIterator() as $worksheet) {
-          $highestRow = $worksheet->getHighestRow();
-          $highestColumn = $worksheet->getHighestColumn();
-          for($row=2; $row<=$highestRow; $row++) {
-            $jenis_pembayaran = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-            $total_pembayaran = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-            $nisn = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+      $spreadsheet = new Spreadsheet();
+      $sheet = $spreadsheet->getActiveSheet();
   
-            $get_id_by_nisn = $this->m_model->get_by_nisn($nisn);
-            $data = array(
-              'jenis_pembayaran' => $jenis_pembayaran,
-              'total_pembayaran' => $total_pembayaran,
-              'id_siswa' => $get_id_by_nisn
-            );
-            $this->m_model->tambah_data('pembayaran', $data);
-          }
-        }
-        redirect(base_url('keuangan/pembayaran'));
-      } else {
-        echo 'Invalid File';
+      $style_col = [
+        'font' => ['bold' => true],
+        'alignment' => [
+          'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+          'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+        ],
+        'borders' => [
+          'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+          'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+          'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+          'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+        ]
+      ];
+  
+      $style_row = [
+        'alignment' => [
+          'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+        ],
+        'borders' => [
+          'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+          'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+          'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+          'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+        ]
+      ];
+  
+      $sheet->setCellValue('A1', "DATA PEMBAYARAN");
+      $sheet->mergeCells('A1:E1');
+      $sheet->getStyle('A1')->getFont()->setBold(true);
+  
+      // Head
+      $sheet->setCellValue('A3', "ID");
+      $sheet->setCellValue('B3', "JENIS PEMBAYARAN");
+      $sheet->setCellValue('C3', "TOTAL PEMBAYARAN");
+      $sheet->setCellValue('D3', "SISWA");
+      $sheet->setCellValue('E3', "KELAS");
+  
+      $sheet->getStyle('A3')->applyFromArray($style_col);
+      $sheet->getStyle('B3')->applyFromArray($style_col);
+      $sheet->getStyle('C3')->applyFromArray($style_col);
+      $sheet->getStyle('D3')->applyFromArray($style_col);
+      $sheet->getStyle('E3')->applyFromArray($style_col);
+  
+      // Get data from database
+      $data_pembayaran = $this->m_model->get_data('pembayaran')->result();
+  
+      $no = 1;
+      $numrow = 4;
+      foreach($data_pembayaran as $data){
+        $sheet->setCellValue('A'.$numrow, $no);
+        $sheet->setCellValue('B'.$numrow, $data->jenis_pembayaran);
+        $sheet->setCellValue('C'.$numrow, $data->total_pembayaran);
+        $sheet->setCellValue('D'.$numrow, $data->id_siswa);
+        
+        $sheet->getStyle('A'.$numrow)->applyFromArray($style_row);
+        $sheet->getStyle('B'.$numrow)->applyFromArray($style_row);
+        $sheet->getStyle('C'.$numrow)->applyFromArray($style_row);
+        $sheet->getStyle('D'.$numrow)->applyFromArray($style_row);
+  
+        $no++;
+        $numrow++;
       }
+
+    $sheet->getColumnDimension('A')->setWidth(5);
+    $sheet->getColumnDimension('B')->setWidth(25);
+    $sheet->getColumnDimension('C')->setWidth(25);
+    $sheet->getColumnDimension('D')->setWidth(20);
+    $sheet->getColumnDimension('E')->setWidth(30);
+    
+    $sheet->getDefaultRowDimension()->setRowHeight(-1);
+
+    $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+
+    $sheet->setTitle("LAPORAN DATA PEMBAYARAN");
+
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="PEMBAYARAN.xlsx"');
+    header('Cache-Control: max-age=0');
+
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('php://output');
+
+  }
+    public function import()
+  {
+    require_once FCPATH . 'vendor/autoload.php';
+
+    if (isset($_FILES["file"]["name"])) {
+      $path = $_FILES["file"]["tmp_name"];
+      $object = PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+      foreach ($object->getWorksheetIterator() as $worksheet) {
+        $highestRow = $worksheet->getHighestRow(); //mencarari berapa banyak data yang ada
+        // $highestColomn = $worksheet->getHighestColomn();
+        for ($row = 2; $row <= $highestRow; $row++) {
+          $jenis_pembayaran = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+          $total_pembayaran = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+          $nisn = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+
+          $get_id_by_nisn = $this->m_model->get_by_nisn($nisn);
+          echo $get_id_by_nisn;
+          $data = [
+            'jenis_pembayaran' => $jenis_pembayaran,
+            'total_pembayaran' => $total_pembayaran,
+            'id_siswa' => $get_id_by_nisn,
+          ];
+          $this->m_model->tambah_data('pembayaran', $data);
+        }
+      }
+      redirect(base_url('keuangan/pembayaran'));
+    } else {
+      echo 'File Tidak Valid';
     }
+  }
     public function index()
     {
         $this->load->view( 'keuangan/index' );

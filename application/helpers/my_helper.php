@@ -36,10 +36,4 @@ function tampil_kelas_byid($id)
         return $stmt;
     }
 }
-?>
-
-<from class="mt-5" method="post" enctype="multipart/from-data"
-              action="<?= base_url('keuangan/import') ?>">
-              <input type="file" name="file"/>
-              <input type="submit" name="import"
-              class="inline-block rounded bg-red-600 px-4 text" value="import"/>    
+?>  

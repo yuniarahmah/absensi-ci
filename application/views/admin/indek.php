@@ -19,7 +19,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- <div class="collapse navbar-collapse">
+   <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout');?>">
@@ -28,7 +28,7 @@
           <hr></a>
         </li>
       </ul>
-    </div> -->
+    </div> 
   </div>
 </nav> 
 
@@ -55,19 +55,14 @@
                         <a href="<?php echo base_url('admin/account') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-house-user"></i><span class="ms-1 d-none d-sm-inline">Account</span></a>
                     </li>
-                    <!-- <li>
+                    <li>
                         <a href="<?php echo base_url('keuangan/index') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Keuangan</span></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('keuangan/pembayaran') ?>" class="nav-link px-0 align-middle">
-<<<<<<< HEAD
                         <i class="fa-solid fa-cash-register"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
                     </li>
-=======
-                        <i class="fa-solid fa-file-invoice-dollar"></i><span class="ms-1 d-none d-sm-inline">Pembayaran</span></a>
-                    </li> -->
->>>>>>> 1d988fd05497c353a2ee7cd735b7d566f3d47433
                 </ul>
                 <hr>
                 <a href="<?php echo base_url('admin');?>"class="btn btn-primary">loguot</a>

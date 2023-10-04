@@ -8,9 +8,9 @@ class Admin extends CI_Controller {
         $this->load->model( 'm_model' );
         $this->load->helper( 'my_helper' );
         $this->load->library( 'upload' );
-        // if ( $this->session->userdata( 'loged_in' ) !=true && $this->session->userdata('role') != 'admin' ) {
-        //     redirect( base_url().'auth' );
-        // }
+        if ( $this->session->userdata( 'loged_in' ) !=true && $this->session->userdata('role') != 'admin' ) {
+            redirect( base_url().'auth' );
+        }
     }
 
     public function index()
