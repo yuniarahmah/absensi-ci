@@ -18,6 +18,7 @@ class Keuangan extends CI_Controller
     }
     public function export()
     {
+      require_once FCPATH . 'vendor/autoload.php';
       $spreadsheet = new Spreadsheet();
       $sheet = $spreadsheet->getActiveSheet();
   
@@ -55,14 +56,14 @@ class Keuangan extends CI_Controller
       $sheet->setCellValue('A3', "ID");
       $sheet->setCellValue('B3', "JENIS PEMBAYARAN");
       $sheet->setCellValue('C3', "TOTAL PEMBAYARAN");
-      $sheet->setCellValue('D3', "SISWA");
-      $sheet->setCellValue('E3', "KELAS");
+      // $sheet->setCellValue('D3', "SISWA");
+      // $sheet->setCellValue('E3', "KELAS");
   
       $sheet->getStyle('A3')->applyFromArray($style_col);
       $sheet->getStyle('B3')->applyFromArray($style_col);
       $sheet->getStyle('C3')->applyFromArray($style_col);
-      $sheet->getStyle('D3')->applyFromArray($style_col);
-      $sheet->getStyle('E3')->applyFromArray($style_col);
+      // $sheet->getStyle('D3')->applyFromArray($style_col);
+      // $sheet->getStyle('E3')->applyFromArray($style_col);
   
       // Get data from database
       $data_pembayaran = $this->m_model->get_data('pembayaran')->result();
@@ -71,9 +72,9 @@ class Keuangan extends CI_Controller
       $numrow = 4;
       foreach($data_pembayaran as $data){
         $sheet->setCellValue('A'.$numrow, $no);
-        $sheet->setCellValue('B'.$numrow, $data->jenis_pembayaran);
-        $sheet->setCellValue('C'.$numrow, $data->total_pembayaran);
-        $sheet->setCellValue('D'.$numrow, $data->id_siswa);
+        $sheet->setCellValue('B'.$numrow, get_by_nisn($data->id_siswa));
+        $sheet->setCellValue('C'.$numrow, $data->jenis_pembayaran);
+        $sheet->setCellValue('D'.$numrow, $data->total_pembayaran);
         
         $sheet->getStyle('A'.$numrow)->applyFromArray($style_row);
         $sheet->getStyle('B'.$numrow)->applyFromArray($style_row);
@@ -83,27 +84,26 @@ class Keuangan extends CI_Controller
         $no++;
         $numrow++;
       }
-
-    $sheet->getColumnDimension('A')->setWidth(5);
-    $sheet->getColumnDimension('B')->setWidth(25);
-    $sheet->getColumnDimension('C')->setWidth(25);
-    $sheet->getColumnDimension('D')->setWidth(20);
-    $sheet->getColumnDimension('E')->setWidth(30);
-    
-    $sheet->getDefaultRowDimension()->setRowHeight(-1);
-
-    $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
-
-    $sheet->setTitle("LAPORAN DATA PEMBAYARAN");
-
-    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment; filename="PEMBAYARAN.xlsx"');
-    header('Cache-Control: max-age=0');
-
-    $writer = new Xlsx($spreadsheet);
-    $writer->save('php://output');
-
-  }
+  
+      $sheet->getColumnDimension('A')->setWidth(5);
+      $sheet->getColumnDimension('B')->setWidth(25);
+      $sheet->getColumnDimension('C')->setWidth(25);
+      $sheet->getColumnDimension('D')->setWidth(20);
+      // $sheet->getColumnDimension('E')->setWidth(30);
+      
+      $sheet->getDefaultRowDimension()->setRowHeight(-1);
+  
+      $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+  
+      $sheet->setTitle("LAPORAN DATA PEMBAYARAN");
+  
+      header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      header('Content-Disposition: attachment; filename="PEMBAYARAN.xlsx"');
+      header('Cache-Control: max-age=0');
+  
+      $writer = new Xlsx($spreadsheet);
+      $writer->save('php://output');
+    }
     public function import()
   {
     require_once FCPATH . 'vendor/autoload.php';

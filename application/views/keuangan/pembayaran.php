@@ -98,7 +98,7 @@
                 </tbody>
               </table>
               <form method="post" enctype="multipart/form-data" action="<?php base_url('keuangan/import') ?>">
-          <div class="modal-body">
+          <div>
             <input type="file" name="file">
             <input type="submit" name="import" class="btn btn-outline-secondary" value="import" />
           </div>

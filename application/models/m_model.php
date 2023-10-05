@@ -76,6 +76,10 @@ class M_model extends CI_Model {
             return false;
         }
     }
+
+    public function export() {
+        $this->db->get('pembayaran')->result();
+    } 
 }
 ?>
 
