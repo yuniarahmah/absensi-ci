@@ -103,10 +103,9 @@
                     </tr>
                    <?php endforeach ?>
                    <a href="<?php echo base_url('admin/export_siswa')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
-
                 </tbody>
               </table>
-              <form method="post" enctype="multipart/form-data" action="<?php base_url('admin/import_siswa') ?>">
+              <form method="post" enctype="multipart/form-data" action="<?= base_url('admin/import') ?>">
           <div>
             <input type="file" name="file">
             <input type="submit" name="import" class="btn btn-outline-secondary" value="import" />

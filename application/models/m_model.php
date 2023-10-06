@@ -63,15 +63,29 @@ class M_model extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function get_by_nisn(){
+    public function get_by_nisn($nisn){
         $this->db->select('id_siswa');
         $this->db->from('siswa');
         $this->db->where('nisn', $nisn);
         $query = $this->db->get();
 
         if($query->num_rows() > 0){
-            $result = $query-row();
+            $result = $query->row();
             return $result->id_siswa;
+        } else{
+            return false;
+        }
+    }
+    public function get_by_kelas($tingkat_kelas, $jurusan_kelas){
+        $this->db->select('id');
+        $this->db->from('kelas');
+        $this->db->where('tingkat_kelas', $tingkat_kelas);
+        $this->db->where('jurusan_kelas', $jurusan_kelas);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            $result = $query->row();
+            return $result->id;
         } else{
             return false;
         }
@@ -80,6 +94,34 @@ class M_model extends CI_Model {
     public function export() {
         $this->db->get('pembayaran')->result();
     } 
+
+    public function get_by_jurusan($tingkat_kelas){
+        $this->db->select('id');
+        $this->db->from('kelas');
+        // $this->db->where('jurusan_kelas', $jurusan );
+        $this->db->where('tingkat_kelas', $tingkat_kelas);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            $result = $query->row();
+            return $result->id;
+        } else{
+            return false;
+        }
+    }
+    public function get_by_mapel($mapel){
+        $this->db->select('id');
+        $this->db->from('mapel');
+        $this->db->where('mapel', $mapel);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            $result = $query->row();
+            return $result->id_mapel;
+        } else{
+            return false;
+        }
+    }
 }
 ?>
 

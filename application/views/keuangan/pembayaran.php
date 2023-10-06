@@ -45,7 +45,7 @@
                     <li>
                         <a href="<?php echo base_url('admin/siswa') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-graduation-cap"></i> <span class="ms-1 d-none d-sm-inline">Siswa</span></a>
-                    </li>
+                    </li>>
                     <li>
                         <a href="<?php echo base_url('admin/account') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-house-user"></i><span class="ms-1 d-none d-sm-inline">Account</span></a>
@@ -97,7 +97,7 @@
                   <a href="<?php echo base_url('keuangan/export')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
                 </tbody>
               </table>
-              <form method="post" enctype="multipart/form-data" action="<?php base_url('keuangan/import') ?>">
+              <form method="post" enctype="multipart/form-data" action="<?= base_url('keuangan/import') ?>">
           <div>
             <input type="file" name="file">
             <input type="submit" name="import" class="btn btn-outline-secondary" value="import" />

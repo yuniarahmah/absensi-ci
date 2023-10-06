@@ -11,7 +11,7 @@ class Admin extends CI_Controller {
         $this->load->model( 'm_model' );
         $this->load->helper( 'my_helper' );
         $this->load->library( 'upload' );
-        if ( $this->session->userdata( 'loged_in' ) != true && $this->session->userdata( 'role' ) != 'admin' ) {
+        if ( $this->session->userdata( 'loged_in' ) != true || $this->session->userdata( 'roll' ) != 'admin' ) {
             redirect( base_url().'auth' );
         }
     }
@@ -300,34 +300,30 @@ class Admin extends CI_Controller {
         $sheet->setCellValue( 'C3', 'NISN' );
         $sheet->setCellValue( 'D3', 'GENDER' );
         $sheet->setCellValue( 'E3', 'KELAS' );
-        $sheet->setCellValue( 'F3', 'FOTO' );
 
         $sheet->getStyle( 'A3' )->applyFromArray( $style_col );
         $sheet->getStyle( 'B3' )->applyFromArray( $style_col );
         $sheet->getStyle( 'C3' )->applyFromArray( $style_col );
         $sheet->getStyle( 'D3' )->applyFromArray( $style_col );
         $sheet->getStyle( 'E3' )->applyFromArray( $style_col );
-        $sheet->getStyle( 'F3' )->applyFromArray( $style_col );
 
         // Get data from database
         $data = $this->m_model->get_data( 'siswa' )->result();
 
         $no = 1;
         $numrow = 4;
-        foreach ( $data as $data ) {
+        foreach ( $data as $dataa ) {
             $sheet->setCellValue( 'A'.$numrow, $id_siswa );
-            $sheet->setCellValue( 'B'.$numrow, $data->nama_siswa );
-            $sheet->setCellValue( 'C'.$numrow, $data->nisn );
-            $sheet->setCellValue( 'D'.$numrow, $data->gender );
-            $sheet->setCellValue( 'E'.$numrow, tampil_full_kelas_byid( $data->id_kelas ) );
-            $sheet->setCellValue( 'F'.$numrow, $data->foto );
+            $sheet->setCellValue( 'B'.$numrow, $dataa->nama_siswa );
+            $sheet->setCellValue( 'C'.$numrow, $dataa->nisn );
+            $sheet->setCellValue( 'D'.$numrow, $dataa->gender );
+            $sheet->setCellValue( 'E'.$numrow, tampil_full_kelas_byid( $dataa->id_kelas ) );
 
             $sheet->getStyle( 'A'.$numrow )->applyFromArray( $style_row );
             $sheet->getStyle( 'B'.$numrow )->applyFromArray( $style_row );
             $sheet->getStyle( 'C'.$numrow )->applyFromArray( $style_row );
             $sheet->getStyle( 'D'.$numrow )->applyFromArray( $style_row );
             $sheet->getStyle( 'E'.$numrow )->applyFromArray( $style_row );
-            $sheet->getStyle( 'F'.$numrow )->applyFromArray( $style_row );
 
             $no++;
             $numrow++;
@@ -338,7 +334,6 @@ class Admin extends CI_Controller {
         $sheet->getColumnDimension( 'C' )->setWidth( 25 );
         $sheet->getColumnDimension( 'D' )->setWidth( 20 );
         $sheet->getColumnDimension( 'E' )->setWidth( 30 );
-        $sheet->getColumnDimension( 'F' )->setWidth( 20 );
 
         $sheet->getDefaultRowDimension()->setRowHeight( -1 );
 
@@ -347,92 +342,67 @@ class Admin extends CI_Controller {
         $sheet->setTitle( 'LAPORAN DATA SISWA' );
 
         header( 'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
-        header( 'Content-Disposition: attachment; filename="data_siswa.xlsx"' );
+        header( 'Content-Disposition: attachment; filename="siswa.xlsx"' );
         header( 'Cache-Control: max-age=0' );
 
         $writer = new Xlsx( $spreadsheet );
         $writer->save( 'php://output' );
     }
 
-    public function import_siswa() 
- {
+    public function import()
+  {
+    if(isset($_FILES["file"]["name"])) {
+      $path = $_FILES["file"]["tmp_name"];
+      $object = PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+      foreach($object->getWorksheetIterator() as $worksheet) {
+        $highestRow = $worksheet->getHighestRow();
+        $highestColumn = $worksheet->getHighestColumn();
+        for($row=2; $row<=$highestRow; $row++) {
+          $nama_siswa = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+          $nisn = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+          $gender = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+          $tingkat_kelas = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+          $jurusan_kelas = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
 
-        if ( isset( $_FILES[ 'file' ][ 'name' ] ) ) {
-
-            $path = $_FILES[ 'file' ][ 'tmp_name' ];
-
-            $object = PhpOffice\PhpSpreadsheet\IOFactory::load( $path );
-
-            foreach ( $object->getWorksheetIterator() as $worksheet ) {
-
-                $highestRow = $worksheet->getHighestRow();
-
-                $highestColumn = $worksheet->getHighestColumn();
-
-                for ( $row = 3; $row <= $highestRow; $row++ ) {
-
-                    $nama_siswa = $worksheet->getCellByColumnAndRow( 2, $row )->getValue();
-
-                    $nisn = $worksheet->getCellByColumnAndRow( 3, $row )->getValue();
-
-                    $gender = $worksheet->getCellByColumnAndRow( 4, $row )->getValue();
-
-                    $kelas = $worksheet->getCellByColumnAndRow( 5, $row )->getValue();
-                    $foto = $worksheet->getCellByColumnAndRow( 6, $row )->getValue();
-
-                    // Periksa apakah ID siswa sudah ada
-                    $get_id_by_nisn = $this->m_model->get_by_nisn( $nisn );
-
-                    $parts = explode( ' ', $kelas );
-
-                    // Ambil kata pertama
-                    $tingkat = $parts[ 0 ];
-
-                    $jurusan = $parts[ 1 ];
-
-                    $get_id_by_jurusan = $this->m_model->get_by_jurusan( $tingkat, $jurusan );
-
-                    if ( !$get_id_by_nisn ) {
-
-                        // Jika ID siswa belum ada, masukkan data baru
-                        $data = array(
-                            'foto' => 'User.png',
-                            'nisn' => $nisn,
-                            'nama_siswa' => $nama_siswa,
-                            'gender' => $gender,
-                            'id_kelas' => $get_id_by_jurusan
-                        );
-
-                        $this->m_model->tambah_data( 'siswa', $data );
-
-                    } else {
-
-                        // Jika ID siswa sudah ada, lakukan tindakan yang sesuai
-                        // Misalnya, Anda bisa memperbarui data yang sudah ada
-                        $data = array(
-                            'nisn' => $nisn,
-                            'nama_siswa' => $nama_siswa,
-                            'gender' => $gender,
-                            'id_kelas' => $get_id_by_jurusan
-                        );
-
-                        $this->m_model->ubah_data( 'siswa', $data, array( 'id_siswa' => $get_id_by_nisn ) );
-
-                    }
-
-                }
-
-            }
-
-            redirect( base_url( 'admin/daftar_siswa' ) );
-
-        } else {
-
-            echo 'Invalid File';
-
+          $get_id_by_kelas = $this->m_model->get_by_kelas($tingkat_kelas, $jurusan_kelas);
+          $data = array(
+            'nama_siswa' => $nama_siswa,
+            'nisn' => $nisn,
+            'gender' => $gender,
+            'id_kelas' => $get_id_by_kelas,
+            'foto' => 'User.png'
+          );
+          $this->m_model->tambah_data('siswa', $data);
         }
-
+      }
+      redirect(base_url('admin/siswa'));
+    } else {
+      echo 'Invalid File';
     }
+  }
+  public function delete_pembayaran( $id )
+  {
+         $this->m_model->delete( 'siswa', 'id_siswa', $id );
+         redirect( base_url( 'admin/siswa' ) );
+     }
+     public function guru()
+	{
+		$data['guru'] = $this->m_model->get_data('guru')->result();
+		$this->load->view('admin/guru', $data);
+	}
+    public function export_guru()
+    {
+        $data['data_guru'] = $this->m_model->get_data('guru')->result();
+        $data['nama'] = 'guru';
 
+        if($this->uri->segment(3) == "pdf"){
+            $this->load->library('pdf');
+            $this->pdf->load_view('admin/export_data_guru', $data);
+            $this->pdf->render();
+            $this->pdf->stream("data_guru.pdf", array("Attachment" => false));
+        }else{
+            $this->load->view('admin/download_data_guru', $data);
+        }
+    }
 }
 ?>
