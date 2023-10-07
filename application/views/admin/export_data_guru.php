@@ -26,7 +26,6 @@
     <table border="1">
         <tr style="font-weight: bold;">
             <td>No</td>
-            <!-- <td>Id</td> -->
             <td>Nama Guru</td>
             <td>NIK</td>
             <td>Gender</td>

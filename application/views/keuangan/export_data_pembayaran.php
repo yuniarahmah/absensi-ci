@@ -33,8 +33,8 @@
 		foreach ($data_pembayaran as $key) { ?>
         <tr>
             <td><?php echo $no++; ?></td>
-            <td><?php echo $key->$jenis_pembayaran ?></td>
-            <td><?php echo $key->$total_pembayaran?></td>
+            <td><?php echo $key->jenis_pembayaran ?></td>
+            <td><?php echo $key->total_pembayaran ?></td>
         </tr>
         <?php } ?>
     </table>

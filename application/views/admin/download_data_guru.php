@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>DATA PEMBAYARAN</h1>
+    <h1>DATA GURU</h1>
     <table style="font-size: 14px; font-weight: bold;">
         <tr>
             <td>Email</td>
@@ -26,7 +26,6 @@
     <table border="1">
         <tr style="font-weight: bold;">
             <td>No</td>
-            <td>Id</td>
             <td>Nama Guru</td>
             <td>NIK</td>
             <td>Gender</td>
@@ -34,15 +33,18 @@
             <td>Kelas</td>
         </tr>
         <?php $no= 1; 
-		foreach ($data_pembayaran as $key) { ?>
+		foreach ($data_guru as $key) { ?>
         <tr>
-            <td><?php echo $no++; ?></td>
-            <td><?php echo $key->id ?></td>
-            <td><?php echo $key->nama_guru ?></td>
-            <td><?php echo $key->nik ?></td>
-            <td><?php echo $key->gender ?></td>
-            <td><?php echo $key->mapel ?></td>
-            <td><?php echo tampil_walikelas_byid($key->id_walikelas) ?></td>
+            <td><?php echo $no++;?></td>
+            <td><?php echo $key->nama_guru?></td>
+            <td><?php echo $key->nik?></td>
+            <td><?php echo $key->gender?></td>
+            <td><?php echo tampil_mapel_byid($key->id)?></td>
+            <td><?php if (!empty($key->id_walikelas)) {
+            echo  tampil_full_kelas_byid($key->id_walikelas);
+            }else {
+                echo "Bukan Wali Kelas";
+            }  ?></td>
         </tr>
         <?php } ?>
     </table>
