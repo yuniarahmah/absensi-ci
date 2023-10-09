@@ -18,9 +18,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout');?>">
-          <i class="fa-solid fa-house-chimney"></i>Home</a>
-          <a class="nav-link active" aria-current="page" style="text-align:center;margin-left: 200px;"><h1>WELCOME TO THE WEB SIS RAHMA</h1>
-          <hr></a>
+          <i class="fa-solid fa-house-chimney"></i></a>
         </li>
       </ul>
     </div>
@@ -44,12 +42,12 @@
                                 </ul>
                             </li>
                     <li>
-                        <a href="<?php echo base_url('admin/siswa') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">Siswa</span></a>
+                        <a href="<?php echo base_url('admin/admin') ?>" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">admin</span></a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('admin/guru') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-user-tie"></i> <span class="ms-1 d-none d-sm-inline">Guru</span></a>
+                        <a href="<?php echo base_url('admin/karyawan') ?>" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-user-tie"></i> <span class="ms-1 d-none d-sm-inline">Karyawan</span></span></a>
                     </li>
                 </ul>
                 <hr>
@@ -57,13 +55,13 @@
         </div>
 
     <div class="container py-3 h-auto">
-          <h1 style="background-color:lightblue; height: 60px; text-align:center;">SISWA</h1>
+          <h1 style="background-color:lightblue; height: 60px; text-align:center;">Karyawan</h1>
           <a href="<?php echo base_url('admin/tambah_siswa')?>"><button type="submit" class="btn btn-primary w-15" name="submit">Tambah <i class="fa-solid fa-file-circle-plus"></i></button></a>
  
       <table class="table">
         <thead>
             <th scope="col" >No</th>
-            <th scope="col" >Nama siswa</th>
+            <th scope="col" >Nama karyawan</th>
             <th scope="col" >Nisn</th>
             <th scope="col" >Gender</th>
             <th scope="col" >Kelas</th>
@@ -74,11 +72,11 @@
         <tbody classs="table-grup-divider">
           <?php $no=0; foreach($siswa as $row ): $no++ ?>
           <tr>
-            <td><?php echo $no?></td>
-            <td><?php echo $row ->nama_siswa ?></td>
-            <td><?php echo $row->nisn ?></td>
-            <td><?php echo $row->gender?></td> 
-            <td><?php echo tampil_full_kelas_byid($row->id_kelas)?></td>       
+            <td>1.</td>
+            <td>Rahma</td>
+            <td>086909075</td>
+            <td></td> 
+            <td></td>       
             <td>
                 <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary"><i class="fa-solid fa-square-pen"></i></a>
                 <button onclick="hapus(<?php echo $row->id_siswa ?>)"
@@ -90,6 +88,8 @@
            <?php endforeach ?>
         </tbody>
       </table>
+      
+      <a href="<?php echo base_url('admin');?>"class="btn btn-primary">loguot <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
          </div>
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>

@@ -29,8 +29,8 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout');?>">
-          <i class="fa-solid fa-house-chimney"></i>Home </a>
+          <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout')?>">
+          <i class="fa-solid fa-house-chimney"></i> </a>
           <a class="nav-link active" aria-current="page" style="text-align:center;margin-left: 200px;"><h1>WELCOME TO THE WEB SIS RAHMA</h1>
           <hr></a>
         </li>
@@ -57,11 +57,11 @@
                             </li>
                     <li>
                         <a href="<?php echo base_url('admin/siswa') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">Siswa</span></a>
+                        <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">Admin</span></a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('admin/guru') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-user-tie"></i> <span class="ms-1 d-none d-sm-inline">guru</span></a>
+                        <i class="fa-solid fa-user-tie"></i> <span class="ms-1 d-none d-sm-inline">Karyawan</span></a>
                     </li>
                 </ul>
                 <hr>
@@ -71,7 +71,7 @@
     <div class="row container py-3 col-10">
  <div class="col">
   <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Jumlah Siswa</div>
+             <div class="card-header">Rekap Harian</div>
                <div class="card-body">
                  <p class="card-text"><?php echo $siswa;?> <i class="fa-solid fa-user"></i></p>
                  <div class="card-footer text-muted">
@@ -82,7 +82,7 @@
         </div>
         <div class="col">
         <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Jumlah Kelas</div>
+             <div class="card-header">Rekap Mingguan</div>
                <div class="card-body">
                  <p class="card-text"><?php echo $kelas;?> <i class="fa-solid fa-door-closed"></i></p>
                  <div class="card-footer text-muted">
@@ -93,7 +93,7 @@
         </div>
         <div class="col">
         <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Jumlah Guru</div>
+             <div class="card-header">Rekap Bulanan</div>
                <div class="card-body">
                  <p class="card-text"><?php echo $guru;?> <i class="fa-solid fa-user-tie"></i></p>
                  <div class="card-footer text-muted">
@@ -102,8 +102,38 @@
              </div>
         </div>            
         </div>
-      </div>
-    </div>
+        <div class="how" style="widht:40vh; height:35vh;">
+        <table class="table table-striped-columns">
+   <thead>
+     <tr class="table-dark">
+       <th scope="col">NO</th>
+       <th scope="col">Nama Belakang</th>
+       <th scope="col">Nama Depan</th>
+       <th scope="col">Email</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+       <th scope="row" class="table-secondary">1</th>
+       <td class="table-light">Satria Candra Pamungkas</td>
+       <td class="table-secondary">Satria</td>
+       <td  class="table-light">@candra</td>
+     </tr>
+     <tr>
+       <th scope="row" class="table-secondary">2</th>
+       <td class="table-light">Wahyu Yulianto</td>
+       <td class="table-secondary">Yuya</td>
+       <td class="table-light">@elena</td>
+     </tr>
+     <tr>
+       <th scope="row" class="table-secondary">3</th>
+       <td class="table-light">Andi Saputro</td>
+       <td class="table-secondary">Andi</td>
+       <td class="table-light">@andi</td>
+     </tr>
+   </tbody>
+ </table>
   </div>
+      </div>
 </body>
 </html>

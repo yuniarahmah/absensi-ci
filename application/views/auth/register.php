@@ -1,58 +1,162 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Membuat Form Pendaftaran Registrasi Dengan PHP MySQL</title>    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title> Pendaftaran Registrasi </title>    
 </head>
 <style>
-    .container{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    padding: 20px 25px;
-    width: 300px;
-
-    background-image: url();
-    background-repeat: no-repeat;
-    background-size:cover;
-    width: 20%;
-    height: 50%;
-    box-shadow: 0 0 10px rgba(255,255,255,.3);
-    border-radius:50px
+    body {
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+    background: linear-gradient(#141e30, #243b55);
   }
-    
-    body{
-      background-image: url("https://static.vecteezy.com/system/resources/previews/000/833/525/original/grey-abstract-background-with-layers-vector.jpg");
-    background-repeat: no-repeat;
-    background-size:cover;
-    }
 
-   </style>
-  <body>
-    <div>
-    <img src="https://anexia.com/blog/wp-content/uploads/2015/01/codeigniter_logo.png" style="width:700px; text-align:center;">
-        <div class="container">
-          <h1 style="text-align:center;background-color:bisque;">Register</h1>
-          <br>
-            <form action="<?php echo base_url('Register/aksi_register')?>" method="post" style="text-align:center;">
-                <label><font color='white'><b>
-                    Nama Pengguna
-                    </b></label><br>@<br></font>
-                <input type="text" id="nama_pengguna" name="nama_pengguna"><br>
-                <label><font color='white'><b>
-                    Email
-                    </br></label>#<br></font>
-                <input type="text" id="email" name="email"><br>
-                <label><font color='white'><b>
-                    assword
-                    </b></label><br>?<br></font>
-        <input type="password" name="password" id="inputPassword">
-        <input type="hidden" value="admin" name="role">
-        <br><br>
-        <input type="checkbox" onclick="myFunction()"><font color='white'>Tampilkan Password</font><br>
-        <button name="submit" type="submit">Register</button>
-            </form>
-       </div>
-       <script>
+  .login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  }
+  
+  .login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .login-box .user-box {
+    position: relative;
+  }
+  
+  .login-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+  }
+  .login-box .user-box label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+  }
+  
+  .login-box .user-box input:focus ~ label,
+  .login-box .user-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+  }
+  
+  .login-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+  }
+
+  .login-box a:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+  }
+  
+  .login-box a span {
+    position: absolute;
+    display: block;
+  }
+  
+  .login-box a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    animation: btn-anim1 1s linear infinite;
+  }
+    .login-box a:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+  }
+  
+  .login-box a span {
+    position: absolute;
+    display: block;
+  }
+  
+  .login-box a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    animation: btn-anim1 1s linear infinite;
+  }
+</style>
+<body>
+    <div class="login-box">
+        <h2>REGISTRASI</h2>
+        <form action="<?php echo base_url('Register/aksi_register')?>" method="post" style="text-align:center;">
+
+          <div class="user-box">
+            <input type="text" name="nama_pengguna" id="nama_pengguna">
+            <label>Nama</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="email" id="email">
+            <label>Email</label>
+          </div>
+          <div class="user-box">
+            <input type="text" name="password" id="password">
+            <label>password</label>
+          </div>
+          <a href="<?php echo base_url('admin') ?>">
+            <span>t</span>
+            <span>i</span>
+            <span>m</span>
+            <span>u</span>
+            Submit
+          </a>
+        </form>
+      </div>
+           <script>
             function myFunction() {
                 var x = document.getElementById("inputPassword");
                 if (x.type === "password") {
@@ -62,6 +166,9 @@
                 }
             }
         </script>
-  </div>
-      </body>
+</body>
 </html>
+
+<input type="checkbox" onclick="myFunction()"><font color='white'>Tampilkan Password</font><br>
+        <button name="submit" type="submit">Register</button>
+  

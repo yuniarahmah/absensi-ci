@@ -8,7 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <style>
         .background {
-            background-color:beige;
+            background-image:url('https://blogct.creative-tim.com/blog/content/images/wordpress/2020/11/How-to-add-Bootstrap-to-HTML-.jpg');
+            background-size:cover;
         }
         .background-image-black {
         height: 10px;
@@ -18,29 +19,7 @@
 
 </head>
 <body class="background">
-    <div class>
-        <h1 style="text-align: center;"></h1>
-       
-        <center>
-            <img src="https://serpong.binus.sch.id/wp-content/themes/binus-2019-169-school-v2/assets/images/default/logo--semarang-2.png" widht="250px" height="150px">
-            <br>
-            <h2 style="text-align: center;"><font color='black'> WELCOME TO SIS THE SCHOOL BINUSA</font></h2>
-            <br>
-            <font color='red'>CERDAS SANTUN BERBUDI LUHUR</font>
-            <br>
-            <P style="background-color: silver; width:40%; margin-rigth:0%;">
-                <i>
-                A Little Description About Binusa School
-                </i>
-                <br>
-                <br>
-                binusa school is a school that has students who are bright, well-mannered, virtuous and achievement. we can learn many things. Although not a foreign school but binusa is also not inferior to a state school with good fasilistas 
-                binusa is also famous for its basic principle which is to make intelligent disciples well-mannered and virtuous
-            </P>
-            <br>
-            <a class="btn btn-primary" href="<?php echo base_url('register') ?> " style="text-align: center;">Register</a>
-            <a class="btn btn-danger" href="<?php echo base_url('Auth/login') ?> " style="text-align: center;"><font color='white'>Login</font></a>
-        </div>
-    </center>
+   <h1 style="text-align:center;">ABSENSI KARYAWAN</h1>
+   <a href="<?php echo base_url('auth/register') ?>" style="margin-left:100vh">REGISTER DULU=></a>
 </body>
 </html>
