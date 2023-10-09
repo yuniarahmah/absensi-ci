@@ -75,8 +75,8 @@
             <td>1.</td>
             <td>Rahma</td>
             <td>086909075</td>
-            <td></td> 
-            <td></td>       
+            <td>perempuan</td> 
+            <td>10 TKJ</td>       
             <td>
                 <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary"><i class="fa-solid fa-square-pen"></i></a>
                 <button onclick="hapus(<?php echo $row->id_siswa ?>)"
