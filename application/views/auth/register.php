@@ -132,22 +132,26 @@
 </style>
 <body>
     <div class="login-box">
-        <h2>LOGIN</h2>
+        <h2>REGISTRASI</h2>
         <form action="<?php echo base_url('Register/aksi_register')?>" method="post" style="text-align:center;">
 
           <div class="user-box">
-            <input type="text" name="" required="">
-            <label>Username</label>
+            <input type="text" name="nama_pengguna" id="nama_pengguna">
+            <label>Nama</label>
           </div>
           <div class="user-box">
-            <input type="chekbox" name="" required="">
-            <label>Password</label>
+            <input type="text" name="email" id="email">
+            <label>Email</label>
           </div>
-          <a href="<?php echo base_url('auth/login') ?>">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="user-box">
+            <input type="text" name="password" id="password">
+            <label>password</label>
+          </div>
+          <a href="<?php echo base_url('admin') ?>">
+            <span>t</span>
+            <span>i</span>
+            <span>m</span>
+            <span>u</span>
             Submit
           </a>
         </form>
