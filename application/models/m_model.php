@@ -4,20 +4,25 @@ class M_model extends CI_Model {
     function get_data( $table ) {
         return $this->db->get( $table );
     }
-
+//untuk menghubungkan data ke sql
     function getwhere( $table, $data )
- {
+    {
         return $this->db->get_where( $table, $data );
 
     }
-
-    public function delete( $table, $field, $id ) {
+//untuk menghubungkan register ke sql
+    function register($data){
+        return $this->db->insert("admin", $data);
+    }
+    //untuk menghapus data di dalam from juga sql
+    public function delete( $table, $field, $id )
+     {
         $data = $this->db->delete( $table, array( $field => $id ) );
         return $data;
     }
-
+    //untuk menambahkan data di dalam from dan sql
     public function tambah_data( $table, $data )
- {
+     {
         $this->db->insert( $table, $data );
         return $this->db->insert_id( $table );
     }
@@ -47,23 +52,6 @@ class M_model extends CI_Model {
         } else {
             return false;
         }
-    }
-    function register($data){
-        return $this->db->insert("user", $data);
-    }
-    public function register_karyawan($email, $username,$nama_depan, $nama_belakang,$role, $password)
-    {
-        $data = array(
-            'email' => $email,
-            'username' => $username,
-            'nama_depan' => $nama_depan,
-            'nama_belakang' => $nama_belakang,
-            'role' => $role,
-            'password' => $password
-        );
-
-        // Simpan data ke dalam tabel pengguna (ganti 'users' sesuai dengan nama tabel Anda)
-        $this->db->insert('user', $data);
     }
 }
 ?>
