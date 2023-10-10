@@ -131,8 +131,8 @@ button:hover {
 <body>
     <div class="container">
         <div class="login">
-        <form action="<?php echo base_url('auth/aksi_register')?>" method="post" style="text-align:center;">
-                <h1>REGISTER ADMIN</h1>
+            <form action="<?php echo base_url('Auth/aksi_register_k') ?>" method="post">
+                <h1>REGISTER KARYAWAN</h1>
                 <hr>
                 <p>Isi data dibawah ini untuk registrasi </p>
                 <div class="user-box">
@@ -154,9 +154,9 @@ button:hover {
           <div class="user-box">
             <label>password</label>
             <input type="password" name="password" id="inputpassword">
-            <input type="hidden" value="admin" name="role">
+            <input type="hidden" value="karyawan" name="role">
           </div>
-          <button type="submit"><a href="<?php echo base_url('auth/login') ?>">Register</a></button>
+          <button name="submit" type="submit"><a href="<?php echo base_url('auth/login') ?>">Register</a></button>
         </form>
         </div>
         <div class="right">

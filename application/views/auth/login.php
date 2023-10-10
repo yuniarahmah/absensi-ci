@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title> Pendaftaran Registrasi </title>    
+    <title> LOGIN </title>    
 </head>
 <style>
     body {
     margin:0;
     padding:0;
     font-family: sans-serif;
-    background: linear-gradient(#141e30, #243b55);
+    background-image:url('https://img.freepik.com/premium-photo/dark-fantasy-background-anime-style-illustration_725906-32.jpg');
+    background-size:cover;
   }
 
   .login-box {
@@ -124,7 +125,7 @@
   .login-box a span:nth-child(1) {
     top: 0;
     left: -100%;
-    width: 100%;
+    width: 90%;
     height: 2px;
     background: linear-gradient(90deg, transparent, #03e9f4);
     animation: btn-anim1 1s linear infinite;
@@ -133,23 +134,24 @@
 <body>
     <div class="login-box">
         <h2>LOGIN</h2>
-        <form action="<?php echo base_url('Register/aksi_register')?>" method="post" style="text-align:center;">
+        <form action="<?php echo base_url('auth/aksi_login')?>" method="post" style="text-align:center;">
 
           <div class="user-box">
-            <input type="text" name="" required="">
-            <label>Username</label>
+            <input type="text" name="email" id="email">
+            <label>Email</label>
           </div>
+         >
           <div class="user-box">
-            <input type="chekbox" name="" required="">
-            <label>Password</label>
+            <input type="password" name="password" id="inputpassword">
+            <label>password</label>
           </div>
-          <a href="<?php echo base_url('auth/login') ?>">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Submit
-          </a>
+            <a href="<?php echo base_url('admin/admin') ?>">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Login
+            </a>
         </form>
       </div>
            <script>
@@ -164,7 +166,3 @@
         </script>
 </body>
 </html>
-
-<input type="checkbox" onclick="myFunction()"><font color='white'>Tampilkan Password</font><br>
-        <button name="submit" type="submit">Register</button>
-  

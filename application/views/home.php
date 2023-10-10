@@ -19,7 +19,14 @@
 
 </head>
 <body class="background">
-   <h1 style="text-align:center;">ABSENSI KARYAWAN</h1>
-   <a href="<?php echo base_url('auth/register') ?>" style="margin-left:100vh">REGISTER DULU=></a>
+    <center>
+    <h1 style="text-align:center;">ABSENSI KARYAWAN</h1>
+    <button class="btn btn-dark w-20">
+        <a style="color:white;" href="<?php echo base_url('auth/register') ?>">REGISTER</a>
+    </button>
+    <button class="btn btn-dark w-20">
+        <a style="color:white;" href="<?php echo base_url('auth/register_k') ?>">REGISTER 2</a>
+    </button>
+    </center>
 </body>
 </html>

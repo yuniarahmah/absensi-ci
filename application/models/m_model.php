@@ -34,7 +34,7 @@ class M_model extends CI_Model {
         return $data;
     }
 
-    public function get_siswa_foto_by_id( $id_siswa )
+    public function get_foto_by_id( $id_siswa )
  {
         $this->db->select( 'foto' );
         $this->db->from( 'siswa' );
@@ -48,19 +48,22 @@ class M_model extends CI_Model {
             return false;
         }
     }
-    //from keuangan
-
-    function get_pembayaran() {
-        $this->db->select( 'pembayaran.*, siswa.nama_siswa' );
-        $this->db->from( 'pembayaran' );
-        $this->db->join( 'siswa', 'pembayaran.id_siswa = siswa.id_siswa', 'left' );
-        $query = $this->db->get();
-        return $query->result();
+    function register($data){
+        return $this->db->insert("user", $data);
     }
-    public function ubah_pembayaran( $tabel, $data, $where )
- {
-        $data = $this->db->update( $tabel, $data, $where );
-        return $this->db->affected_rows();
+    public function register_karyawan($email, $username,$nama_depan, $nama_belakang,$role, $password)
+    {
+        $data = array(
+            'email' => $email,
+            'username' => $username,
+            'nama_depan' => $nama_depan,
+            'nama_belakang' => $nama_belakang,
+            'role' => $role,
+            'password' => $password
+        );
+
+        // Simpan data ke dalam tabel pengguna (ganti 'users' sesuai dengan nama tabel Anda)
+        $this->db->insert('user', $data);
     }
 }
 ?>

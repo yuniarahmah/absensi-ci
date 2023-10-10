@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 class Admin extends CI_Controller {
 
 function __construct(){
@@ -10,6 +11,9 @@ function __construct(){
     // if($this->session->userdata('loged_in')!=true){
     //     redirect(base_url().'login');
     // }
+	// if ( $this->session->userdata( 'loged_in' ) != true || $this->session->userdata( 'roll' ) != 'admin' ) {
+	// 	redirect( base_url().'auth' );
+	// }
 }
 
 	public function index()
@@ -17,12 +21,11 @@ function __construct(){
 		$data['siswa'] = $this->m_model->get_data('siswa')->num_rows();
 		$data['kelas'] = $this->m_model->get_data('kelas')->num_rows();
 		$data['guru'] = $this->m_model->get_data('guru')->num_rows();
-         $this->load->view('admin/dashboard', $data);
+         $this->load->view('admin/index', $data);
 	}
 	public function admin()
 	{
-		$data['admin'] = $this->m_model->get_data('admin')->result();
-		$this->load->view('admin/admin', $data);
-	}	
+		$this->load->view('admin/admin');
+	}
 }
 ?>
