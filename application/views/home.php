@@ -19,7 +19,6 @@
 
 </head>
 <body class="background">
-<<<<<<< HEAD:application/views/home.php
     <center>
     <h1 style="text-align:center;">ABSENSI KARYAWAN</h1>
     <button class="btn btn-dark w-20">
@@ -29,9 +28,5 @@
         <a style="color:white;" href="<?php echo base_url('auth/register_k') ?>">REGISTER 2</a>
     </button>
     </center>
-=======
-   <h1 style="text-align:center;">ABSENSI KARYAWAN</h1>
-   <a href="<?php echo base_url('auth/register') ?>" style="margin-left:100vh">REGISTER DULU=></a>
->>>>>>> dbc453eb95e601d46dafc0dd2e07f2541a2716d8:application/views/auth/tampilan.php
 </body>
 </html>

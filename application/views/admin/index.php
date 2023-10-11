@@ -36,8 +36,8 @@
                       
                     </li>
                     <li>
-                        <a href="<?php echo base_url('admin') ?>" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                        <a href="history" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">history</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 </ul>
                             </li>
@@ -70,7 +70,7 @@
 
         </thead>
         <tbody classs="table-grup-divider">
-          <?php $no=0; foreach($siswa as $row ): $no++ ?>
+          <?php $no=0; foreach($karyawan as $row ): $no++ ?>
           <tr>
             <td>1.</td>
             <td>Rahma</td>

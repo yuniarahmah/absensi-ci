@@ -43,7 +43,7 @@
                                 </ul>
                             </li>
                     <li>
-                        <a href="<?php echo base_url('admin/admin') ?>" class="nav-link px-0 align-middle">
+                        <a href="<?php echo base_url('admin') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">Admin</span></a>
                     </li>
                     <li>
@@ -55,72 +55,53 @@
             </div>
         </div>
        <br>
-    <div class="row container py-3 col-10">
- <div class="col">
-  <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Rekap Harian</div>
-               <div class="card-body">
-                 <p class="card-text"> <i class="fa-solid fa-user"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>            
-        </div>
-        <div class="col">
-        <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Rekap Mingguan</div>
-               <div class="card-body">
-                 <p class="card-text"> <i class="fa-solid fa-door-closed"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>            
-        </div>
-        <div class="col">
-        <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Rekap Bulanan</div>
-               <div class="card-body">
-                 <p class="card-text"><i class="fa-solid fa-user-tie"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>            
-        </div>
-        <div class="how" style="widht:40vh; height:35vh;">
-        <table class="table table-striped-columns">
-   <thead>
-     <tr class="table-dark">
-       <th scope="col">NO</th>
-       <th scope="col">Nama Belakang</th>
-       <th scope="col">Nama Depan</th>
-       <th scope="col">Email</th>
-     </tr>
-   </thead>
-   <tbody>
-     <tr>
-       <th scope="row" class="table-secondary">1</th>
-       <td class="table-light">Satria Candra Pamungkas</td>
-       <td class="table-secondary">Satria</td>
-       <td  class="table-light">@candra</td>
-     </tr>
-     <tr>
-       <th scope="row" class="table-secondary">2</th>
-       <td class="table-light">Wahyu Yulianto</td>
-       <td class="table-secondary">Yuya</td>
-       <td class="table-light">@elena</td>
-     </tr>
-     <tr>
-       <th scope="row" class="table-secondary">3</th>
-       <td class="table-light">Andi Saputro</td>
-       <td class="table-secondary">Andi</td>
-       <td class="table-light">@andi</td>
-     </tr>
-   </tbody>
- </table>
-  </div>
-      </div>
+       <div class="row container py-3">
+    <div class="container py-3 h-auto">
+                  <h1 style="background-color:grey ; height: 60px; text-align:center;"><font color='white'>karyawan</font></h1>
+              <table class="table">
+                <thead>
+                    <th scope="col" >No</th>
+                    <th scope="col" >foto</th>
+                    <th scope="col" >Nama siswa</th>
+                    <th scope="col" >Nisn</th>
+                    <th scope="col" >Gender</th>
+                    <th scope="col" >Id_kelas</th>
+                    <th scope="col" >Aksi</th>
+                  </tr>
+          
+                </thead>
+                <tbody classs="table-grup-divider">
+                  <?php $no=0; foreach($absen as $row ): $no++ ?>
+                  <tr>
+                    <td><?php echo $no ?></td>
+                    <td><img src="<?php echo base_url('images/siswa/'. $row->foto)?>" width="50px"></td>
+                    <td>
+                        <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary">Ubah</a>
+                        <button onclick="hapus(<?php echo $row->id_siswa ?>)"
+                        class="btn btn-danger">
+                      Hapus
+                     </button>
+                    </td>
+                    </tr>
+                   <?php endforeach ?>
+                   <a href="<?php echo base_url('admin/expor_tsiswa')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
+                </tbody>
+              </table>
+              <form method="post" enctype="multipart/form-data" action="<?= base_url('admin/import') ?>">
+          <div>
+            <input type="file" name="file">
+            <input type="submit" name="import" class="btn btn-outline-secondary" value="import" />
+          </div>
+        </form>
+              <a href="<?php echo base_url('admin/tambah_siswa')?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
+    </div>
+      <script>
+        function hapus(id){
+          var yes = confirm('Yakin Di Hapus?');
+          if(yes == true) {
+            window.location.href = "<?php echo base_url('admin/hapus_siswa/')?>" + id;
+        }
+    }
+</script>
 </body>
 </html>

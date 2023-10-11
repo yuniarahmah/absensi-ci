@@ -31,7 +31,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout')?>">
           <i class="fa-solid fa-house-chimney"></i> </a>
-          <a class="nav-link active" aria-current="page" style="text-align:center;margin-left: 200px;"><h1>WELCOME TO THE WEB SIS RAHMA</h1>
+          <a class="nav-link active" aria-current="page" style="text-align:center;margin-left: 200px;"><h1></h1>
           <hr></a>
         </li>
       </ul>
@@ -50,17 +50,17 @@
                       
                     </li>
                     <li>
-                        <a href="/dashboard" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                        <a href="" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                        <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">history</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="admin">
                                 </ul>
                             </li>
                     <li>
-                        <a href="<?php echo base_url('admin/siswa') ?>" class="nav-link px-0 align-middle">
+                        <a href="<?php echo base_url('admin/dashboard') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">Admin</span></a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('admin/guru') ?>" class="nav-link px-0 align-middle">
+                        <a href="<?php echo base_url('karyawan/karyawan') ?>" class="nav-link px-0 align-middle">
                         <i class="fa-solid fa-user-tie"></i> <span class="ms-1 d-none d-sm-inline">Karyawan</span></a>
                     </li>
                 </ul>
@@ -73,9 +73,9 @@
   <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
              <div class="card-header">Rekap Harian</div>
                <div class="card-body">
-                 <p class="card-text"><?php echo $siswa;?> <i class="fa-solid fa-user"></i></p>
+                 <p class="card-text"> <i class="fa-solid fa-user"></i></p>
                  <div class="card-footer text-muted">
-                    <a href="<?php echo base_url('admin/detail_siswa')?>" class="btn btn-primary">info lengkap</a>
+                    <a href="" class="btn btn-primary">info lengkap</a>
                   </div>
              </div>
         </div>            
@@ -84,9 +84,9 @@
         <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
              <div class="card-header">Rekap Mingguan</div>
                <div class="card-body">
-                 <p class="card-text"><?php echo $kelas;?> <i class="fa-solid fa-door-closed"></i></p>
+                 <p class="card-text"><i class="fa-solid fa-door-closed"></i></p>
                  <div class="card-footer text-muted">
-                    <a href="<?php echo base_url('admin/kelas')?>" class="btn btn-primary">info lengkap</a>
+                    <a href="" class="btn btn-primary">info lengkap</a>
                   </div>
              </div>
         </div>            
@@ -95,7 +95,7 @@
         <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
              <div class="card-header">Rekap Bulanan</div>
                <div class="card-body">
-                 <p class="card-text"><?php echo $guru;?> <i class="fa-solid fa-user-tie"></i></p>
+                 <p class="card-text"><i class="fa-solid fa-user-tie"></i></p>
                  <div class="card-footer text-muted">
                     <a href="<?php echo base_url('admin/detail_guru')?>" class="btn btn-primary">info lengkap</a>
                   </div>
