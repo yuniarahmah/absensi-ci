@@ -40,12 +40,15 @@ class Auth extends CI_Controller {
       $this->session->set_userdata($data);
       if ($this->session->userdata('role') == 'admin') {
         redirect(base_url() . "admin");
-      } elseif ($this->session->userdata('role') == 'karyawan') {
+      }
+       elseif ($this->session->userdata('role') == 'karyawan') {
         redirect(base_url() . "karyawan/history");
-      } else {
+      } 
+      else {
         redirect(base_url() . "auth");
       }
-    } else {
+    } 
+    else {
       redirect(base_url() . "auth");
     }
   }
@@ -67,16 +70,7 @@ class Auth extends CI_Controller {
         $nama_depan = $this->input->post( 'nama_depan' );
         $nama_belakang = $this->input->post( 'nama_belakang' );
         $password = $this->input->post( 'password' );
-        $role = $this->input->post( 'role' );
 
-        // $uppercase = preg_match( '@[A-Z]@', $password );
-        // $lowercase = preg_match( '@[a-z]@', $password );
-        $number    = preg_match( '@[0-9]@', $password );
-
-        if ( !$number || strlen( $password ) < 8 ) {
-            $this->session->set_flashdata( 'eror', 'gagal register' );
-            redirect( 'register' );
-        } else {
             $kode_pass = md5( $password );
             $data = array (
                 'id'             => $id,
@@ -85,12 +79,11 @@ class Auth extends CI_Controller {
                 'nama_depan'     => $nama_depan,
                 'nama_belakang'  => $nama_belakang,
                 'password'       => $kode_pass,
-                'role'           => $role,
+                'role'           => 'admin',
             );
             $this->m_model->register( $data );
             redirect( 'auth/login' );
-        }
-        ;
+       
     }
 
     public function register_k()
@@ -107,14 +100,7 @@ class Auth extends CI_Controller {
         $password = $this->input->post( 'password' );
         $role = $this->input->post( 'role' );
 
-        // $uppercase = preg_match( '@[A-Z]@', $password );
-        // $lowercase = preg_match( '@[a-z]@', $password );
-        $number    = preg_match( '@[0-9]@', $password );
-
-        if ( !$number || strlen( $password ) < 8 ) {
-            $this->session->set_flashdata( 'eror', 'gagal register' );
-            redirect( 'register_k' );
-        } else {
+       
             $kode_pass = md5( $password );
             $data = array (
                 'id'             => $id,
@@ -123,12 +109,10 @@ class Auth extends CI_Controller {
                 'nama_depan'     => $nama_depan,
                 'nama_belakang'  => $nama_belakang,
                 'password'       => $kode_pass,
-                'role'           => $role,
+                'role'           => 'karyawan',
             );
             $this->m_model->register( $data );
             redirect( 'auth/login' );
-        }
-        ;
     }
 
 }

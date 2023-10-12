@@ -12,7 +12,7 @@ class M_model extends CI_Model {
     }
 //untuk menghubungkan register ke sql
     function register($data){
-        return $this->db->insert("admin", $data);
+        return $this->db->insert("user", $data);
     }
     //untuk menghapus data di dalam from juga sql
     public function delete( $table, $field, $id )
@@ -60,6 +60,19 @@ class M_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+    public function get_by_karyawan($nama_depan){
+        $this->db->select('id');
+        $this->db->from('absen');
+        $this->db->where('nama_depan', $nama_depan);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            $result = $query->row();
+            return $result->id;
+        } else{
+            return false;
+        }
+}
 }
 ?>
 

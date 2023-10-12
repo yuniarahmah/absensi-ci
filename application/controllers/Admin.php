@@ -11,9 +11,9 @@ function __construct(){
     // if($this->session->userdata('loged_in')!=true){
     //     redirect(base_url().'login');
     // }
-	// if ( $this->session->userdata( 'loged_in' ) != true || $this->session->userdata( 'role' ) != 'admin' ) {
-	// 	redirect( base_url().'auth' );
-	// }
+	if ( $this->session->userdata( 'loged_in' ) != true || $this->session->userdata( 'role' ) != 'admin' ) {
+		redirect( base_url().'admin' );
+	}
 }
 
 	public function index()

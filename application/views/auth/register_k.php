@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOGIN</title>
+    <title>REGISTER KARYAWAN</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
             integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -130,6 +130,7 @@ button:hover {
         height: 100%;
     }
   }
+
 </style>
 <body>
     <div class="container">
@@ -155,10 +156,12 @@ button:hover {
             <input type="text" name="nama_belakang" id="nama_belakang">
           </div>
          <div class="user-box">
-          <div class="form-group">
-                    <label for="exampleInputEmail1">Password</label>
-                    <div class="input-group">
-                        <input type="password" id="pass" class="form-control">
+
+             <div class="form-group"> <label for="psw">Password</label>
+             
+             <dv class="input-group">
+                     
+                        <input type="password" id="pass" class="form-control" pattern="(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                         <div class="input-group-append">
                             <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
                             <span id="mybutton" onclick="change()" class="input-group-text">
@@ -172,12 +175,13 @@ button:hover {
                                 </svg>
                             </span>
                         </div>
-                    </div>
+                    </dv>
                 </div>
           </div>
-          <button name="submit" type="submit"><a href="<?php echo base_url('auth/login') ?>">Register</a></button>
+          <button name="submit" type="submit">Register</button>
         </form>
         </div>
+        
         <div class="right">
             <img src="https://png.pngtree.com/element_origin_min_pic/16/07/06/23577d1d403788d.jpg" alt="">
         </div>
@@ -214,6 +218,29 @@ button:hover {
                                                                     </svg>`;
                 }
             }
+      function cekPass()
+{
+
+    p1 = document.frm.pass1.value;
+
+    p2 = document.frm.pass2.value;
+
+    if(p1==p2)
+
+    {
+        document.frm.btn.disabled=false;
+      
+    }
+
+    else
+
+    {
+
+        document.frm.btn.disabled=true;
+
+    }
+
+}
         </script>
 </body>
 
