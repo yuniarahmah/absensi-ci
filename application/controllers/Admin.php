@@ -12,11 +12,11 @@ function __construct(){
     //     redirect(base_url().'login');
     // }
 	if ( $this->session->userdata( 'loged_in' ) != true || $this->session->userdata( 'role' ) != 'admin' ) {
-		redirect( base_url().'admin' );
+		redirect( base_url().'auth' );
 	}
 }
 
-	public function index()
+	public function dashboard()
 	{
          $this->load->view('admin/dashboard');
 	}

@@ -59,46 +59,25 @@
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
-  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">Dashboard</span></a>
-
-  <a href="<?php echo base_url('karyawan/menu_absen') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">menu absen</span></a></a>
+  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">History</span></a>
 
   <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">menu izin cuti</span></a></a>
 
   <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">profil</span></a></a>
   <a href="<?php echo base_url('auth')?>">home</a>  
-
 </div>
-
 </div>
-
-<script src="jquery-1.4.js"></script>
-<div& gt;>
-
-<div class="card w-50 p-5 " style="margin-left:23%">
+<?php foreach ($absen as $data):?>
+<form class="card w-50 p-5 " style="margin-left:23%" method="post" enctype="multipart/from-data" action="<?php echo base_url('karyawan/aksi_ubah_karyawan')?>">
   <h5 class="card-title" style="margin-left:23%">Menu Absen</h5>
+  <input type="hidden" name="id" value="<?php echo $data->id?>">
   <div class="card-body">
     <div class="card" style="width: 30rem;">
-    <input type="text">
+    <input type="text" name="kegiatan" value="<?php echo $data->kegiatan?>">
   </div>
-  <button type="button" class="btn btn-success">submit</button>
+  <button type="submit" name= "submit" class="btn btn-primary">ubah</button>
 </div>
-</div>
-</div&am p;gt;>
-
-   <script>
-function w3_open() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("mySidebar").style.width = "25%";
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
-}
-function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-}
-
-</script>
+</form>
+<?php endforeach;?>
 </body>
 </html>

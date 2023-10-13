@@ -7,7 +7,7 @@ class Auth extends CI_Controller {
  {
         parent::__construct();
         $this->load->model( 'm_model' );
-        $this->load->library('form_validation');
+        $this->load->library( 'form_validation' );
     }
 
     public function index()
@@ -21,37 +21,35 @@ class Auth extends CI_Controller {
     }
 
     public function fungsi_login()
-  {
+ {
 
-    $email = $this->input->post('email', true);
-    $password = $this->input->post('password', true);
-    $data = ['email' => $email,];
-    $query = $this->m_model->getwhere('user', $data);
-    $result = $query->row_array();
+        $email = $this->input->post( 'email', true );
+        $password = $this->input->post( 'password', true );
+        $data = [ 'email' => $email, ];
+        $query = $this->m_model->getwhere( 'user', $data );
+        $result = $query->row_array();
 
-    if (!empty($result) && md5($password) === $result['password']) {
-      $data = [
-        'loged_in' => TRUE,
-        'email'    => $result['email'],
-        'username' => $result['username'],
-        'role'     => $result['role'],
-        'id'       => $result['id'],
-      ];
-      $this->session->set_userdata($data);
-      if ($this->session->userdata('role') == 'admin') {
-        redirect(base_url() . "admin");
-      }
-       elseif ($this->session->userdata('role') == 'karyawan') {
-        redirect(base_url() . "karyawan/history");
-      } 
-      else {
-        redirect(base_url() . "auth");
-      }
-    } 
-    else {
-      redirect(base_url() . "auth");
+        if ( !empty( $result ) && md5( $password ) === $result[ 'password' ] ) {
+            $data = [
+                'loged_in' => TRUE,
+                'email'    => $result[ 'email' ],
+                'username' => $result[ 'username' ],
+                'role'     => $result[ 'role' ],
+                'id'       => $result[ 'id' ],
+            ];
+            $this->session->set_userdata( $data );
+            if ( $this->session->userdata( 'role' ) == 'admin' ) {
+                redirect( base_url() . 'admin/dashboard' );
+            }if ( $this->session->userdata( 'role' ) == 'karyawan' ) {
+                redirect( base_url() . 'karyawan/history' );
+            } else {
+                redirect( base_url() . 'auth' );
+            }
+        } else {
+            redirect( base_url() . 'auth' );
+        }
     }
-  }
+
     function logout() {
         $this->session->sess_destroy();
         redirect( base_url( 'auth' ) );
@@ -64,56 +62,52 @@ class Auth extends CI_Controller {
 
     public function aksi_register()
  {
-        $id = $this->input->post( 'id' );
-        $username = $this->input->post( 'username' );
-        $email = $this->input->post( 'email' );
-        $nama_depan = $this->input->post( 'nama_depan' );
-        $nama_belakang = $this->input->post( 'nama_belakang' );
+        $this->form_validation->set_rules( 'username', 'username', 'trim|required|min_length[1]|max_length[100]|is_unique[user.username]' );
+        $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
+        $this->form_validation->set_rules( 'email', 'email', 'trim|required|min_length[1]|max_length[20]' );
         $password = $this->input->post( 'password' );
+        $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
 
-            $kode_pass = md5( $password );
-            $data = array (
-                'id'             => $id,
-                'username'       => $username,
-                'email'          => $email,
-                'nama_depan'     => $nama_depan,
-                'nama_belakang'  => $nama_belakang,
-                'password'       => $kode_pass,
-                'role'           => 'admin',
-            );
-            $this->m_model->register( $data );
+        if ( $this->form_validation->run() == true )
+            {
+            $username = $this->input->post( 'username' );
+            $password = $this->input->post( 'password' );
+            $email = $this->input->post( 'email' );
+            $this->auth->register( $username, $password, $nama );
+            $this->session->set_flashdata( 'success_register', 'Proses Pendaftaran User Berhasil' );
             redirect( 'auth/login' );
-       
+        } else {
+            $this->session->set_flashdata( 'error', validation_errors() );
+            redirect( 'auth/login' );
+        }
     }
+
 
     public function register_k()
  {
         $this->load->view( 'auth/register_k' );
     }
+
     public function aksi_register_k()
  {
-        $id = $this->input->post( 'id' );
-        $username = $this->input->post( 'username' );
-        $email = $this->input->post( 'email' );
-        $nama_depan = $this->input->post( 'nama_depan' );
-        $nama_belakang = $this->input->post( 'nama_belakang' );
+        $this->form_validation->set_rules( 'username', 'username', 'trim|required|min_length[1]|max_length[100]|is_unique[user.username]' );
+        $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
+        $this->form_validation->set_rules( 'email', 'email', 'trim|required|min_length[1]|max_length[20]' );
         $password = $this->input->post( 'password' );
-        $role = $this->input->post( 'role' );
+        $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
 
-       
-            $kode_pass = md5( $password );
-            $data = array (
-                'id'             => $id,
-                'username'       => $username,
-                'email'          => $email,
-                'nama_depan'     => $nama_depan,
-                'nama_belakang'  => $nama_belakang,
-                'password'       => $kode_pass,
-                'role'           => 'karyawan',
-            );
-            $this->m_model->register( $data );
+        if ( $this->form_validation->run() == true )
+            {
+            $username = $this->input->post( 'username' );
+            $password = $this->input->post( 'password' );
+            $email = $this->input->post( 'email' );
+            $this->auth->register( $username, $password, $nama );
+            $this->session->set_flashdata( 'success_register', 'Proses Pendaftaran User Berhasil' );
             redirect( 'auth/login' );
-    }
-
+        } else {
+            $this->session->set_flashdata( 'error', validation_errors() );
+            redirect( 'auth/register' );
+        }
+    }    
 }
 ?>

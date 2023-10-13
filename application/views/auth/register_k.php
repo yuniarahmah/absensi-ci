@@ -147,21 +147,12 @@ button:hover {
             <label>Email</label>
             <input type="text" name="email" id="email">
           </div>
-          <div class="user-box">
-            <label>Nama Depan</label>
-            <input type="text" name="nama_depan" id="nama_depan">
-          </div>
-          <div class="user-box">
-            <label>Nama Belakang</label>
-            <input type="text" name="nama_belakang" id="nama_belakang">
-          </div>
          <div class="user-box">
 
              <div class="form-group"> <label for="psw">Password</label>
              
-             <dv class="input-group">
-                     
-                        <input type="password" id="pass" class="form-control" pattern="(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+             <div class="input-group">
+                      <input type="password" id="pass" class="form-control" pattern="(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                         <div class="input-group-append">
                             <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
                             <span id="mybutton" onclick="change()" class="input-group-text">
@@ -175,7 +166,7 @@ button:hover {
                                 </svg>
                             </span>
                         </div>
-                    </dv>
+                    </div>
                 </div>
           </div>
           <button name="submit" type="submit">Register</button>
@@ -218,29 +209,7 @@ button:hover {
                                                                     </svg>`;
                 }
             }
-      function cekPass()
-{
 
-    p1 = document.frm.pass1.value;
-
-    p2 = document.frm.pass2.value;
-
-    if(p1==p2)
-
-    {
-        document.frm.btn.disabled=false;
-      
-    }
-
-    else
-
-    {
-
-        document.frm.btn.disabled=true;
-
-    }
-
-}
         </script>
 </body>
 

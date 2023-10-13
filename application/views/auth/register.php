@@ -129,36 +129,7 @@ button:hover {
         height: 100%;
     }
   }
-  input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-}
-#message p {
-    padding: 0px 35px;
-    font-size: 18px;
-}
-.valid {
-    color: green;
-}
-.valid:before {
-    position: relative;
-    left: -35px;
-    content: "2713";
-}
-.invalid {
-    color: red;
-}
-.invalid:before {
-    position: relative;
-    left: -35px;
-    content: "0D7";
-}
-}
+  
 </style>
 <body>
     <div class="container">
@@ -175,23 +146,8 @@ button:hover {
             <label>Email</label>
             <input type="text" name="email" id="email">
           </div>
+       
           <div class="user-box">
-            <label>Nama Depan</label>
-            <input type="text" name="nama_depan" id="nama_depan">
-          </div>
-          <div class="user-box">
-            <label>Nama Belakang</label>
-            <input type="text" name="nama_belakang" id="nama_belakang">
-            <input type="hidden" name="role" id="role" value="admin">
-          </div>
-          <div class="user-box">
-          <div id="message">
-  <h3>Password harus terdiri dari: </h3>
-    <p id="letter" class="invalid">Memiliki <b>huruf kecil</b></p>
-    <p id="capital" class="invalid">Memiliki <b>huruf besar</b></p>
-    <p id="number" class="invalid">Memiliki <b>nomor</b></p>
-    <p id="length" class="invalid">Minimal <b>8 karakter</b></p>
-</div>
           <div class="form-group">
                     <label for="exampleInputEmail1">Password</label>
                     <div class="input-group">
@@ -251,60 +207,7 @@ button:hover {
                                                                     </svg>`;
                 }
             }
-var myInput = document.getElementById("psw");
-var letter = document.getElementById("letter");
-var capital = document.getElementById("capital");
-var number = document.getElementById("number");
-var length = document.getElementById("length");
 
-myInput.onfocus = function() {
-    document.getElementById("message").style.display = "block";
-}
-
-myInput.onblur = function() {
-    document.getElementById("message").style.display = "none";
-}
-
-myInput.onkeyup = function() {
-  // Validate lowercase letters
-  var lowerCaseLetters = /[a-z]/g;
-  if(myInput.value.match(lowerCaseLetters)) {  
-    letter.classList.remove("invalid");
-    letter.classList.add("valid");
-  } else {
-    letter.classList.remove("valid");
-    letter.classList.add("invalid");
-  }
-  
-  // Validate capital letters
-  var upperCaseLetters = /[A-Z]/g;
-  if(myInput.value.match(upperCaseLetters)) {  
-    capital.classList.remove("invalid");
-    capital.classList.add("valid");
-  } else {
-    capital.classList.remove("valid");
-    capital.classList.add("invalid");
-  }
-
-  // Validate numbers
-  var numbers = /[0-9]/g;
-  if(myInput.value.match(numbers)) {  
-    number.classList.remove("invalid");
-    number.classList.add("valid");
-  } else {
-    number.classList.remove("valid");
-    number.classList.add("invalid");
-  }
-  
-  // Validate length
-  if(myInput.value.length >= 8) {
-    length.classList.remove("invalid");
-    length.classList.add("valid");
-  } else {
-    length.classList.remove("valid");
-    length.classList.add("invalid");
-  }
-}
         </script>
 </body>
 

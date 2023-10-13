@@ -54,25 +54,13 @@ class M_model extends CI_Model {
         }
     }
     function get_karyawan() {
-        $this->db->select( 'absensi.*, user.id' );
-        $this->db->from( 'absensi' );
-        $this->db->join( 'absensi', 'user.id = user.id', 'left' );
+        $this->db->select( 'absen.*, user.username' );
+        $this->db->from( 'absen' );
+        $this->db->join( 'user', 'absen.id_karyawan = user.id', 'left' );
         $query = $this->db->get();
         return $query->result();
     }
-    public function get_by_karyawan($nama_depan){
-        $this->db->select('id');
-        $this->db->from('absen');
-        $this->db->where('nama_depan', $nama_depan);
-        $query = $this->db->get();
-
-        if($query->num_rows() > 0){
-            $result = $query->row();
-            return $result->id;
-        } else{
-            return false;
-        }
-}
+    
 }
 ?>
 

@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-    
-<nav class="navbar bg-body-tertiary">
+  <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
     <a>Role karyawan</a>
     <?php
@@ -48,58 +47,29 @@
               window.onload = date_time('date_time');
             </script>
 
-    <a href="<?php echo base_url('karyawan/history') ?>">pulang</a>
-
+    <button class="btn btn-sussces" name="submit" type="submit"><a href="<?php echo base_url('karyawan/history') ?>"><i class="fa-solid fa-house-user"><i>Home</i></i></a></button>
   </div>
 </nav>
 
 <div class="d-flex">
-<div class="w3-sidebar w3-bar-block w3-green" style="width:20%">
-<br>
+  <div class="w3-sidebar w3-bar-block w3-green" style="width:20%"><br>
 
-<form class="d-flex" role="search">
+  <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
-  <a href="/absensii/karyawan/karyawan" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">Dashboard</span></a>
+  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
 
-  <a href="<?php echo base_url('karyawan/menu_absen') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">menu absen</span></a></a>
+  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Menu Izin Cuti</span></a></a>
 
-  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">menu izin cuti</span></a></a>
+  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">profil</span></a></a>
-  <a href="<?php echo base_url('auth')?>">home</a>  
+  <a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
 </div>
-<script src="jquery-1.4.js"></script>
 
-</script>
-
-</head><div& gt;>
-
-<div class="card w-100 p-5 " style="margin-left:60%;">
-  <h5 class="card-title" style="margin-left:23%"> IZIN</h5>
-  <div class="card-body">
-    <div class="card" style="width: 30rem;">
-    <input type="text">
-  </div>
   <button type="button" class="btn btn-success">submit</button>
 </div>
 </div>
-</div&am p;gt;>
-
-   <script>
-function w3_open() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("mySidebar").style.width = "25%";
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
-}
-function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-}
-
-</script>
+</div>
 </body>
 </html>

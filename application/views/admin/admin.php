@@ -18,8 +18,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout')?>">
-          <i class="fa-solid fa-house-chimney"></i> </a>
-          <a class="nav-link active" aria-current="page" style="text-align:center;margin-left: 200px;"></a>
+         log out</a>
         </li>
       </ul>
     </div>

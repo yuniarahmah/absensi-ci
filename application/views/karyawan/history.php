@@ -48,27 +48,29 @@
               window.onload = date_time('date_time');
             </script>
 
-    <button class="btn btn-sussces" name="submit" type="submit"><a href="<?php echo base_url('karyawan/history') ?>">pulang</a></button>
+  <!-- <button id="myBtn">My Button</button>
+  
+<p>Click the button below to disable the button above.</p>
+
+<button onclick="myFunction()">Try it</button> -->
+
   </div>
 </nav>
 
 <div class="d-flex">
-<div class="w3-sidebar w3-bar-block w3-green" style="width:15%">
-<br>
+  <div class="w3-sidebar w3-bar-block w3-green" style="width:15%"><br>
 
-<form class="d-flex" role="search">
+  <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
-  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">Dashboard</span></a>
+  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
 
-  <a href="<?php echo base_url('karyawan/menu_absen') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">menu absen</span></a></a>
+  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Menu Izin Cuti</span></a></a>
 
-  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">menu izin cuti</span></a></a>
+  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">Profil</span></a></a>
-  <a href="<?php echo base_url('auth')?>">home</a>  
-
+  <a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
 </div>
 
 
@@ -109,6 +111,7 @@
         <div class="how" style="widht:40vh; height:35vh;">
         <table class="table table-striped-columns">
    <thead>
+
    <tr class="table-success">
        <th style="width:3%;">NO</th>
        <th style="width:5%;">Nama</th>
@@ -132,19 +135,26 @@
        <td><?php echo $row->jam_masuk?></td>
        <td><?php echo $row->jam_pulang?></td>
        <td><?php echo $row->keterangan?></td>
-       <td><?php echo $row->status?></td>
-       <td style="display:flex;"> <a href="<?php echo base_url('karyawan/menu_absen/').$row->id?>" class="btn btn-primary">Ubah</a>
+       <td onclick="myFunction()"><?php echo $row->status?></td>
+       <td style="display:flex;"> 
+       <a href="<?php echo base_url('karyawan/ubah_kegiatan/' . $row->id)?>" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                         <button onclick="hapus(<?php echo $row->id ?>)"
                         class="btn btn-danger">
-                      Hapus
-                     </button></td>
+                        <i class="fa-solid fa-trash"></i>
+          </button>
+          <?php if ('status' === 'done'):?>
+ <div>
+     <button sidabled class="btn btn-success" ><i class="fa-solid fa-house-user"><i>home</i></a></button>
+    </div>
+    <?php endif; ?>
+        </td>
      </tr>
      <?php endforeach ?>
      <a href="<?php echo base_url('karyawan/export_karyawan')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
    </tbody>
  </table>
   </div>
-  </div>
+</div>
   <script>
         function hapus(id){
           var yes = confirm('Yakin Di Hapus?');
@@ -152,6 +162,9 @@
             window.location.href = "<?php echo base_url('admin/hapus_siswa/')?>" + id;
         }
     }
+   function myFunction() {
+  document.getElementById("home").disabled = true;
+}
 </script>
 </body>
 </html>
