@@ -127,16 +127,15 @@ integrity = 'sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJz
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>- yuniahrahmah@gmail.com</p>
-                                                <p>- yuraama75@gmail.com</p>
+                                            <button class="btn btn-link" url="http://localhost/absensii/karyawan/history/">yuniahrahmah@gmail.com</button>                                
                                             </div>
-                                        </div>
+                                        </div><br>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Phone</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>0857 2786 0382</p>
+                                                <button class="btn btn-link" >0857 2786 0382</button>
                                             </div>
                                         </div>
                                         <div class="row">

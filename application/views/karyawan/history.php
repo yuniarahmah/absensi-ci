@@ -48,12 +48,6 @@
               window.onload = date_time('date_time');
             </script>
 
-  <!-- <button id="myBtn">My Button</button>
-  
-<p>Click the button below to disable the button above.</p>
-
-<button onclick="myFunction()">Try it</button> -->
-
   </div>
 </nav>
 
@@ -142,11 +136,11 @@
                         class="btn btn-danger">
                         <i class="fa-solid fa-trash"></i>
           </button>
-          <?php if ('status' === 'done'):?>
- <div>
-     <button sidabled class="btn btn-success" ><i class="fa-solid fa-house-user"><i>home</i></a></button>
-    </div>
-    <?php endif; ?>
+  <?php if ($row->status === "done"):?>
+    <button disabled class="btn btn-success" type="submit">pulang</i></a></button>
+    <?php else:?>
+    <button onclick="pulang('<?php echo $row->id?>')" class="btn btn-success" type="submit">pulang</i></a></button>
+    <?php endif;?>
         </td>
      </tr>
      <?php endforeach ?>
@@ -155,16 +149,38 @@
  </table>
   </div>
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script>
-        function hapus(id){
-          var yes = confirm('Yakin Di Hapus?');
+            function hapus(id) {
+           swal.fire({
+               title: 'Yakin untuk menghapus data ini?',
+               text: "Data ini akan terhapus permanen",
+               icon: 'warning',
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               cancelButtonText: 'Batal',
+               confirmButtonText: 'Ya Hapus'
+           }).then((result) => {
+               if (result.isConfirmed) {
+                   Swal.fire({
+                       icon: 'success',
+                       title: 'Berhasil Dihapus',
+                       showConfirmButton: false,
+                       timer: 1500,
+   
+                   }).then(function() {
+                       window.location.href = "<?php echo base_url('Karyawan/hapus_karyawan/')?>" + id;
+                   });
+               }
+           });
+       }
+        function pulang(id){
+          var yes = confirm('Yakin pulang?');
           if(yes == true) {
-            window.location.href = "<?php echo base_url('admin/hapus_siswa/')?>" + id;
+            window.location.href = "<?php echo base_url('karyawan/pulang/')?>" + id;
         }
     }
-   function myFunction() {
-  document.getElementById("home").disabled = true;
-}
 </script>
 </body>
 </html>

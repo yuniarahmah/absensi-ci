@@ -123,3 +123,17 @@
 </script>
 </body>
 </html>
+
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Add an event listener for the "change" event on the select element
+        var selectElement = document.getElementById('bulan');
+        var formElement = selectElement.form; // Get the parent form
+
+        selectElement.addEventListener('change', function() {
+            formElement.submit(); // Submit the form when the select element changes
+        });
+    });
+    </script>

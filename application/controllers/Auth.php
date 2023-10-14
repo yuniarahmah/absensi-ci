@@ -82,32 +82,32 @@ class Auth extends CI_Controller {
         }
     }
 
-
     public function register_k()
- {
-        $this->load->view( 'auth/register_k' );
-    }
+    {
+           $this->load->view( 'auth/register_k' );
+       }
+   
+       public function aksi_register_k()
+    {
+           $this->form_validation->set_rules( 'username', 'username', 'trim|required|min_length[1]|max_length[100]|is_unique[user.username]' );
+           $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
+           $this->form_validation->set_rules( 'email', 'email', 'trim|required|min_length[1]|max_length[20]' );
+           $password = $this->input->post( 'password' );
+        //    $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
+   
+           if ( $this->form_validation->run() === true )
+               {
+               $username = $this->input->post( 'username' );
+               $password = $this->input->post( 'password' );
+               $email = $this->input->post( 'email' );
+               $this->auth->register( $username, $password, $email );
+               $this->session->set_flashdata( 'success_register', 'Proses Pendaftaran User Berhasil' );
+               redirect( 'auth/login' );
+           } else {
+               $this->session->set_flashdata( 'error', validation_errors() );
+               redirect( 'auth/register_k' );
+           }
+       }  
 
-    public function aksi_register_k()
- {
-        $this->form_validation->set_rules( 'username', 'username', 'trim|required|min_length[1]|max_length[100]|is_unique[user.username]' );
-        $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
-        $this->form_validation->set_rules( 'email', 'email', 'trim|required|min_length[1]|max_length[20]' );
-        $password = $this->input->post( 'password' );
-        $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
-
-        if ( $this->form_validation->run() == true )
-            {
-            $username = $this->input->post( 'username' );
-            $password = $this->input->post( 'password' );
-            $email = $this->input->post( 'email' );
-            $this->auth->register( $username, $password, $nama );
-            $this->session->set_flashdata( 'success_register', 'Proses Pendaftaran User Berhasil' );
-            redirect( 'auth/login' );
-        } else {
-            $this->session->set_flashdata( 'error', validation_errors() );
-            redirect( 'auth/register' );
-        }
-    }    
-}
+ }
 ?>

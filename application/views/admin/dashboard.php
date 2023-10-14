@@ -3,73 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HISTORY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<script>
-  myInput.onfocus = function() {
-    document.getElementById("message").style.display = "block";
-  if(myInput.value.length >= 8) {
-    length.classList.remove("invalid");
-    length.classList.add("valid");
-  } else {
-    length.classList.remove("valid");
-    length.classList.add("invalid");
-  }
-  }
-</script>
 <body>
-
-<nav class="navbar navbar-expand-lg" style="background:darkgrey" >
+    
+<nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout')?>">
-          <i class="fa-solid fa-house-chimney"></i> </a>
-          <a class="nav-link active" aria-current="page" style="text-align:center;margin-left: 200px;"><h1></h1>
-          <hr></a>
-        </li>
-      </ul>
-    </div>
+    <a>Role Admin</a>
+    <?php
+            date_default_timezone_set("Asia/Jakarta");
+            ?>
+            <script type="text/javascript">
+              function date_time(id) {
+                date = new Date;
+                year = date.getFullYear();
+                month = date.getMonth();
+                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+                d = date.getDate();
+                day = date.getDay();
+                days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                h = date.getHours();
+                if (h < 10) {
+                  h = "0" + h;
+                }
+                m = date.getMinutes();
+                if (m < 10) {
+                  m = "0" + m;
+                }
+                s = date.getSeconds();
+                if (s < 10) {
+                  s = "0" + s;
+                }
+                result = '' + days[day] + ' ' + d + ' ' + months[month] + ' ' + year + ' ' + h + ':' + m + ':' + s;
+                document.getElementById(id).innerHTML = result;
+                setTimeout('date_time("' + id + '");', '1000');
+                return true;
+              }
+            </script>
+            <span id="date_time"></span>
+            <script type="text/javascript">
+              window.onload = date_time('date_time');
+            </script>
+
   </div>
 </nav>
 
 <div class="d-flex">
-        <div class="col-12 bg-dark" style="width: 17%;">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">INFO SEKOLAH</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                      
-                    </li>
-                    <li>
-                        <a href="" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">history</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="admin">
-                                </ul>
-                            </li>
-                    <li>
-                        <a href="<?php echo base_url('admin/dashboard') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">Admin</span></a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('karyawan/karyawan') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-user-tie"></i> <span class="ms-1 d-none d-sm-inline">Karyawan</span></a>
-                    </li>
-                </ul>
-                <hr>
-            </div>
-        </div>
-       <br>
-    <div class="row container py-3 col-10">
- <div class="col">
+  <div class="w3-sidebar w3-bar-block w3-green" style="width:17%"><br>
+  <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
+
+  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Admin</span></a></a>
+
+  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
+
+  <a href="<?php echo base_url('auth')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
+</div>solid
+
+
+<div class="row container p-3 col-10" style="margin-left:15%;">
+ <!-- <div class="col">
   <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
              <div class="card-header">Rekap Harian</div>
                <div class="card-body">
@@ -79,19 +74,72 @@
                   </div>
              </div>
         </div>            
-        </div>
-        <div class="col">
-        <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Rekap Mingguan</div>
-               <div class="card-body">
-                 <p class="card-text"><i class="fa-solid fa-door-closed"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>            
-        </div>
-        <div class="col">
+        </div> -->
+        <div class="relative min-h-screen md:flex" data-dev-hint="container">
+        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
+            <div class="container mx-auto">
+                
+                    <h1 class="flex justify-center mb-2 md:justify-start md:pl-6">
+                        REKAP MINGGUAN
+                    </h1>
+                    <a href="<?php echo base_url('admin/export_admin_mingguan')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
+
+                <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
+                    <table class="my-4 w-full divide-y divide-gray-300 text-center">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-3 py-2 text-xs text-gray-500">NO</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">KARYAWAN</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">KEGIATAN</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">TANGGAL</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">KETERANGAN IZIN</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-300">
+                            <?php $no=0; foreach ($absensi as $absen): $no++ ?>
+                            <tr class="whitespace-nowrap">
+                                <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo tampil_full_karyawan_byid($absen->id_karyawan); ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $absen->kegiatan; ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $absen->date; ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $absen->jam_masuk; ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $absen->jam_pulang; ?>
+                                    </div>
+                                </td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo $absen->keterangan; ?>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php endforeach?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+        <!-- <div class="col">
         <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
              <div class="card-header">Rekap Bulanan</div>
                <div class="card-body">
@@ -100,40 +148,8 @@
                     <a href="<?php echo base_url('admin/detail_guru')?>" class="btn btn-primary">info lengkap</a>
                   </div>
              </div>
-        </div>            
+        </div>             -->
         </div>
-        <div class="how" style="widht:40vh; height:35vh;">
-        <table class="table table-striped-columns">
-   <thead>
-     <tr class="table-dark">
-       <th scope="col">NO</th>
-       <th scope="col">Nama Belakang</th>
-       <th scope="col">Nama Depan</th>
-       <th scope="col">Email</th>
-     </tr>
-   </thead>
-   <tbody>
-     <tr>
-       <th scope="row" class="table-secondary">1</th>
-       <td class="table-light">Satria Candra Pamungkas</td>
-       <td class="table-secondary">Satria</td>
-       <td  class="table-light">@candra</td>
-     </tr>
-     <tr>
-       <th scope="row" class="table-secondary">2</th>
-       <td class="table-light">Wahyu Yulianto</td>
-       <td class="table-secondary">Yuya</td>
-       <td class="table-light">@elena</td>
-     </tr>
-     <tr>
-       <th scope="row" class="table-secondary">3</th>
-       <td class="table-light">Andi Saputro</td>
-       <td class="table-secondary">Andi</td>
-       <td class="table-light">@andi</td>
-     </tr>
-   </tbody>
- </table>
-  </div>
-      </div>
+       
 </body>
 </html>

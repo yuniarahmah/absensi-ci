@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-  <nav class="navbar bg-body-tertiary">
+    
+<nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
     <a>Role karyawan</a>
-    <?php
+      <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
             <script type="text/javascript">
@@ -47,29 +48,41 @@
               window.onload = date_time('date_time');
             </script>
 
-    <button class="btn btn-sussces" name="submit" type="submit"><a href="<?php echo base_url('karyawan/history') ?>"><i class="fa-solid fa-house-user"><i>Home</i></i></a></button>
+    <a href="<?php echo base_url('karyawan/history') ?>">pulang</a>
   </div>
 </nav>
 
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-green" style="width:20%"><br>
-
-  <form class="d-flex" role="search">
+<div class="w3-sidebar w3-bar-block w3-green" style="width:20%">
+  <br>
+<form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
-  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
+  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">History</span></a>
 
-  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Menu Izin Cuti</span></a></a>
+  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">menu izin cuti</span></a></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
-
-  <a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
-</div>
-
-  <button type="button" class="btn btn-success">submit</button>
+  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">profil</span></a></a>
+  <a href="<?php echo base_url('auth')?>">home</a>  
 </div>
 </div>
+<?php foreach ($absensi as $data):?>
+<form class="card w-50 p-5 " style="margin-left:50%" method="post" enctype="multipart/from-data" action="<?php echo base_url('karyawan/aksi_ubah_karyawan')?>">
+  <h5 class="card-title" style="margin-left:23%">Menu Absen</h5>
+  <input type="hidden" name="id" value="<?php echo $data->id?>">
+  <div class="card-body">
+    <div class="card" style="width: 30rem; margin-left:3%;">
+    <input type="text" name="kegiatan" value="<?php echo $data->kegiatan?>">
+  </div>
+  <div class="card-body">
+    <h5 style="margin-left:20%;">Menu Izin</h5>
+    <div class="card" style="width: 30rem; margin-right:5%;">
+    <input type="text" name="keterangan" value="<?php echo $data->keterangan?>">
+  </div><br>
+  <button type="submit" name= "submit" class="btn btn-primary">ubah</button>
 </div>
+</form>
+<?php endforeach;?>
 </body>
 </html>

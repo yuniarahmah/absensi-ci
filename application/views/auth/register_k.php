@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -130,12 +129,12 @@ button:hover {
         height: 100%;
     }
   }
-
+  
 </style>
 <body>
     <div class="container">
         <div class="login">
-            <form action="<?php echo base_url('Auth/aksi_register_k') ?>" method="post">
+        <form action="<?php echo base_url('Auth/aksi_register_k')?>" method="post" style="text-align:center;">
                 <h1>REGISTER KARYAWAN</h1>
                 <hr>
                 <p>Isi data dibawah ini untuk registrasi </p>
@@ -147,12 +146,12 @@ button:hover {
             <label>Email</label>
             <input type="text" name="email" id="email">
           </div>
-         <div class="user-box">
-
-             <div class="form-group"> <label for="psw">Password</label>
-             
-             <div class="input-group">
-                      <input type="password" id="pass" class="form-control" pattern="(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+       
+          <div class="user-box">
+          <div class="form-group">
+                    <label for="exampleInputEmail1">Password</label>
+                    <div class="input-group">
+                        <input type="password" id="pass" name="password" class="form-control">
                         <div class="input-group-append">
                             <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
                             <span id="mybutton" onclick="change()" class="input-group-text">
@@ -169,10 +168,9 @@ button:hover {
                     </div>
                 </div>
           </div>
-          <button name="submit" type="submit">Register</button>
+          <button type="submit" name="submit">Register</button>
         </form>
         </div>
-        
         <div class="right">
             <img src="https://png.pngtree.com/element_origin_min_pic/16/07/06/23577d1d403788d.jpg" alt="">
         </div>
