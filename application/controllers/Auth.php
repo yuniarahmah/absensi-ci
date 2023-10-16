@@ -88,26 +88,38 @@ class Auth extends CI_Controller {
        }
    
        public function aksi_register_k()
-    {
-           $this->form_validation->set_rules( 'username', 'username', 'trim|required|min_length[1]|max_length[100]|is_unique[user.username]' );
-           $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
-           $this->form_validation->set_rules( 'email', 'email', 'trim|required|min_length[1]|max_length[20]' );
-           $password = $this->input->post( 'password' );
-        //    $this->form_validation->set_rules( 'password', 'password', 'trim|required|min_length[1]|max_length[7]' );
-   
-           if ( $this->form_validation->run() === true )
-               {
-               $username = $this->input->post( 'username' );
-               $password = $this->input->post( 'password' );
-               $email = $this->input->post( 'email' );
-               $this->auth->register( $username, $password, $email );
-               $this->session->set_flashdata( 'success_register', 'Proses Pendaftaran User Berhasil' );
-               redirect( 'auth/login' );
+       {
+           $email = $this->input->post('email', true);
+           $data = ['email' => $email];
+           $password = $this->input->post('password');
+           $username = $this->input->post('username');
+           $nama_depan = $this->input->post('nama_depan');
+           $nama_belakang = $this->input->post('nama_belakang');
+           $query = $this->m_model->getwhere('user', $data);
+           $result = $query->row_array();
+           if (empty($result)) {
+               if (strlen($password) < 8) {
+                   $this->session->set_flashdata('error_password' , 'gagal...');
+                   redirect(base_url('auth/register_karyawan'));
+               } else {
+                   $data = [
+                       'email' => $this->input->post('email'),
+                       'username' => $this->input->post('username'),
+                       'nama_depan' => $this->input->post('nama_depan'),
+                       'nama_belakang' => $this->input->post('nama_belakang'),
+                       'role' => 'karyawan',
+                       'image' => 'User.png',
+                       'password' => md5($this->input->post('password')),
+                   ];
+                   $this->session->set_flashdata('succsess' , 'berhasil...');
+                   $this->m_model->add('user', $data);
+                   redirect(base_url());
+               }
            } else {
-               $this->session->set_flashdata( 'error', validation_errors() );
-               redirect( 'auth/register_k' );
+               $this->session->set_flashdata('error_email' , 'gagal...');
+               redirect(base_url('auth/register_karyawan'));
            }
-       }  
+       }
 
  }
 ?>

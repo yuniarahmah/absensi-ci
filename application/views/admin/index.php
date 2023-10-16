@@ -6,134 +6,65 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-   
-<nav class="navbar navbar-expand-lg" style="background:darkgrey" >
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="<?php echo base_url('auth/logout');?>">
-          <i class="fa-solid fa-house-chimney"></i></a>
-        </li>
-      </ul>
+
+    <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
+    <div class="container-fluid">
+        <a style="text-align-center">Role Admin</a>
+        <?php
+                date_default_timezone_set("Asia/Jakarta");
+                ?>
+                <script type="text/javascript">
+                function date_time(id) {
+                    date = new Date;
+                    year = date.getFullYear();
+                    month = date.getMonth();
+                    months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+                    d = date.getDate();
+                    day = date.getDay();
+                    days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                    h = date.getHours();
+                    if (h < 10) {
+                    h = "0" + h;
+                    }
+                    m = date.getMinutes();
+                    if (m < 10) {
+                    m = "0" + m;
+                    }
+                    s = date.getSeconds();
+                    if (s < 10) {
+                    s = "0" + s;
+                    }
+                    result = '' + days[day] + ' ' + d + ' ' + months[month] + ' ' + year + ' ' + h + ':' + m + ':' + s;
+                    document.getElementById(id).innerHTML = result;
+                    setTimeout('date_time("' + id + '");', '1000');
+                    return true;
+                }
+                </script>
+                <span id="date_time" style="margin-right: 40%;"></span>
+                <script type="text/javascript">
+                window.onload = date_time('date_time');
+                </script>
+
     </div>
-    
-  </div>
-</nav>
+    </nav>
+    <br>
+    <br>
+
 <div class="d-flex">
-        <div class="col-12 bg-dark min-vh-100" style="width: 15%;">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">INFO SEKOLAH</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                      
-                    </li>
-                    <li>
-                        <a href="history" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-gauge-high"></i> <span class="ms-1 d-none d-sm-inline">history</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                </ul>
-                            </li>
-                    <li>
-                        <a href="<?php echo base_url('admin/admin') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-user"></i> <span class="ms-1 d-none d-sm-inline">admin</span></a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('admin/karyawan') ?>" class="nav-link px-0 align-middle">
-                        <i class="fa-solid fa-user-tie"></i> <span class="ms-1 d-none d-sm-inline">Karyawan</span></span></a>
-                    </li>
-                </ul>
-                <hr>
-            </div>
-        </div>
+  <div class="w3-sidebar w3-bar-block w3-green">
+  <br >
+   <h2 style="color:black;">Admin <hr></h2>
+  <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
 
-    <div class="container py-3 h-auto">
-          <h1 style="background-color:lightblue; height: 60px; text-align:center;">Karyawan</h1>
-          <a href="<?php echo base_url('admin/tambah_siswa')?>"><button type="submit" class="btn btn-primary w-15" name="submit">Tambah <i class="fa-solid fa-file-circle-plus"></i></button></a>
- 
-      <table class="table">
-        <thead>
-            <th scope="col" >No</th>
-            <th scope="col" >Nama karyawan</th>
-            <th scope="col" >Nisn</th>
-            <th scope="col" >Gender</th>
-            <th scope="col" >Kelas</th>
-            <th scope="col" >Aksi</th>
-          </tr>
+  <a href="<?php echo base_url('admin/admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Admin</span></a></a>
 
-        </thead>
-        <tbody classs="table-grup-divider">
-          <?php $no=0; foreach($karyawan as $row ): $no++ ?>
-          <tr>
-            <td>1.</td>
-            <td>Rahma</td>
-            <td>086909075</td>
-            <td>perempuan</td> 
-            <td>10 TKJ</td>       
-            <td>
-                <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-primary"><i class="fa-solid fa-square-pen"></i></a>
-                <button onclick="hapus(<?php echo $row->id_siswa ?>)"
-                class="btn btn-danger">
-              Hapus  <i class="fa-solid fa-trash"></i>
-             </button>
-            </td>
-            </tr>
-           <?php endforeach ?>
-        </tbody>
-      </table>
-      
-      <a href="<?php echo base_url('admin');?>"class="btn btn-primary">loguot <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-         </div>
+  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
+
+  <a href="<?php echo base_url('auth')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
 </div>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    
-    <script>
-            function hapus(id) {
-           swal.fire({
-               title: 'Yakin untuk menghapus data ini?',
-               text: "Data ini akan terhapus permanen",
-               icon: 'warning',
-               showCancelButton: true,
-               confirmButtonColor: '#3085d6',
-               cancelButtonColor: '#d33',
-               cancelButtonText: 'Batal',
-               confirmButtonText: 'Ya Hapus'
-           }).then((result) => {
-               if (result.isConfirmed) {
-                   Swal.fire({
-                       icon: 'success',
-                       title: 'Berhasil Dihapus',
-                       showConfirmButton: false,
-                       timer: 1500,
-   
-                   }).then(function() {
-                       window.location.href = "<?php echo base_url('Admin/hapus_siswa/')?>" + id;
-                   });
-               }
-           });
-       }
-    </script>
-</script>
+
 </body>
 </html>
-
-
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Add an event listener for the "change" event on the select element
-        var selectElement = document.getElementById('bulan');
-        var formElement = selectElement.form; // Get the parent form
-
-        selectElement.addEventListener('change', function() {
-            formElement.submit(); // Submit the form when the select element changes
-        });
-    });
-    </script>

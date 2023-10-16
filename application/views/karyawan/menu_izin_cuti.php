@@ -61,20 +61,15 @@
     </form>
   <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">History</span></a>
 
-  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">menu izin cuti</span></a></a>
+  <a href="<?php echo base_url('karyawan/menu_izin_cuti') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">menu izin cuti</span></a></a>
 
   <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">profil</span></a></a>
   <a href="<?php echo base_url('auth')?>">home</a>  
 </div>
 </div>
-<?php foreach ($absensi as $data):?>
-<form class="card w-50 p-5 " style="margin-left:50%" method="post" enctype="multipart/from-data" action="<?php echo base_url('karyawan/aksi_ubah_karyawan')?>">
-  <h5 class="card-title" style="margin-left:23%">Menu Absen</h5>
+<?php foreach ($absen as $data):?>
+<form class="card w-50 p-5 " style="margin-left:23%" method="post" enctype="multipart/from-data" action="<?php echo base_url('karyawan/aksi_ubah_karyawan')?>">
   <input type="hidden" name="id" value="<?php echo $data->id?>">
-  <div class="card-body">
-    <div class="card" style="width: 30rem; margin-left:3%;">
-    <input type="text" name="kegiatan" value="<?php echo $data->kegiatan?>">
-  </div>
   <div class="card-body">
     <h5 style="margin-left:20%;">Menu Izin</h5>
     <div class="card" style="width: 30rem; margin-right:5%;">

@@ -74,7 +74,46 @@ class M_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-    
+    public function getAbsensiLast7Days() {
+        $this->load->database();
+        $end_date = date('Y-m-d');
+        $start_date = date('Y-m-d', strtotime('-7 days', strtotime($end_date)));        
+        $query = $this->db->select('absen.*, user.nama_depan, user.nama_belakang, date, kegiatan, jam_masuk, jam_pulang, keterangan, status, COUNT(*) AS total_absences')
+                          ->from('absen')
+                          ->join('user', 'absen.id_karyawan = user.id', 'left')
+                          ->where('date >=', $start_date)
+                          ->where('date <=', $end_date)
+                          ->group_by('date, kegiatan, jam_masuk, jam_pulang, keterangan, status')
+                          ->get();
+        return $query->result_array();
+    }
+    public function getbulanan($bulan)
+  {
+        $this->db->from('absen');
+        $this->db->where("DATE_FORMAT(absen.date, '%m') =", $bulan);
+        $db = $this->db->get();
+        $result = $db->result();
+        return $result;
+  }
+  
+    public function get_harian()
+  { 
+        $this->db->select('absen.*, user.nama_depan, nama_belakang');
+        $this->db->from('absen');
+        $this->db->join('user', 'absen.id_karyawan = user.id', 'left');
+        $this->db->where('date', date('Y-m-d'));
+        $db = $this->db->get();
+        return $db->result(); 
+  }
+  public function getlast($table, $where) {
+    $this->db->select('*');
+    $this->db->from($table);
+    $this->db->where($where);
+    $this->db->order_by('id', 'DESC');
+    $this->db->limit(1);
+    return $this->db->get()->row();
+}
+ 
 }
 ?>
 

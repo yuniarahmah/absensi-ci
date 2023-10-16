@@ -10,7 +10,7 @@
 </head>
 <body>
     
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
     <a>Role karyawan</a>
     <?php
@@ -43,14 +43,14 @@
                 return true;
               }
             </script>
-            <span id="date_time"></span>
+            <span id="date_time" style="margin-right: 40%;"></span>
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
 
   </div>
-</nav>
-
+</nav><br>
+<br>
 <div class="d-flex">
   <div class="w3-sidebar w3-bar-block w3-green" style="width:15%"><br>
 
@@ -60,49 +60,17 @@
     </form>
   <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
 
-  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Menu Izin Cuti</span></a></a>
+  <a href="<?php echo base_url('karyawan/menu_izin_cuti') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Menu Izin Cuti</span></a></a>
+
+  <a href="<?php echo base_url('karyawan/absen') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Menu Absen</span></a></a>
 
   <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 
   <a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
 </div>
-
-
+<hr>
 <div class="row container p-3 col-10" style="margin-left:15%;">
- <div class="col">
-  <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Rekap Harian</div>
-               <div class="card-body">
-                 <p class="card-text"> <i class="fa-solid fa-user"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>            
-        </div>
-        <div class="col">
-        <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Rekap Mingguan</div>
-               <div class="card-body">
-                 <p class="card-text"><i class="fa-solid fa-door-closed"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>            
-        </div>
-        <div class="col">
-        <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Rekap Bulanan</div>
-               <div class="card-body">
-                 <p class="card-text"><i class="fa-solid fa-user-tie"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="<?php echo base_url('admin/detail_guru')?>" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>            
-        </div>
-        <div class="how" style="widht:40vh; height:35vh;">
+  <div class="how" style="widht:40vh; height:35vh;">
         <table class="table table-striped-columns">
    <thead>
 
@@ -123,7 +91,7 @@
 
      <tr>
        <th><?php echo $no ?></th>
-       <td><?php echo tampil_full_karyawan_byid($row->id_karyawan)?></td>
+       <td><?php echo tampil_karyawan_byid($row->id_karyawan)?></td>
        <td><?php echo $row->kegiatan?></td>
        <td><?php echo $row->date?></td>
        <td><?php echo $row->jam_masuk?></td>
@@ -151,36 +119,28 @@
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script>
-            function hapus(id) {
-           swal.fire({
-               title: 'Yakin untuk menghapus data ini?',
-               text: "Data ini akan terhapus permanen",
-               icon: 'warning',
-               showCancelButton: true,
-               confirmButtonColor: '#3085d6',
-               cancelButtonColor: '#d33',
-               cancelButtonText: 'Batal',
-               confirmButtonText: 'Ya Hapus'
-           }).then((result) => {
-               if (result.isConfirmed) {
-                   Swal.fire({
-                       icon: 'success',
-                       title: 'Berhasil Dihapus',
-                       showConfirmButton: false,
-                       timer: 1500,
-   
-                   }).then(function() {
-                       window.location.href = "<?php echo base_url('Karyawan/hapus_karyawan/')?>" + id;
-                   });
-               }
-           });
-       }
         function pulang(id){
           var yes = confirm('Yakin pulang?');
           if(yes == true) {
             window.location.href = "<?php echo base_url('karyawan/pulang/')?>" + id;
         }
     }
+         function hapus(id) {
+          Swal.fire({
+  title: 'Do you want to save the changes?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Save',
+  denyButtonText: `Don't save`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    Swal.fire('Saved!', '', 'success')
+  } else if (result.isDenied) {
+    Swal.fire('Changes are not saved', '', 'info')
+  }
+})
+         }
 </script>
 </body>
 </html>

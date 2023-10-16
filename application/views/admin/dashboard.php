@@ -10,9 +10,9 @@
 </head>
 <body>
     
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
-    <a>Role Admin</a>
+    <a style="text-align-center">Role Admin</a>
     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
@@ -43,113 +43,69 @@
                 return true;
               }
             </script>
-            <span id="date_time"></span>
+            <span id="date_time" style="margin-right: 40%;"></span>
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
 
   </div>
 </nav>
+<br>
+<br>
 
 <div class="d-flex">
   <div class="w3-sidebar w3-bar-block w3-green" style="width:17%"><br>
+   <h2 styl="color:black;">Admin <hr></h2>
   <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
 
-  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Admin</span></a></a>
+  <a href="<?php echo base_url('admin/dashboard') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Admin</span></a></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
+  <a href="<?php echo base_url('karyawan/history') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
 
   <a href="<?php echo base_url('auth')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
-</div>solid
+</div>
 
-
-<div class="row container p-3 col-10" style="margin-left:15%;">
- <!-- <div class="col">
-  <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Rekap Harian</div>
-               <div class="card-body">
-                 <p class="card-text"> <i class="fa-solid fa-user"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>            
-        </div> -->
-        <div class="relative min-h-screen md:flex" data-dev-hint="container">
-        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
-            <div class="container mx-auto">
-                
-                    <h1 class="flex justify-center mb-2 md:justify-start md:pl-6">
-                        REKAP MINGGUAN
-                    </h1>
-                    <a href="<?php echo base_url('admin/export_admin_mingguan')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
-
-                <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
-                    <table class="my-4 w-full divide-y divide-gray-300 text-center">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-3 py-2 text-xs text-gray-500">NO</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KARYAWAN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KEGIATAN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">TANGGAL</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KETERANGAN IZIN</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-300">
-                            <?php $no=0; foreach ($absensi as $absen): $no++ ?>
-                            <tr class="whitespace-nowrap">
-                                <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo tampil_full_karyawan_byid($absen->id_karyawan); ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $absen->kegiatan; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $absen->date; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $absen->jam_masuk; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $absen->jam_pulang; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $absen->keterangan; ?>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php endforeach?>
-                        </tbody>
-                    </table>
-                </div>
+<div style="width:100%; margin-left:20%">
+      <div class="text-center m-4">
+        <h1><b>Selamat Datang <?php echo $this->session->userdata('username') ?></b></h1>
+      </div>
+      <hr>
+      <div class="row mb-sm-0" style="margin-top: 25px;">
+        <div class="col-3" style="margin-left: 10%;">
+          <div class="card text-bg-sussces">
+            <div class="card-header">Daily Report</div>
+            <div class="card-body">
+              <p class="card-text">REKAP DATA</p>
+              <div class="card text-center card-footer">
+                <a href="<?php echo base_url('admin/rekap_h')?>" class="btn btn-primary">Go Page</a>
+              </div>
             </div>
-        </main>
-    </div>
-        <!-- <div class="col">
-        <div class="card text-bg-secondary mb-3" style="max-width: 22rem;">
-             <div class="card-header">Rekap Bulanan</div>
-               <div class="card-body">
-                 <p class="card-text"><i class="fa-solid fa-user-tie"></i></p>
-                 <div class="card-footer text-muted">
-                    <a href="<?php echo base_url('admin/detail_guru')?>" class="btn btn-primary">info lengkap</a>
-                  </div>
-             </div>
-        </div>             -->
+          </div>
         </div>
-       
+        <div class="col-3" style="margin-left: 25px;">
+          <div class="card text-bg-sussces">
+            <div class="card-header">Weekly Report</div>
+            <div class="card-body">
+              <p class="card-text">REKAP DATA</p>
+              <div class="card text-center card-footer">
+                <a href="<?php echo base_url('admin/rekap_m') ?>" class="btn btn-primary">Go Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3" style="margin-left: 25px;">
+          <div class="card text-bg-sussces">
+            <div class="card-header">Monthly Report</div>
+            <div class="card-body">
+              <p class="card-text">REKAP DATA</p>
+              <div class="card text-center card-footer">
+                <a href="<?php echo base_url('admin/rekap_b')?>" class="btn btn-primary">Go Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+   
 </body>
 </html>
