@@ -67,8 +67,7 @@
 
 <div class="relative min-h-screen md:flex" data-dev-hint="container" style="margin-left:20%;">
         <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
-            <div class="container mx-auto">
-                <div class="grid grid-cols-1 px-2 md:grid-cols-3 rounded-t-lg py-2.5 bg-rose-700 text-white text-xl">
+            <div class="container mx-auto"> 
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
                      
                     <h1 class="flex justify-center mb-2 md:justify-start md:pl-6">
@@ -76,7 +75,6 @@
                     </h1>
                     <a href="<?php echo base_url('admin/export_admin_mingguan')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
                     </div>
-                </div>
                 <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
                     <table class="my-4 w-full divide-y divide-gray-300 text-center">
                         <thead class="bg-gray-50">

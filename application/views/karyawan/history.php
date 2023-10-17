@@ -12,7 +12,7 @@
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
-    <a>Role karyawan</a>
+    <i>Absensi karyawan <hr></i>
     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
@@ -44,36 +44,29 @@
               }
             </script>
             <span id="date_time" style="margin-right: 40%;"></span>
+            <a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
             <script type="text/javascript">
               window.onload = date_time('date_time');
-            </script>
-
+              </script>
   </div>
 </nav><br>
 <br>
 <div class="d-flex">
   <div class="w3-sidebar w3-bar-block w3-green" style="width:15%"><br>
-
-  <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+  <i>karyawan <hr></i>
   <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
-
-  <a href="<?php echo base_url('karyawan/menu_izin_cuti') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Menu Izin Cuti</span></a></a>
-
-  <a href="<?php echo base_url('karyawan/absen') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Menu Absen</span></a></a>
 
   <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 
-  <a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
 </div>
 <hr>
-<div class="row container p-3 col-10" style="margin-left:15%;">
-  <div class="how" style="widht:40vh; height:35vh;">
-        <table class="table table-striped-columns">
-   <thead>
 
+<div class="row container p-3 col-10" style="margin-left:15%;">
+
+<div class="shadow p-3 mb-5 bg-body-tertiary rounded"><i class="fa-solid fa-coins"> HISTORY KARYAWAN</i></div>
+<div class="how" style="widht:40vh; height:35vh;">
+ <table class="table table-striped-columns">
+    <thead>
    <tr class="table-success">
        <th style="width:3%;">NO</th>
        <th style="width:5%;">Nama</th>
@@ -99,7 +92,7 @@
        <td><?php echo $row->keterangan?></td>
        <td onclick="myFunction()"><?php echo $row->status?></td>
        <td style="display:flex;"> 
-       <a href="<?php echo base_url('karyawan/ubah_kegiatan/' . $row->id)?>" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+       <a href="<?php echo base_url('karyawan/ubah_karyawan/' . $row->id)?>" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                         <button onclick="hapus(<?php echo $row->id ?>)"
                         class="btn btn-danger">
                         <i class="fa-solid fa-trash"></i>
@@ -113,9 +106,10 @@
      </tr>
      <?php endforeach ?>
      <a href="<?php echo base_url('karyawan/export_karyawan')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
+     
    </tbody>
  </table>
-  </div>
+</div>
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script>

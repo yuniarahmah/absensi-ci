@@ -12,7 +12,7 @@
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
-    <i>Absensi karyawan <hr></i>
+    <a><i>FROM ADMIN</i></a>
     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
@@ -43,28 +43,30 @@
                 return true;
               }
             </script>
-            <span id="date_time" style="margin-right: 40%;"></span>
+            <span id="date_time" style="margin-right: 40%;">
+        </span>
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
+<a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
   </div>
 </nav><br>
 <br>
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-green" style="width:15%; position:absolute;"><br>
-  <div class="flex">
-    <i>karyawan<hr></i>
-  </div>
-  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
+<div class="w3-sidebar w3-bar-block w3-green" style="width:17%"><br>
+   <h2 styl="color:black;">Admin <hr></h2>
+  <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
+  <a href="<?php echo base_url('admin/account') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Profile Admin</span></a></a>
+
+  <a href="<?php echo base_url('karyawan/history') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
 
 </div>
 <hr>
 <div style="margin-top:20px; margin-left:20%; margin-right:15%; background-color:grey;" class = 'card w-20px p-3 shadow-sm p-3 mb-5 bg-body-primary rounded'>
   <h1 class = 'text-center'><b>Akun <?php echo $this->session->userdata('username'); ?></b></h1>   
   <?php $no=0; foreach ($user as $users): $no++ ?>
-  <form  action="<?php echo base_url('admin/aksi_profil_karyawan')?>" method="post" enctype="multipart/from-data">
+  <form  action="<?php echo base_url('admin/aksi_ubah_account')?>" method="post" enctype="multipart/from-data">
     <div class="row">
     <div class="mb-3 col-6">
       <button class="border border-0 btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -97,7 +99,7 @@
       <input type="file" class="form-control" id="foto" name="foto">
     </div>
   </div>
-  <button class="btn btn-outline-dark"><a href="<?php echo base_url('karyawan/history') ?>">pulang</a></button>
+  <button style="margin-left: 35%; margin-top: 25px;" type="submit" class="btn btn-primary w-25" name="submit">Ubah</button>
 </form>
 <?php endforeach ?>
 </div>

@@ -60,13 +60,13 @@ class M_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-    function get_by_karyawan() {
-        $this->db->select( 'absen.*, user.username' );
-        $this->db->from( 'absen' );
-        $this->db->join( 'user', 'absen.id_karyawan = user.id', 'left' );
-        $query = $this->db->get();
-        return $query->result();
-    }
+    // function get_by_karyawan() {
+    //     $this->db->select( 'absen.*, user.username' );
+    //     $this->db->from( 'absen' );
+    //     $this->db->join( 'user', 'absen.id_karyawan = user.id', 'left' );
+    //     $query = $this->db->get();
+    //     return $query->result();
+    // }
     function get_absensi() {
         $this->db->select( 'absen.*, user.username' );
         $this->db->from( 'absen' );
@@ -105,15 +105,17 @@ class M_model extends CI_Model {
         $db = $this->db->get();
         return $db->result(); 
   }
-  public function getlast($table, $where) {
+  public function get_by_karyawan($table, $field, $id) {
     $this->db->select('*');
     $this->db->from($table);
-    $this->db->where($where);
-    $this->db->order_by('id', 'DESC');
-    $this->db->limit(1);
-    return $this->db->get()->row();
+    $this->db->where($field, $id);
+    $query = $this->db->get();
+    return $query;  // Pastikan hasil query dikembalikan sebagai objek
 }
- 
+function daftar($data)
+{
+     $this->db->insert('user',$data);
+}
 }
 ?>
 

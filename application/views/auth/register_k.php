@@ -134,8 +134,8 @@ button:hover {
 <body>
     <div class="container">
         <div class="login">
-        <form action="<?php echo base_url('Auth/aksi_register_k')?>" method="post" style="text-align:center;">
-                <h1>REGISTER KARYAWAN</h1>
+        <form action="<?php echo base_url('auth/aksi_register_k')?>" method="post" style="text-align:center;">
+                <h1>REGISTER Karyawan</h1>
                 <hr>
                 <p>Isi data dibawah ini untuk registrasi </p>
                 <div class="user-box">
@@ -146,12 +146,21 @@ button:hover {
             <label>Email</label>
             <input type="text" name="email" id="email">
           </div>
+          <div class="user-box">
+            <label>Nama Depan</label>
+            <input type="text" name="nama_depan" id="nama_depan">
+          </div>
+          <div class="user-box">
+            <label>Nama Belakang</label>
+            <input type="text" name="nama_belakang" id="nama_belakang">
+          </div>
+            <input type="hidden" name="role" id="role" value="karyawan">
        
           <div class="user-box">
           <div class="form-group">
                     <label for="exampleInputEmail1">Password</label>
                     <div class="input-group">
-                        <input type="password" id="pass" name="password" class="form-control">
+                        <input type="password" id="pass" name = "password" class="form-control">
                         <div class="input-group-append">
                             <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
                             <span id="mybutton" onclick="change()" class="input-group-text">

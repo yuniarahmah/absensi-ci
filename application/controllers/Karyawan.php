@@ -18,13 +18,6 @@ class Karyawan extends CI_Controller {
         }
     }
 
-
-    public function menu_izin_cuti($id)
- {
-    $data['absen'] = $this->m_model->get_by_id('absen', 'id', $id)->result();
-        $this->load->view( 'karyawan/menu_izin_cuti', $data);
-    }
-
     public function history()
  {
         $data['karyawan'] = $this->m_model->get_data('absen')->result();
@@ -32,20 +25,19 @@ class Karyawan extends CI_Controller {
     }
 
     public function profil_karyawan()
- {
-        $data[ 'user' ] = $this->m_model->get_by_id( 'user', 'id', $this->session->userdata( 'id' ) )->result();
-        $this->load->view( 'karyawan/profil_karyawan' );
+    {
+        $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
+        $this->load->view('karyawan/profil_karyawan', $data); // Mengirimkan variabel $data ke tampilan
     }
-
     public function tambah_karyawan()
  {
         $this->load->view( 'karyawan/history', $data );
     }
-public function ubah_kegiatan($id)
-	{
-		$data['absen'] = $this->m_model->get_by_karyawan('absen', 'id', $id)->result();
-         $this->load->view('karyawan/absen', $data);
-	}
+    public function ubah_karyawan($id)
+{
+    $data['absen'] = $this->m_model->get_by_karyawan('absen', 'id', $id)->result();
+    $this->load->view('karyawan/ubah_karyawan', $data);
+    }
 	
 public function aksi_ubah_karyawan()
   {
@@ -62,7 +54,7 @@ public function aksi_ubah_karyawan()
       redirect(base_url('karyawan/history'));
     } else {
       $this->session->set_flashdata('error', 'gagal..');
-      redirect(base_url('karyawan/ubah_kegiatan/' . $this->input->post('id')));
+      redirect(base_url('karyawan/ubah_karyawan/' . $this->input->post('id')));
     }
   }
   
@@ -72,7 +64,7 @@ public function aksi_ubah_karyawan()
     $absensi = $this->db->get_where('absen', array('id' => $id))->row();
     if ($absensi) {
         $data = [
-            'jam_pulang' => date('H:I'),
+            'jam_pulang' => date('H.i.s'),
             'status' => 'done'
         ];
         $this->db->where('id',$id);
@@ -81,7 +73,6 @@ public function aksi_ubah_karyawan()
     } else {
         echo 'data absensi tidak ditemukan';
     }
-    
   }
   public function rekap_mingguan() {
     $data['absensi'] = $this->m_model->getAbsensiLast7Days();        
@@ -195,6 +186,53 @@ public function aksi_ubah_karyawan()
             $writer = new Xlsx( $spreadsheet );
             $writer->save( 'php://output' );
    } 
+   public function aksi_profil_karyawan()
+   {
+       // Mengunggah gambar profil
+       $foto = $this->upload_img('foto');
+   
+       // Mengambil data dari input form
+       $password_baru = $this->input->post('password_baru');
+       $konfirmasi_password = $this->input->post('konfirmasi_password');
+       $email = $this->input->post('email');
+       $username = $this->input->post('username');
+   
+       // Inisialisasi data
+       $data = [
+           'email' => $email,
+           'username' => $username,
+       ];
+   
+       // Jika foto diunggah dengan sukses, tambahkan foto ke data
+       if ($foto[0] === true) {
+           $data['foto'] = $foto[1];
+       }
+   
+       // Jika ada password baru, periksa dan enkripsi
+       if (!empty($password_baru)) {
+           // Pastikan password baru dan konfirmasi password sama
+           if ($password_baru === $konfirmasi_password) {
+               // Enkripsi password dengan algoritma yang aman (misalnya, bcrypt)
+               $data['password'] = password_hash($password_baru, PASSWORD_BCRYPT);
+           } else {
+               $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama');
+               redirect(base_url('karyawan/profil_karyawan'));
+               return;
+           }
+       }
+   
+       // Memperbarui data pengguna
+       $update_result = $this->m_model->ubah_data('user', $data, ['id' => $this->session->userdata('id')]);
+   
+       if ($update_result) {
+           $this->session->set_flashdata('message', 'Profil berhasil diperbarui');
+           redirect(base_url('karyawan/profil_karyawan'));
+       } else {
+           $this->session->set_flashdata('message', 'Gagal memperbarui profil');
+           redirect(base_url('karyawan/profil_karyawan'));
+       }
+   }
+    
    
 }
 ?>

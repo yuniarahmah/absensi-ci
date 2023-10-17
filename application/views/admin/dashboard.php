@@ -12,7 +12,7 @@
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
-    <a style="text-align-center">Role Admin</a>
+    <a style="text-align-center"><i>FROM ADMIN</i></a>
     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
@@ -44,6 +44,8 @@
               }
             </script>
             <span id="date_time" style="margin-right: 40%;"></span>
+            
+  <a href="<?php echo base_url('auth')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
@@ -58,11 +60,10 @@
    <h2 styl="color:black;">Admin <hr></h2>
   <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
 
-  <a href="<?php echo base_url('admin/dashboard') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Admin</span></a></a>
+  <a href="<?php echo base_url('admin/account') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Profile Admin</span></a></a>
 
   <a href="<?php echo base_url('karyawan/history') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
 
-  <a href="<?php echo base_url('auth')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
 </div>
 
 <div style="width:100%; margin-left:20%">
@@ -71,41 +72,42 @@
       </div>
       <hr>
       <div class="row mb-sm-0" style="margin-top: 25px;">
-        <div class="col-3" style="margin-left: 10%;">
-          <div class="card text-bg-sussces">
+        <di class="col-3" style="margin-left: 10%;">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
             <div class="card-header">Daily Report</div>
             <div class="card-body">
-              <p class="card-text">REKAP DATA</p>
-              <div class="card text-center card-footer">
+              <img src="https://static.promediateknologi.id/crop/0x82:1280x850/750x500/webp/photo/2023/05/20/Ilustrasi-Kalender-Jawa-Juni-2023-3877882117.png" style="width: 40%; margin-left:20%">
+              <br>
+              <div class="card text-center">
                 <a href="<?php echo base_url('admin/rekap_h')?>" class="btn btn-primary">Go Page</a>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-3" style="margin-left: 25px;">
-          <div class="card text-bg-sussces">
+        </di>
+        <div class="col-3" style="margin-left: 25px; ">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
             <div class="card-header">Weekly Report</div>
             <div class="card-body">
-              <p class="card-text">REKAP DATA</p>
-              <div class="card text-center card-footer">
+              <img src="https://static.promediateknologi.id/crop/0x82:1280x850/750x500/webp/photo/2023/05/20/Ilustrasi-Kalender-Jawa-Juni-2023-3877882117.png" style="width: 40%; margin-left:20% ">
+              <br>
+            <div class="card text-center">
                 <a href="<?php echo base_url('admin/rekap_m') ?>" class="btn btn-primary">Go Page</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-3" style="margin-left: 25px;">
-          <div class="card text-bg-sussces">
+        <div class="col-3" style="margin-left: 25px; ">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
             <div class="card-header">Monthly Report</div>
             <div class="card-body">
-              <p class="card-text">REKAP DATA</p>
-              <div class="card text-center card-footer">
-                <a href="<?php echo base_url('admin/rekap_b')?>" class="btn btn-primary">Go Page</a>
-              </div>
+              <img src="https://static.promediateknologi.id/crop/0x82:1280x850/750x500/webp/photo/2023/05/20/Ilustrasi-Kalender-Jawa-Juni-2023-3877882117.png" style="width: 40%; margin-left:20%">
+              <br>
+              <div class="card text-center ">
+              <a href="<?php echo base_url('admin/rekap_b')?>" class="btn btn-primary">Go Page</a>
+            </div>
             </div>
           </div>
         </div>
-    </div>
-
-   
+        </div>
 </body>
 </html>
