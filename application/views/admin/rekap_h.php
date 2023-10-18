@@ -12,7 +12,7 @@
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
-    <a style="text-align-center">Role Admin</a>
+  <a style="text-align-center"><i>FROM ADMIN</i></a>
     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
@@ -47,22 +47,20 @@
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
+  <a href="<?php echo base_url('admin/dashboard')?>"><i class="fa- fa-right-from-bracket">home<hr></i></a> 
 
   </div>
 </nav>
 <br>
-<br>
+<br><br>
 
 <div class="d-flex">
   <div class="w3-sidebar w3-bar-block w3-green" style="width:17%"><br>
    <h2 styl="color:black;">Admin <hr></h2>
   <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
 
-  <a href="<?php echo base_url('admin/admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Admin</span></a></a>
-
   <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
 
-  <a href="<?php echo base_url('auth')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
 </div>
 
 <div class="relative min-h-screen md:flex" data-dev-hint="container" style="margin-left:20%;">
@@ -70,9 +68,11 @@
             <div class="container mx-auto"> 
                     <div class="flex justify-center mb-2 md:justify-start md:pl-6">
                      
+            <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
                     <h1 class="flex justify-center mb-2 md:justify-start md:pl-6">
-                        REKAP HARIAN
+                    <i class="fa-solid fa-note-sticky"></i> LAPORAN HARIAN
                     </h1>
+         </div>
                     <a href="<?php echo base_url('admin/export_admin_mingguan')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
                     </div>
                 <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
@@ -80,9 +80,8 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-3 py-2 text-xs text-gray-500">NO</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">
-                                    KEGIATAN
-                                </th>
+                                <th class="px-3 py-2 text-xs text-gray-500">KARYAWAN</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">KEGIATAN</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">TANGGAL</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
                                 <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
@@ -93,6 +92,11 @@
                             <?php $no=0; foreach ($absensi_harian as $absen): $no++ ?>
                             <tr class="whitespace-nowrap">
                                 <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
+                                <td class="px-3 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <?php echo tampil_karyawan_byid($absen->id_karyawan); ?>
+                                    </div>
+                                </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
                                         <?php echo $absen->kegiatan; ?>

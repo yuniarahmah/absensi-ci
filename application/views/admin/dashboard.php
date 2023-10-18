@@ -45,7 +45,7 @@
             </script>
             <span id="date_time" style="margin-right: 40%;"></span>
             
-  <a href="<?php echo base_url('auth')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
+            <a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
@@ -54,13 +54,12 @@
 </nav>
 <br>
 <br>
+<br>
 
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-green" style="width:17%"><br>
+  <div class="w3-sidebar w3-bar-block w3-green" style="width:17%;" style="width:17%"><br>
    <h2 styl="color:black;">Admin <hr></h2>
   <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
-
-  <a href="<?php echo base_url('admin/account') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Profile Admin</span></a></a>
 
   <a href="<?php echo base_url('karyawan/history') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
 
@@ -108,6 +107,6 @@
             </div>
           </div>
         </div>
-        </div>
+ </div>
 </body>
 </html>

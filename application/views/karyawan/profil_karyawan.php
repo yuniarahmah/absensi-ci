@@ -47,6 +47,7 @@
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
+              <button class="btn btn-outline-dark"><a href="<?php echo base_url('karyawan/history') ?>">pulang</a></button>
   </div>
 </nav><br>
 <br>
@@ -61,20 +62,21 @@
 
 </div>
 <hr>
-<div style="margin-top:20px; margin-left:20%; margin-right:15%; background-color:grey;" class = 'card w-20px p-3 shadow-sm p-3 mb-5 bg-body-primary rounded'>
+<div style="margin-top:20px; margin-left:20%; margin-right:15%; position:fixed;" class = 'card w-20px p-3 shadow-lg p-3 mb-5 bg-body-primary rounded'>
   <h1 class = 'text-center'><b>Akun <?php echo $this->session->userdata('username'); ?></b></h1>   
   <?php $no=0; foreach ($user as $users): $no++ ?>
-  <form  action="<?php echo base_url('admin/aksi_profil_karyawan')?>" method="post" enctype="multipart/from-data">
+  <form  action="<?php echo base_url('karyawan/aksi_profil_karyawan')?>" method="post" enctype="multipart/from-data">
     <div class="row">
     <div class="mb-3 col-6">
-      <button class="border border-0 btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <span class="border border-0 btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <?php if (!empty($row->foto)): ?>
-          <img class="rounded-circle" height="150" width="150" src="<?php echo base64_decode($row->foto);?>" style="text-align:center;">
-                    <?php else: ?>
+          <img src="<?php echo  base_url('./image/karyawan/' . $row->foto) ?>" height="150"
+                                                width="150" class="rounded-circle">
+                      <?php else: ?>
                       <img class="rounded-circle" height="150" width="150"
-                        src="https://slabsoft.com/wp-content/uploads/2022/05/pp-wa-kosong-default.jpg" />
+                        src="https://w7.pngwing.com/pngs/117/752/png-transparent-computer-icons-user-icon-design-numerous-miscellaneous-logo-computer-wallpaper.png" />
                     <?php endif;?>
-                  </button>
+                  </span>
                 </div>
     <div class="mb-3 col-6">
         <label for="email" class="form-label">email</label>
@@ -83,6 +85,14 @@
       <div class="mb-3 col-6">
      <label for="username" class="form-label">username</label>
      <input type="text" class="form-control" id="username" name="username" value="<?php echo $users->username?>">
+    </div>
+      <div class="mb-3 col-6">
+     <label for="nama_depan" class="form-label">Nama Depan</label>
+     <input type="text" class="form-control" id="nama_depan" name="nama_depan" value="<?php echo $users->nama_depan?>">
+    </div>
+      <div class="mb-3 col-6">
+     <label for="nama_belakang" class="form-label">Nama Belakang</label>
+     <input type="text" class="form-control" id="nama_belakang" name="nama_belakang" value="<?php echo $users->nama_belakang?>">
     </div>
     <div class="mb-3 col-6">
       <label for="password" class="form-label">password</label>
@@ -97,7 +107,8 @@
       <input type="file" class="form-control" id="foto" name="foto">
     </div>
   </div>
-  <button class="btn btn-outline-dark"><a href="<?php echo base_url('karyawan/history') ?>">pulang</a></button>
+  <button style="margin-left: 35%; margin-top: 25px;" type="submit" class="btn btn-primary w-25" name="submit">Ubah</button>
+
 </form>
 <?php endforeach ?>
 </div>

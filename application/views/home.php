@@ -19,6 +19,7 @@
 
 </head>
 <body class="background">
+        
     <center>
     <h1 style="text-align:center;">ABSENSI KARYAWAN</h1>
     <button class="btn btn-dark w-20">

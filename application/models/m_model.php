@@ -85,7 +85,7 @@ class M_model extends CI_Model {
                           ->where('date <=', $end_date)
                           ->group_by('date, kegiatan, jam_masuk, jam_pulang, keterangan, status')
                           ->get();
-        return $query->result_array();
+        return $query->result();
     }
     public function getbulanan($bulan)
   {

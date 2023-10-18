@@ -48,20 +48,18 @@
               window.onload = date_time('date_time');
             </script>
 
-    <a href="<?php echo base_url('karyawan/history') ?>">pulang</a>
-    <a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
+    <a href="<?php echo base_url('karyawan/history') ?>">home</a>
   </div>
 </nav><br>
 <br>
 <div class="d-flex">
 <div class="w3-sidebar w3-bar-block w3-green" style="width:20%">
   <br>
-<form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">History</span></a>
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline">profil</span></a></a>
+  <div class="flex">
+    <i>karyawan<hr></i>
+  </div>
+  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
+  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i>  profil</span></a></a>
 </div>
 </div>
 <?php foreach ($absen as $data):?>

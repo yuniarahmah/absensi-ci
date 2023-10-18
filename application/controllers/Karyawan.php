@@ -23,12 +23,6 @@ class Karyawan extends CI_Controller {
         $data['karyawan'] = $this->m_model->get_data('absen')->result();
         $this->load->view( 'karyawan/history', $data );
     }
-
-    public function profil_karyawan()
-    {
-        $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
-        $this->load->view('karyawan/profil_karyawan', $data); // Mengirimkan variabel $data ke tampilan
-    }
     public function tambah_karyawan()
  {
         $this->load->view( 'karyawan/history', $data );
@@ -76,7 +70,7 @@ public function aksi_ubah_karyawan()
   }
   public function rekap_mingguan() {
     $data['absensi'] = $this->m_model->getAbsensiLast7Days();        
-    $this->load->view('pages/admin/rekap_mingguan', $data);
+    $this->load->view('pages/karyawan/rekap_mingguan', $data);
 }
     public function hapus_karyawan( $id ) {
         $this->m_model->delete( 'absen', 'id', $id );
@@ -186,53 +180,103 @@ public function aksi_ubah_karyawan()
             $writer = new Xlsx( $spreadsheet );
             $writer->save( 'php://output' );
    } 
+
+   
+    public function profil_karyawan()
+    {
+        $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
+        $this->load->view('karyawan/profil_karyawan', $data); // Mengirimkan variabel $data ke tampilan
+    }
+    
+    public function upload_image( $value )
+ {
+        $kode = round( microtime( true ) * 1000 );
+        $config[ 'upload_path' ] = './images/karyawan/';
+        $config[ 'allowed_types' ] = 'jpg|png|jpeg';
+        $config[ 'max_size' ] = 30000;
+        // Ukuran dalam kilobita ( 30 MB )
+        $config[ 'file_name' ] = $kode;
+
+        $this->load->library( 'upload', $config );
+        // Load library 'upload' with config
+
+        if ( !$this->upload->do_upload( $value ) ) {
+            return array( false, '' );
+        } else {
+            $fn = $this->upload->data();
+            $nama = $fn[ 'file_name' ];
+            return array( true, $nama );
+        }
+    }
+
    public function aksi_profil_karyawan()
    {
-       // Mengunggah gambar profil
-       $foto = $this->upload_img('foto');
-   
-       // Mengambil data dari input form
+       $username = $this->input->post('username');
+       $email = $this->input->post('email');
+       $nama_depan  = $this->input->post('nama_depan');
+       $nama_belakang  = $this->input->post('nama_belakang');
        $password_baru = $this->input->post('password_baru');
        $konfirmasi_password = $this->input->post('konfirmasi_password');
-       $email = $this->input->post('email');
-       $username = $this->input->post('username');
-   
-       // Inisialisasi data
-       $data = [
-           'email' => $email,
-           'username' => $username,
-       ];
-   
-       // Jika foto diunggah dengan sukses, tambahkan foto ke data
-       if ($foto[0] === true) {
-           $data['foto'] = $foto[1];
-       }
-   
-       // Jika ada password baru, periksa dan enkripsi
-       if (!empty($password_baru)) {
-           // Pastikan password baru dan konfirmasi password sama
-           if ($password_baru === $konfirmasi_password) {
-               // Enkripsi password dengan algoritma yang aman (misalnya, bcrypt)
-               $data['password'] = password_hash($password_baru, PASSWORD_BCRYPT);
-           } else {
-               $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama');
-               redirect(base_url('karyawan/profil_karyawan'));
-               return;
-           }
-       }
-   
-       // Memperbarui data pengguna
-       $update_result = $this->m_model->ubah_data('user', $data, ['id' => $this->session->userdata('id')]);
-   
-       if ($update_result) {
-           $this->session->set_flashdata('message', 'Profil berhasil diperbarui');
-           redirect(base_url('karyawan/profil_karyawan'));
-       } else {
-           $this->session->set_flashdata('message', 'Gagal memperbarui profil');
-           redirect(base_url('karyawan/profil_karyawan'));
-       }
-   }
-    
-   
+       $foto = $this->upload_image('image');
+  
+          if ( $foto[ 0 ] == false ) {
+              //data yg akan diubah
+              $data = [
+                  'image'=> 'User.jpg',
+                  'username'=> $username,
+                  'email'=> $email,
+                  'nama_depan'=> $nama_depan,
+                  'nama_belakang'=> $nama_belakang,
+              ];
+          } else {
+              //data yg akan diubah
+              $data = [
+                  'image'=> $foto[ 1 ],
+                  'username'=> $username,
+                  'email'=> $email,
+                  'nama_depan'=> $nama_depan,
+                  'nama_belakang'=> $nama_belakang,
+              ];
+          }
+          //kondisi jika ada password baru
+          if (!empty($password_baru)) {
+            // Pastikan password baru dan konfirmasi password sama
+            if ($password_baru === $konfirmasi_password) {
+                // Enkripsi password baru dengan md5 (harap ganti dengan metode keamanan yang lebih kuat seperti bcrypt)
+                $hashed_password = md5($password_baru);
+        
+                // Perbarui data password pengguna di sesi
+                $this->session->set_userdata('password', $hashed_password);
+        
+                // Perbarui data password pengguna di database
+                $data['password'] = $hashed_password;
+        
+                // Simpan data pengguna ke database
+                $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+        
+                if ($update_result) {
+                    redirect(base_url('karyawan/profil_karyawan'));
+                } else {
+                    // Handle error jika gagal menyimpan data ke database
+                    $this->session->set_flashdata('message', 'Terjadi kesalahan saat menyimpan data ke database.');
+                    redirect(base_url('karyawan/profil_karyawan'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama');
+                redirect(base_url('karyawan/profil_karyawan'));
+            }
+        }
+        
+  
+          //untuk melakukan pembaruan data
+          $this->session->set_userdata($data);
+          $update_result = $this->m_model->ubah_data( 'user', $data, array( 'id' => $this->session->userdata( 'id' )));
+  
+          if ($update_result) {
+              redirect( base_url( 'karyawan/profil_karyawan' ) );
+          } else {
+              redirect( base_url( 'karyawan/profil_karyawan' ) );
+          }
+ }  
 }
 ?>

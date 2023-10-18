@@ -11,12 +11,19 @@
 
 </head>
 <style>
-    body {
-    margin:0;
-    padding:0;
-    font-family: sans-serif;
-    background-image:url('https://img.freepik.com/premium-photo/dark-fantasy-background-anime-style-illustration_725906-32.jpg');
-    background-size:cover;
+    body {font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #121212; /* fallback for old browsers */
+  overflow-x: hidden;
+
+  height: 100%;
+
+  /* code to make all text unselectable */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
   }
   /* test */
   .login-box {
@@ -135,14 +142,17 @@
   }
 </style>
 <body>
+  <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="color:white;">
+    <img src="https://cdn-icons-png.flaticon.com/512/2019/2019442.png" style="width:20%;">
+    </div>
     <div class="login-box">
-        <h2>LOGIN</h2>
+        <h1 style="color:white; text-align:center;">LOGIN</h1><br>
         <form action="<?php echo base_url('auth/fungsi_login')?>" method="post" style="text-align:center;">
 
           <div class="user-box">
             <input type="text" name="email" id="email">
             <label>Email</label>
-          </div>=
+          </div>
           <div class="user-box">
             <input type="password" name="password" id="pass">
             <label>password</label>
@@ -160,7 +170,7 @@
                             </span>
                         </div>
           </div>
-            <button class="btn btn-dark" type="submit" name="submit">Login </button>
+            <button class="btn btn-outline-dark shadow" type="submit" name="submit"> Login </button>
         </form>
       </div>
     <script>
