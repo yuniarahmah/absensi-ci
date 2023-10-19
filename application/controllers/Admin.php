@@ -18,14 +18,11 @@ class Admin extends CI_Controller {
 
     public function dashboard()
  {
-        $bulan = $this->input->post( 'bulan' );
-        $hari_ini = date( 'Y-m-d' );
-        $data[ 'absensi_bulan' ] = $this->m_model->getbulanan( $bulan );
-        $data[ 'absensi' ] = $this->m_model->get_absensi();
+    $data['absensi'] = $this->m_model->get_data('absen')->result();
         $this->load->view( 'admin/dashboard', $data );
     }
 
-    public function admin()
+    public function index()
  {
         $this->load->view( 'admin/index' );
     }
@@ -179,7 +176,7 @@ class Admin extends CI_Controller {
 
         $writer = new Xlsx( $spreadsheet );
         $writer->save( 'php://output' );
-    }
+}
 
     public function bulanan()
  {
@@ -289,7 +286,7 @@ class Admin extends CI_Controller {
 
         $writer = new Xlsx( $spreadsheet );
         $writer->save( 'php://output' );
-    }
+}
 
     function laporan_harian() {
         cek_session_admin();
@@ -298,50 +295,106 @@ class Admin extends CI_Controller {
         $this->template->load( 'app/template', 'app/mod_laporan/view_harian', $data );
     }
 
-    public function account()
- {
-        $data[ 'user' ] = $this->m_model->get_by_id( 'user', 'id', $this->session->userdata( 'id' ) )->result();
-        $this->load->view( 'admin/account', $data );
-    }
-
-    // from untuk ubah akun
-
+    public function profil_admin()
+    {
+        $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
+        $this->load->view('admin/profil_admin', $data); // Mengirimkan variabel $data ke tampilan
+ }
     
- public function ubah_foto_account() {
+    public function upload_image( $value )
+ {
+        $kode = round( microtime( true ) * 1000 );
+        $config[ 'upload_path' ] = './images/karyawan/';
+        $config[ 'allowed_types' ] = 'jpg|png|jpeg';
+        $config[ 'max_size' ] = '30000';
+        // Ukuran dalam kilobita ( 30 MB )
+        $config[ 'file_name' ] = $kode;
 
-        $image = $this->upload_image( 'image' );
+        $this->load->library( 'upload', $config );
+        // Load library 'upload' with config
 
-        if ( $image[ 0 ] == false ) {
-            //data yg akan diubah
-            $data = [
-                'image'=> 'User.jpg',
-            ];
+        if ( !$this->upload->do_upload( $value ) ) {//
+            return array( false, '' );
         } else {
-            //data yg akan diubah
-            $data = [
-                'image'=> $image[ 1 ],
-            ];
-
-        }
-
-        //untuk melakukan pembaruan data
-        $this->session->set_userdata( $data );
-        $update_result = $this->m_model->ubah_data( 'user', $data, array( 'id' => $this->session->userdata( 'id' ) ) );
-
-        if ( $update_result ) {
-            redirect( base_url( 'admin/account' ) );
-        } else {
-            redirect( base_url( 'admin/account' ) );
+            $fn = $this->upload->data();
+            $nama = $fn[ 'file_name' ];
+            return array( true, $nama );
         }
     }
+
+   public function aksi_profil_admin()
+   {
+       $username = $this->input->post('username');
+       $foto = $this->upload_image('image');
+       $email = $this->input->post('email');
+       $nama_depan  = $this->input->post('nama_depan');
+       $nama_belakang  = $this->input->post('nama_belakang');
+       $password_baru = $this->input->post('password_baru');
+       $konfirmasi_password = $this->input->post('konfirmasi_password');
+  
+          if ( $foto[ 0 ] == false ) {//jika foto kosong maka akan menampilkan foto cain.jpg
+              //data yg akan diubah
+              $data = [
+                  'image'=> 'cain.jpg',
+                  'username'=> $username,
+                  'email'=> $email,
+                  'nama_depan'=> $nama_depan,
+                  'nama_belakang'=> $nama_belakang,
+              ];
+          } else {
+              //data yg akan diubah
+              $data = [//jika ada fotonya maka akan menampilkan foto tersebut
+                  'image'=> $foto[ 1 ],
+                  'username'=> $username,
+                  'email'=> $email,
+                  'nama_depan'=> $nama_depan,
+                  'nama_belakang'=> $nama_belakang,
+              ];
+          }
+          //kondisi jika ada password baru
+          if (!empty($password_baru)) {
+            // Pastikan password baru dan konfirmasi password sama
+            if ($password_baru === $konfirmasi_password) {
+                // Enkripsi password baru dengan md5 (harap ganti dengan metode keamanan yang lebih kuat seperti bcrypt)
+                $hashed_password = md5($password_baru);
+        
+                // Perbarui data password pengguna di sesi
+                $this->session->set_userdata('password', $hashed_password);
+        
+                // Perbarui data password pengguna di database
+                $data['password'] = $hashed_password;
+        
+                // Simpan data pengguna ke database
+                $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+        
+                if ($update_result) {
+                    redirect(base_url('admin/profil_admin'));
+                } else {
+                    // Handle error jika gagal menyimpan data ke database
+                    $this->session->set_flashdata('message', 'Terjadi kesalahan saat menyimpan data ke database.');
+                    redirect(base_url('admin/profil_admin'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama');
+                redirect(base_url('admin/profil_admin'));
+            }
+        }
+        
+  
+          //untuk melakukan pembaruan data
+          $this->session->set_userdata($data);
+          $update_result = $this->m_model->ubah_data( 'user', $data, array( 'id' => $this->session->userdata( 'id' )));
+  
+          if ($update_result) {
+              redirect( base_url( 'admin/profil_admin' ) );
+          } else {
+              redirect( base_url( 'admin/profil_admin' ) );
+          }
+ } 
+ //function untuk menghapus
+ public function hapus_admin( $id ) {
+    $this->m_model->delete( 'absen', 'id', $id );
+    redirect( base_url( 'admin/dashboard' ) );
+}  
 }
 ?>
-<!-- if ( !empty( $password_baru ) ) {
-            //pastikan password baru dan konfirmasi password sama
-            if ( $password_baru === $konfirmasi_password ) {
-                //wadah password baru
-                $data[ 'password' ] = md5( $password_baru );
-            } else {
-                $this->session->set_flashdata( 'message', 'password baru dan konfirmasi password harus sama' );
-                redirect( base_url( 'admin/account' ) );
-            } -->

@@ -12,8 +12,7 @@
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
-    <i>Absensi karyawan <hr></i>
-    <?php
+  <a style="text-align-center"><i>FROM ADMIN</i></a>    <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
             <script type="text/javascript">
@@ -49,36 +48,38 @@
             </script>
               <button class="btn btn-outline-dark"><a href="<?php echo base_url('karyawan/history') ?>">pulang</a></button>
   </div>
-</nav><br><br>
+</nav><br><br><br> 
 
 <div class="d-flex">
   <div class="w3-sidebar w3-bar-block w3-green" style="width:15%; position:absolute;"><br>
   <div class="flex">
-    <i>karyawan<hr></i>
-  </div>
-  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
+  <h2 style="color:black;">Admin <hr></h2>
+  </div> <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 
+<a href="<?php echo base_url('admin/profil_admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> profil</span></a></a>
+<a href="<?php echo base_url('admin/rekap_b') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap bulanan</span></a></a>
+<a href="<?php echo base_url('admin/rekap_h') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap harian </span></a></a>
+<a href="<?php echo base_url('admin/rekap_m') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap mingguan</span></a></a>
+</div>
 </div>
 <hr>
 <div style="margin-top:20px; margin-left:20%; margin-right:15%; position:fixed;" class = 'card w-20px p-3 shadow-lg p-3 mb-5 bg-body-primary rounded'>
   <?php $no=0; foreach ($user as $users): $no++ ?>
-  <form  action="<?php echo base_url('karyawan/aksi_profil_karyawan')?>" method="post" enctype="multipart/from-data">
+  <form  action="<?php echo base_url('admin/aksi_profil_admin')?>" method="post" enctype="multipart/from-data">
     <div class="row">
-    <div class="mb-3 col-6" style="margin-left:40%;">
-      <span class="border border-0 btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <?php if (!empty($row->foto)): ?>
-          <img src="<?php echo  base_url('./images/karyawan/' . $row->foto) ?>" height="150"
-              width="150" class="rounded-circle">
-                      <?php else: ?>
-                      <img class="rounded-circle" height="150" width="150"
-                        src="https://i.pinimg.com/736x/1e/91/9d/1e919dd922c781c157ac04af8aa71f80.jpg" />
-                        <?php endif;?>
-                      </span>
-                    </div>
-                    <h1 class = 'text-center'><b>Akun <?php echo $this->session->userdata('username'); ?></b></h1>   
-     <div class="mb-3 col-6">
+      <div class="mb-3 col-6" style="margin-left:30%;">
+        <button class="border border-0 btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <?php if (!empty($row->image)): ?>
+            <img src="<?php echo base_url('./images/karyawan/'. $row->image) ?>" height="150"
+            width="150" class="rounded-circle">
+            <?php else: ?>
+              <img style="width:50%; border-radius:50%;" src="https://vsbattles.com/data/avatars/h/10/10859.jpg?1694648797" alt="">
+              <?php endif;?>
+            </button>
+          </div>
+          <h1 class = 'text-center'><b>Akun <?php echo $this->session->userdata('username'); ?></b></h1>   
+          <div class="mb-3 col-6">
       <label for="email" class="form-label">email</label>
       <input type="text" class="form-control" id="email" name="email" value="<?php echo $users->email?>">
     </div>
@@ -117,8 +118,8 @@
         </div>
       </div>
     <div class="mb-3 col-6">
-     <label for="foto" class="form-label">Foto</label>
-      <input type="file" class="form-control" id="foto" name="foto">
+     <label for="image" class="form-label">Foto</label>
+      <input type="file" class="form-control" id="image" name="image">
     </div>
   </div>
   <button style="margin-left: 35%; margin-top: 25px;" type="submit" class="btn btn-primary w-25" name="submit">Ubah</button>
@@ -126,6 +127,24 @@
 </form>
 <?php endforeach ?>
 </div>
+<script>
+  // Function to toggle password visibility
+  function togglePasswordVisibility(inputId) {
+    const passwordInput = document.getElementById(inputId);
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+    } else {
+      passwordInput.type = "password";
+    }
+  }
 
+  // Attach event listeners to the "Show" checkboxes
+  document.getElementById("showPasswordBaru").addEventListener("change", function () {
+    togglePasswordVisibility("password_baru");
+  });
+  document.getElementById("showKonfirmasiPassword").addEventListener("change", function () {
+    togglePasswordVisibility("konfirmasi_password");
+  });
+</script>
 </body>
 </html>

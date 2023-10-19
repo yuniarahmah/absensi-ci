@@ -63,10 +63,10 @@
 </div>
 </div>
 <?php foreach ($absen as $data):?>
-<form class="card w-50 p-5 " style="margin-left:23%" method="post" enctype="multipart/from-data" action="<?php echo base_url('karyawan/aksi_ubah_karyawan')?>">
+<form class="card w-50 p-5 shadow-lg " style="margin-left:23%;" method="post" enctype="multipart/from-data" action="<?php echo base_url('karyawan/aksi_ubah_karyawan')?>">
   <input type="hidden" name="id" value="<?php echo $data->id?>">
-  <div class="card-body">
-    <b style="margin-left:20%;">IZIN CUTI</b>
+  <div class="card-body" style="background:lightgreen;">
+    <b style="margin-left:20%; ">IZIN CUTI</b>
     <div class="card" style="width: 30rem; margin-right:5%;">
     <input type="text" name="keterangan" value="<?php echo $data->keterangan?>">
   </div><br>

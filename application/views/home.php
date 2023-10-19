@@ -26,9 +26,6 @@
         <a style="color:white;" href="<?php echo base_url('auth/register') ?>">REGISTER</a>
     </button>
     <button class="btn btn-dark w-20">
-        <a style="color:white;" href="<?php echo base_url('auth/register_k') ?>">REGISTER 2</a>
-    </button><br><br>
-    <button class="btn btn-dark w-20">
         <a style="color:white;" href="<?php echo base_url('auth/login') ?>">LOGIN</a>
     </button>
     </center>

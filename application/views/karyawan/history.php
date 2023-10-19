@@ -44,7 +44,7 @@
               }
             </script>
             <span id="date_time" style="margin-right: 40%;"></span>
-            <a href="<?php echo base_url('auth')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
+            <a href="<?php echo base_url('auth/login')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
             <script type="text/javascript">
               window.onload = date_time('date_time');
               </script>
@@ -62,13 +62,41 @@
 <hr>
 
 <div class="row container p-3 col-10" style="margin-left:15%;">
-
-<div class="shadow p-3 mb-5 bg-body-tertiary rounded"><i class="fa-solid fa-coins"> HISTORY KARYAWAN</i></div>
+  <div style="width:100%; ">
+    <div class="shadow p-3 mb-5 bg-body-tertiary rounded"><i class="fa-solid fa-coins"> HISTORY KARYAWAN</i></div>
+      <div class="row mb-sm-0" style="margin-top: 25px;">
+        <div class="col-5" style="margin-left: 10%;">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <i>Total Karyawan</i>
+            <div class="card-header"><?php echo $user?></div>
+            <div class="card-body">              <br>
+              <div class="card text-center">
+                <a href="<?php echo $user?>" class="btn btn-primary">Go Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-5" style="margin-left: 25px; ">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <i>Total Absen</i>
+            <div class="card-header"><?php echo $absen ?></div>
+            <div class="card-body">
+              <br>
+            <div class="card text-center">
+                <a href="" class="btn btn-primary">Go Page</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+ </div>
+</div>
 <div class="how" style="widht:40vh; height:35vh;">
  <table class="table table-striped-columns">
     <thead>
    <tr class="table-success">
        <th style="width:3%;">NO</th>
+       <th style="width:5%;">Foto</th>
        <th style="width:5%;">Nama</th>
        <th style="width:5%;">Kegiatan</th>
        <th style="width:5%;">Date</th>
@@ -84,6 +112,7 @@
 
      <tr>
        <th><?php echo $no ?></th>
+       <th><img src="https://i0.wp.com/www.stignatius.co.uk/wp-content/uploads/2020/10/default-user-icon.jpg?fit=415%2C415&ssl=1" style="width:10rem"></th>
        <td><?php echo tampil_karyawan_byid($row->id_karyawan)?></td>
        <td><?php echo $row->kegiatan?></td>
        <td><?php echo $row->date?></td>
@@ -119,22 +148,30 @@
             window.location.href = "<?php echo base_url('karyawan/pulang/')?>" + id;
         }
     }
-         function hapus(id) {
-          Swal.fire({
-  title: 'Do you want to save the changes?',
-  showDenyButton: true,
-  showCancelButton: true,
-  confirmButtonText: 'Save',
-  denyButtonText: `Don't save`,
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-    Swal.fire('Saved!', '', 'success')
-  } else if (result.isDenied) {
-    Swal.fire('Changes are not saved', '', 'info')
-  }
-})
-         }
+    function hapus(id) {
+        swal.fire({
+            title: 'Yakin untuk menghapus data ini?',
+            text: "Data ini akan terhapus permanen",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Ya Hapus'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil Dihapus',
+                    showConfirmButton: false,
+                    timer: 1500,
+
+                }).then(function() {
+                    window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/')?>" + id;
+                });
+            }
+        });
+    }
 </script>
 </body>
 </html>

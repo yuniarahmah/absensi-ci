@@ -60,13 +60,6 @@ class M_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-    // function get_by_karyawan() {
-    //     $this->db->select( 'absen.*, user.username' );
-    //     $this->db->from( 'absen' );
-    //     $this->db->join( 'user', 'absen.id_karyawan = user.id', 'left' );
-    //     $query = $this->db->get();
-    //     return $query->result();
-    // }
     function get_absensi() {
         $this->db->select( 'absen.*, user.username' );
         $this->db->from( 'absen' );
@@ -116,6 +109,7 @@ function daftar($data)
 {
      $this->db->insert('user',$data);
 }
+
 }
 ?>
 

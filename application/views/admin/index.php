@@ -63,7 +63,7 @@
 
   <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
 
-  <a href="<?php echo base_url('auth')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
+  <a href="<?php echo base_url('auth/login')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
 </div>
 
 </body>

@@ -29,7 +29,7 @@ class Auth extends CI_Controller {
         $query = $this->m_model->getwhere( 'user', $data );
         $result = $query->row_array();
 
-        if ( !empty( $result ) && md5( $password ) === $result[ 'password' ] ) {
+        if ( !empty( $result ) && md5( $password ) === $result[ 'password' ] ) {//jika password sudah menjadi md5 maka data akan dijalankan
             $data = [
                 'loged_in' => TRUE,
                 'email'    => $result[ 'email' ],
@@ -38,10 +38,10 @@ class Auth extends CI_Controller {
                 'id'       => $result[ 'id' ],
             ];
             $this->session->set_userdata( $data );
-            if ( $this->session->userdata( 'role' ) == 'admin' ) {
+            if ( $this->session->userdata( 'role' ) == 'admin' ) {// jika role admin maka yang akan ditampilkan setelah lohin adalah dashboard admin
                 redirect( base_url() . 'admin/dashboard' );
             }
-            if ( $this->session->userdata( 'role' ) == 'karyawan' ) {
+            if ( $this->session->userdata( 'role' ) == 'karyawan' ) {//jika rolenya adalah karyawan maka yang akan ditampilkan setelah login adalah history karyawan
                 redirect( base_url() . 'karyawan/history' );
             } else {
                 redirect( base_url() . 'auth' );
@@ -53,7 +53,7 @@ class Auth extends CI_Controller {
 
     function logout() {
         $this->session->sess_destroy();
-        redirect( base_url( 'auth' ) );
+        redirect( base_url( 'auth/login' ) );
     }
 
     public function register()
@@ -71,7 +71,7 @@ class Auth extends CI_Controller {
         $role = $this->input->post('role');
         // $result = $query->row_array();
         if (empty($result)) {
-            if (strlen($password) < 8) {
+            if (strlen($password) < 8) {//jika password kurang dari 8 angka maka tidak bisa menjalankan register
                 $this->session->set_flashdata('error_password' , 'gagal...');
                 redirect(base_url('auth/register'));
             } else {
@@ -109,7 +109,7 @@ class Auth extends CI_Controller {
         $password = $this->input->post('password');
         // $result = $query->row_array();
         if (empty($result)) {
-            if (strlen($password) < 8) {
+            if (strlen($password) < 8) {//jika password kurang dari 8 angka maka tidak bisa menjalankan register
                 $this->session->set_flashdata('error_password' , 'gagal...');
                 redirect(base_url('auth/register_k'));
             } else {

@@ -10,6 +10,7 @@ class Karyawan extends CI_Controller {
         parent::__construct();
         $this->load->model( 'm_model' );
         $this->load->helper( 'my_helper' );
+        $this->load->library( 'upload' );
         // if ( $this->session->userdata( 'loged_in' ) != true ) {
         //     redirect( base_url().'login' );
         // }
@@ -20,6 +21,8 @@ class Karyawan extends CI_Controller {
 
     public function history()
  {
+        $data[ 'user' ] = $this->m_model->get_data( 'user' )->num_rows();
+        $data[ 'absen' ] = $this->m_model->get_data( 'absen' )->num_rows();
         $data['karyawan'] = $this->m_model->get_data('absen')->result();
         $this->load->view( 'karyawan/history', $data );
     }
@@ -51,14 +54,16 @@ public function aksi_ubah_karyawan()
       redirect(base_url('karyawan/ubah_karyawan/' . $this->input->post('id')));
     }
   }
-  
+  //function untuk waktu pulang
   public function pulang($id)
   {
     date_default_timezone_set('Asia/Jakarta');
     $absensi = $this->db->get_where('absen', array('id' => $id))->row();
-    if ($absensi) {
+    if ($absensi) {//validasi disini berisi jika button pulang di tekan maka status akan otomatis done dan jam pulang terisi
         $data = [
             'jam_pulang' => date('H.i.s'),
+            'jam_masuk' => date('-'),
+            'kegiatan' => date(''),
             'status' => 'done'
         ];
         $this->db->where('id',$id);
@@ -68,10 +73,12 @@ public function aksi_ubah_karyawan()
         echo 'data absensi tidak ditemukan';
     }
   }
+  //function untuk rekap mingguan
   public function rekap_mingguan() {
     $data['absensi'] = $this->m_model->getAbsensiLast7Days();        
     $this->load->view('pages/karyawan/rekap_mingguan', $data);
 }
+//function untuk menghapus
     public function hapus_karyawan( $id ) {
         $this->m_model->delete( 'absen', 'id', $id );
         redirect( base_url( 'karyawan/history' ) );
@@ -186,21 +193,21 @@ public function aksi_ubah_karyawan()
     {
         $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
         $this->load->view('karyawan/profil_karyawan', $data); // Mengirimkan variabel $data ke tampilan
-    }
+ }
     
     public function upload_image( $value )
  {
         $kode = round( microtime( true ) * 1000 );
         $config[ 'upload_path' ] = './images/karyawan/';
         $config[ 'allowed_types' ] = 'jpg|png|jpeg';
-        $config[ 'max_size' ] = 30000;
+        $config[ 'max_size' ] = '30000';
         // Ukuran dalam kilobita ( 30 MB )
         $config[ 'file_name' ] = $kode;
 
         $this->load->library( 'upload', $config );
         // Load library 'upload' with config
 
-        if ( !$this->upload->do_upload( $value ) ) {
+        if ( !$this->upload->do_upload( $value ) ) {//
             return array( false, '' );
         } else {
             $fn = $this->upload->data();
@@ -212,17 +219,17 @@ public function aksi_ubah_karyawan()
    public function aksi_profil_karyawan()
    {
        $username = $this->input->post('username');
+       $foto = $this->upload_image('image');
        $email = $this->input->post('email');
        $nama_depan  = $this->input->post('nama_depan');
        $nama_belakang  = $this->input->post('nama_belakang');
        $password_baru = $this->input->post('password_baru');
        $konfirmasi_password = $this->input->post('konfirmasi_password');
-       $foto = $this->upload_image('image');
   
-          if ( $foto[ 0 ] == false ) {
+          if ( $foto[ 0 ] == false ) {//jika foto kosong maka akan menampilkan foto cain.jpg
               //data yg akan diubah
               $data = [
-                  'image'=> 'User.jpg',
+                  'image'=> 'cain.jpg',
                   'username'=> $username,
                   'email'=> $email,
                   'nama_depan'=> $nama_depan,
@@ -230,7 +237,7 @@ public function aksi_ubah_karyawan()
               ];
           } else {
               //data yg akan diubah
-              $data = [
+              $data = [//jika ada fotonya maka akan menampilkan foto tersebut
                   'image'=> $foto[ 1 ],
                   'username'=> $username,
                   'email'=> $email,
