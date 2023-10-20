@@ -79,22 +79,7 @@
     color: #03e9f4;
     font-size: 12px;
   }
-  
-  .login-box form a {
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    color: #03e9f4;
-    font-size: 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: .5s;
-    margin-top: 40px;
-    letter-spacing: 4px
-  }
-
-  .login-box a:hover {
+    .login-box a:hover {
     background: #03e9f4;
     color: #fff;
     border-radius: 5px;
@@ -114,8 +99,6 @@
     left: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #03e9f4);
-    animation: btn-anim1 1s linear infinite;
   }
     .login-box a:hover {
     background: #03e9f4;
@@ -132,14 +115,7 @@
     display: block;
   }
   
-  .login-box a span:nth-child(1) {
-    top: 0;
-    left: -100%;
-    width: 90%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #03e9f4);
-    animation: btn-anim1 1s linear infinite;
-  }
+  
 </style>
 <body>
   <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="color:white;">
@@ -170,6 +146,7 @@
                             </span>
                         </div>
           </div>
+          <p>tekan <a href="forgot_password">lupa password</a></p>
             <button class="btn btn-outline-dark shadow" type="submit" name="submit"> Login </button>
         </form>
       </div>

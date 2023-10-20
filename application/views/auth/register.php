@@ -14,121 +14,60 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    outline: 0;
+    font-family:'Open Sans', sans-serif;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: black;
+    height: 100vh;
+    background-image: url(https://dosenit.com/wp-content/uploads/2020/10/Gunung-Fuji-Jepang-1024x640-1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.container {
-    width: 100%;
-    display: flex;
-    max-width: 850px;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
+.container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px 25px;
+    width: 30%;
 
-.login {
-    width: 400px;
+    background-color: rgba(0,0,0,.7);
+    box-shadow: 0 0 10px rgba(255,255,255,.3);
 }
-
-form {
-    width: 250px;
-    margin: 60px auto;
-}
-
-h1 {
-    margin: 20px;
-    text-align: center;
-    font-weight: bolder;
+.container h1{
+    text-align: left;
+    color: #fafafa;
+    margin-bottom: 30px;
     text-transform: uppercase;
+    border-bottom: 4px solid #752BEA;
 }
-
-hr {
-    border-top: 2px solid #ffa12c;
+.container label{
+    text-align: left;
+    color: #90caf9;
 }
-
-p {
-    text-align: center;
-    margin: 10px;
-}
-
-.right img {
-    width: 450px;
-    height: 100%;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-form label {
-    display: block;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 5px;
-}
-
-input {
-    width: 100%;
-    margin: 2px;
+.container form input{
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 15px;
     border: none;
-    outline: none;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid gray;
-}
-
-button {
-    border: none;
-    outline: none;
-    padding: 8px;
-    width: 252px;
+    background-color: transparent;
+    border-bottom: 2px solid #752BEA;
     color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-    border-radius: 5px;
-    background: #ffa12c;
+    font-size: 20px;
 }
-
-button:hover {
-    background: rgba(214, 86, 64, 1);
+.container form button{
+    width: 100%;
+    height: 40px;
+    padding: 5px 0;
+    border: none;
+    background-color:#752BEA;
+    font-size: 18px;
+    color: #fafafa;
+    border-radius: 20px;
 }
-
-
-@media (max-width: 880px) {
-    .container {
-        width: 100%;
-        max-width: 750px;
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-
-    form {
-        width: 300px;
-        margin: 20px auto;
-    }
-
-    .login {
-        width: 400px;
-        padding: 20px;
-    }
-
-    button {
-        width: 100%;
-    }
-
-    .right img {
-        width: 100%;
-        height: 100%;
-    }
-  }
   
 </style>
 <body>
@@ -160,7 +99,7 @@ button:hover {
           <div class="form-group">
                     <label for="exampleInputEmail1">Password</label>
                     <div class="input-group">
-                        <input type="password" name="password" id="pass" class="form-control">
+                        <input type="password" id="pass" name = "password" class="form-control">
                         <div class="input-group-append">
                             <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
                             <span id="mybutton" onclick="change()" class="input-group-text">
@@ -179,10 +118,6 @@ button:hover {
           </div>
           <button type="submit" name="submit">Register</button>
         </form>
-        </div>
-        <div class="right">
-            <img src="https://png.pngtree.com/element_origin_min_pic/16/07/06/23577d1d403788d.jpg" alt="">
-        </div>
     </div>
     <script>
             // membuat fungsi change
@@ -194,6 +129,7 @@ button:hover {
                 //membuat if kondisi, jika tipe x adalah password maka jalankan perintah di bawahnya
                 if (x == 'password') {
     
+                    
                     //ubah form input password menjadi text
                     document.getElementById('pass').type = 'text';
                     
@@ -202,6 +138,7 @@ button:hover {
                                                                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                                                                     <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                                                                     </svg>`;
+                }
                 else {
     
                     //ubah form input password menjadi text
@@ -214,10 +151,8 @@ button:hover {
                                                                     <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
                                                                     </svg>`;
                 }
-                }
             }
-
-        </script>
+</script>
 </body>
 
 </html>

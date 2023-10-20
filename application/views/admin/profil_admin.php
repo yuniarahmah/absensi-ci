@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HISTORY</title>
+    <title>profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<body>
+<body class="max-h-screen">
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
-  <a style="text-align-center"><i>FROM ADMIN</i></a>    <?php
+  <a style="text-align-center"><i>FROM ADMIN</i></a>
+    <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
             <script type="text/javascript">
@@ -48,23 +49,22 @@
             </script>
               <button class="btn btn-outline-dark"><a href="<?php echo base_url('karyawan/history') ?>">pulang</a></button>
   </div>
-</nav><br><br><br> 
+</nav><br><br><br>
 
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-green" style="width:15%; position:absolute;"><br>
-  <div class="flex">
-  <h2 style="color:black;">Admin <hr></h2>
-  </div> <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
+  <div class="w3-sidebar w3-bar-block w3-green" style="width:17%;"><br>
+   <h2 style="color:black;">Admin <hr></h2>
+  <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
+  <a href="<?php echo base_url('admin/profil_admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> profil</span></a></a>
+  
+  <a href="<?php echo base_url('admin/rekap_b') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap bulanan</span></a></a>
 
+  <a href="<?php echo base_url('admin/rekap_h') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap harian </span></a></a>
 
-<a href="<?php echo base_url('admin/profil_admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> profil</span></a></a>
-<a href="<?php echo base_url('admin/rekap_b') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap bulanan</span></a></a>
-<a href="<?php echo base_url('admin/rekap_h') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap harian </span></a></a>
-<a href="<?php echo base_url('admin/rekap_m') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap mingguan</span></a></a>
-</div>
+  <a href="<?php echo base_url('admin/rekap_m') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap mingguan</span></a></a>
 </div>
 <hr>
-<div style="margin-top:20px; margin-left:20%; margin-right:15%; position:fixed;" class = 'card w-20px p-3 shadow-lg p-3 mb-5 bg-body-primary rounded'>
+<div style="margin-top:20px; margin-left:20%; margin-right:15%; " class = 'card w-20px p-3 shadow-lg p-3 mb-5 bg-body-primary rounded'>
   <?php $no=0; foreach ($user as $users): $no++ ?>
   <form  action="<?php echo base_url('admin/aksi_profil_admin')?>" method="post" enctype="multipart/from-data">
     <div class="row">
@@ -117,10 +117,10 @@
           </div>
         </div>
       </div>
-    <div class="mb-3 col-6">
+    <!-- <div class="mb-3 col-6">
      <label for="image" class="form-label">Foto</label>
       <input type="file" class="form-control" id="image" name="image">
-    </div>
+    </div> -->
   </div>
   <button style="margin-left: 35%; margin-top: 25px;" type="submit" class="btn btn-primary w-25" name="submit">Ubah</button>
 

@@ -68,10 +68,10 @@
         <div class="col-5" style="margin-left: 10%;">
           <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
             <i>Total Karyawan</i>
-            <div class="card-header"><?php echo $user?></div>
+            <div class="card-header"><?php echo $user?>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVhCKxuUIspulbp9gs99Y8mheMb0Skhrf7Q&usqp=CAU" style="width:10%;"></div>
             <div class="card-body">              <br>
               <div class="card text-center">
-                <a href="<?php echo $user?>" class="btn btn-primary">Go Page</a>
               </div>
             </div>
           </div>
@@ -79,11 +79,11 @@
         <div class="col-5" style="margin-left: 25px; ">
           <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
             <i>Total Absen</i>
-            <div class="card-header"><?php echo $absen ?></div>
+            <div class="card-header"><?php echo $absen ?>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVhCKxuUIspulbp9gs99Y8mheMb0Skhrf7Q&usqp=CAU" style="width:10%;"></div>
             <div class="card-body">
               <br>
             <div class="card text-center">
-                <a href="" class="btn btn-primary">Go Page</a>
               </div>
             </div>
           </div>
@@ -91,12 +91,12 @@
         
  </div>
 </div>
-<div class="how" style="widht:40vh; height:35vh;">
+<div class="how" style="widht:40vh; height:35vh; ">
  <table class="table table-striped-columns">
     <thead>
    <tr class="table-success">
        <th style="width:3%;">NO</th>
-       <th style="width:5%;">Foto</th>
+       <!-- <th style="width:5%;">Foto</th> -->
        <th style="width:5%;">Nama</th>
        <th style="width:5%;">Kegiatan</th>
        <th style="width:5%;">Date</th>
@@ -112,7 +112,7 @@
 
      <tr>
        <th><?php echo $no ?></th>
-       <th><img src="https://i0.wp.com/www.stignatius.co.uk/wp-content/uploads/2020/10/default-user-icon.jpg?fit=415%2C415&ssl=1" style="width:10rem"></th>
+       <!-- <th><img src="https://i0.wp.com/www.stignatius.co.uk/wp-content/uploads/2020/10/default-user-icon.jpg?fit=415%2C415&ssl=1" style="width:10rem"></th> -->
        <td><?php echo tampil_karyawan_byid($row->id_karyawan)?></td>
        <td><?php echo $row->kegiatan?></td>
        <td><?php echo $row->date?></td>

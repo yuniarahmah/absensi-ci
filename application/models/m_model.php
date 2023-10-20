@@ -39,16 +39,16 @@ class M_model extends CI_Model {
         return $data;
     }
 
-    public function get_foto_by_id( $id_siswa )
+    public function get_foto_by_id( $id )
  {
-        $this->db->select( 'foto' );
-        $this->db->from( 'siswa' );
-        $this->db->where( 'id_siswa', $id_siswa );
+        $this->db->select( 'image' );
+        $this->db->from( 'user' );
+        $this->db->where( 'id', $id );
         $query = $this->db->get();
 
         if ( $query->num_rows() > 0 ) {
             $result = $query->row();
-            return $result->foto;
+            return $result->image;
         } else {
             return false;
         }
@@ -88,7 +88,7 @@ class M_model extends CI_Model {
         $result = $db->result();
         return $result;
   }
-  
+  //utnuk mengambil semua data
     public function get_harian()
   { 
         $this->db->select('absen.*, user.nama_depan, nama_belakang');
@@ -104,10 +104,6 @@ class M_model extends CI_Model {
     $this->db->where($field, $id);
     $query = $this->db->get();
     return $query;  // Pastikan hasil query dikembalikan sebagai objek
-}
-function daftar($data)
-{
-     $this->db->insert('user',$data);
 }
 
 }

@@ -10,134 +10,85 @@
             integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
 </head>
+
 <style>
-* {
+*{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    outline: 0;
+    font-family: 'Open Sans', sans-serif;
 }
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: black;
+body{
+    height: 100vh;
+    background-image: url(https://dosenit.com/wp-content/uploads/2020/10/Gunung-Fuji-Jepang-1024x640-1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
-
-.container {
-    width: 100%;
-    display: flex;
-    max-width: 850px;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
-
-.login {
-    width: 400px;
-}
-
-form {
-    width: 250px;
-    margin: 60px auto;
+p {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 10px;
 }
 
 h1 {
-    margin: 20px;
-    text-align: center;
-    font-weight: bolder;
+  text-align: center;
+  padding-left: 100px;
+  padding-bottom: 20px;
+}
+
+a {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+.container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px 25px;
+    width: 30%;
+
+    background-color: rgba(0,0,0,.7);
+    box-shadow: 0 0 10px rgba(255,255,255,.3);
+}
+.container h1{
+    text-align: left;
+    color: #fafafa;
+    margin-bottom: 30px;
     text-transform: uppercase;
+    border-bottom: 4px solid #752BEA;
 }
-
-hr {
-    border-top: 2px solid #ffa12c;
+.container label{
+    text-align: left;
+    color: #90caf9;
 }
-
-p {
-    text-align: center;
-    margin: 10px;
-}
-
-.right img {
-    width: 450px;
-    height: 100%;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-form label {
-    display: block;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 5px;
-}
-
-input {
-    width: 100%;
-    margin: 2px;
+.container form input{
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 15px;
     border: none;
-    outline: none;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid gray;
-}
-
-button {
-    border: none;
-    outline: none;
-    padding: 8px;
-    width: 252px;
+    background-color: transparent;
+    border-bottom: 2px solid #752BEA;
     color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-    border-radius: 5px;
-    background: #ffa12c;
+    font-size: 20px;
 }
-
-button:hover {
-    background: rgba(214, 86, 64, 1);
+.container form button{
+    width: 100%;
+    height: 40px;
+    padding: 5px 0;
+    border: none;
+    background-color:#752BEA;
+    font-size: 18px;
+    color: #fafafa;
+    border-radius: 20px;
 }
-
-
-@media (max-width: 880px) {
-    .container {
-        width: 100%;
-        max-width: 750px;
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-
-    form {
-        width: 300px;
-        margin: 20px auto;
-    }
-
-    .login {
-        width: 400px;
-        padding: 20px;
-    }
-
-    button {
-        width: 100%;
-    }
-
-    .right img {
-        width: 100%;
-        height: 100%;
-    }
-  }
-  
-</style>
+  </style>
 <body>
     <div class="container">
-        <div class="login">
         <form action="<?php echo base_url('auth/aksi_register_k')?>" method="post" style="text-align:center;">
                 <h1>REGISTER Karyawan</h1>
                 <hr>
-                <p>Isi data dibawah ini untuk registrasi </p>
                 <div class="user-box">
                   <label>Username</label>
             <input type="text" name="username" id="username">
@@ -179,10 +130,6 @@ button:hover {
           </div>
           <button type="submit" name="submit">Register</button>
         </form>
-        </div>
-        <div class="right">
-            <img src="https://png.pngtree.com/element_origin_min_pic/16/07/06/23577d1d403788d.jpg" alt="">
-        </div>
     </div>
     <script>
             // membuat fungsi change
@@ -217,8 +164,7 @@ button:hover {
                                                                     </svg>`;
                 }
             }
-
-        </script>
+</script>
 </body>
 
 </html>
