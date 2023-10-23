@@ -19,6 +19,10 @@ class Karyawan extends CI_Controller {
         }
     }
 
+    public function dashboard()
+ {
+        $this->load->view( 'karyawan/dashboard');
+    }
     public function history()
  {
         $data[ 'user' ] = $this->m_model->get_data( 'user' )->num_rows();
@@ -41,7 +45,6 @@ public function aksi_ubah_karyawan()
     $data = array(
         'id'     =>  $this->input->post('id'),
       'kegiatan' => $this->input->post('kegiatan'),
-      'keterangan' => $this->input->post('keterangan'),
     );
 
     $eksekusi = $this->m_model->ubah_data
@@ -198,7 +201,7 @@ public function aksi_ubah_karyawan()
  public function upload_img($value)
  {
      $kode = round(microtime(true) * 1000);
-     $config['upload_path'] = '../../images/';
+     $config['upload_path'] = '../../image/karyawan';
      $config['allowed_types'] = 'jpg|png|jpeg';
      $config['max_size'] = '30000';
      $config['file_name'] = $kode;
@@ -226,13 +229,13 @@ public function aksi_ubah_karyawan()
      if ($image) {
          $kode = round(microtime(true) * 100);
          $file_name = $kode . '_' . $image;
-         $upload_path = './images/' . $file_name;
+         $upload_path = './image/karyawan' . $file_name;
 
          if (move_uploaded_file($foto_temp, $upload_path)) {
              // Hapus image lama jika ada
              $old_file = $this->m_model->get_foto_by_id($this->input->post('id'));
-             if ($old_file && file_exists(' ./images/' . $old_file)) {
-                 unlink(' ./images/' . $old_file);
+             if ($old_file && file_exists(' .image/karyawan' . $old_file)) {
+                 unlink(' ./image/karyawan' . $old_file);
              }
 
              $data = [
@@ -316,5 +319,51 @@ public function aksi_ubah_password()
 
     
     }
+    public function aksi_password()
+   {
+      $password_baru = $this->input->post('password_baru');
+      $password_lama = $this->input->post('password_lama');
+       $konfirmasi_password = $this->input->post('konfirmasi_password');
+  
+          //kondisi jika ada password baru
+          if (!empty($password_baru)) {
+            // Pastikan password baru dan konfirmasi password sama
+            if ($password_baru === $konfirmasi_password) {
+                // Enkripsi password baru dengan md5 (harap ganti dengan metode keamanan yang lebih kuat seperti bcrypt)
+                $hashed_password = md5($password_baru);
+        
+                // Perbarui data password pengguna di sesi
+                $this->session->set_userdata('password', $hashed_password);
+        
+                // Perbarui data password pengguna di database
+                $data['password'] = $hashed_password;
+        
+                // Simpan data pengguna ke database
+                $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+        
+                if ($update_result) {
+                    redirect(base_url('karyawan/profil_karyawan'));
+                } else {
+                    // Handle error jika gagal menyimpan data ke database
+                    $this->session->set_flashdata('message', 'Terjadi kesalahan saat menyimpan data ke database.');
+                    redirect(base_url('karyawan/profil_karyawan'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama');
+                redirect(base_url('karyawan/profil_karyawan'));
+            }
+        }
+        
+  
+          //untuk melakukan pembaruan data
+          $this->session->set_userdata($data);
+          $update_result = $this->m_model->ubah_data( 'user', $data, array( 'id' => $this->session->userdata( 'id' )));
+  
+          if ($update_result) {
+              redirect( base_url( 'karyawan/profil_karyawan' ) );
+          } else {
+              redirect( base_url( 'karyawan/profil_karyawan' ) );
+          }
+ } 
 }
 ?>

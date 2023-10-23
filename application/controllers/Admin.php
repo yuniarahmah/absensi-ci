@@ -59,7 +59,6 @@ class Admin extends CI_Controller {
             'id'     =>  $this->input->post( 'id' ),
             'kegiatan' => $this->input->post( 'kegiatan' ),
             'keterangan' => $this->input->post( 'keterangan' ),
-            'keterangan' => $this->input->post( 'keterangan' ),
         );
 
         $eksekusi = $this->m_model->ubah_data
@@ -69,7 +68,7 @@ class Admin extends CI_Controller {
             redirect( base_url( 'admin/dashboard' ) );
         } else {
             $this->session->set_flashdata( 'error', 'gagal..' );
-            redirect( base_url( 'karyawan/ubah_rekap/' . $this->input->post( 'id' ) ) );
+            redirect( base_url( 'admin/ubah_rekap/' . $this->input->post( 'id' ) ) );
         }
     }
 
@@ -132,10 +131,10 @@ class Admin extends CI_Controller {
 
         $no = 1;
         $numrow = 4;
-        foreach ( $data as $dataa ) {
+        foreach ( $karyawan as $dataa ) {
             $sheet->setCellValue( 'A'.$numrow, $no );
             $sheet->setCellValue( 'B'.$numrow, $dataa->id );
-            $sheet->setCellValue( 'C'.$numrow, $dataa->username );
+            $sheet->setCellValue( 'C'.$numrow, $dataa->kegiatan );
             $sheet->setCellValue( 'D'.$numrow, $dataa->keterangan );
             $sheet->setCellValue( 'E'.$numrow, $dataa->date );
             $sheet->setCellValue( 'F'.$numrow, $dataa->jam_masuk );
@@ -168,7 +167,7 @@ class Admin extends CI_Controller {
 
         $sheet->getPageSetup()->setOrientation( \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE );
 
-        $sheet->setTitle( 'LAPORAN DATA KARYAWAN' );
+        $sheet->setTitle( 'LAPORAN DATA admin' );
 
         header( 'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
         header( 'Content-Disposition: attachment; filename="mingguan.xlsx"' );
@@ -214,7 +213,7 @@ class Admin extends CI_Controller {
             ]
         ];
 
-        $sheet->setCellValue( 'A1', 'DATA KARYAWAN' );
+        $sheet->setCellValue( 'A1', 'DATA admin' );
         $sheet->mergeCells( 'A1:E1' );
         $sheet->getStyle( 'A1' )->getFont()->setBold( true );
 
@@ -238,7 +237,7 @@ class Admin extends CI_Controller {
         $sheet->getStyle( 'H3' )->applyFromArray( $style_col );
 
         // Get data from database
-        $data = $this->m_model->get_karyawan();
+        $data = $this->m_model->get_admin();
 
         $no = 1;
         $numrow = 4;
@@ -278,7 +277,7 @@ class Admin extends CI_Controller {
 
         $sheet->getPageSetup()->setOrientation( \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE );
 
-        $sheet->setTitle( 'LAPORAN DATA KARYAWAN' );
+        $sheet->setTitle( 'LAPORAN DATA admin' );
 
         header( 'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
         header( 'Content-Disposition: attachment; filename="bulanan.xlsx"' );
@@ -301,56 +300,130 @@ class Admin extends CI_Controller {
         $this->load->view('admin/profil_admin', $data); // Mengirimkan variabel $data ke tampilan
  }
     
-    public function upload_image( $value )
+ public function upload_img($value)
  {
-        $kode = round( microtime( true ) * 1000 );
-        $config[ 'upload_path' ] = './images/karyawan/';
-        $config[ 'allowed_types' ] = 'jpg|png|jpeg';
-        $config[ 'max_size' ] = '30000';
-        // Ukuran dalam kilobita ( 30 MB )
-        $config[ 'file_name' ] = $kode;
+     $kode = round(microtime(true) * 1000);
+     $config['upload_path'] = '../../image/';
+     $config['allowed_types'] = 'jpg|png|jpeg';
+     $config['max_size'] = '30000';
+     $config['file_name'] = $kode;
+     
+     $this->load->library('upload', $config); // Load library 'upload' with config
+     
+     if (!$this->upload->do_upload($value)) {
+         return array(false, '');
+     } else {
+         $fn = $this->upload->data();
+         $nama = $fn['file_name'];
+         return array(true, $nama);
+     }
+ }
 
-        $this->load->library( 'upload', $config );
-        // Load library 'upload' with config
+ public function aksi_update_profile()
+ {
+     $image = $_FILES['foto']['name'];
+     $foto_temp = $_FILES['foto']['tmp_name'];
+     $username = $this->input->post('username');
+     $nama_depan = $this->input->post('nama_depan');
+     $nama_belakang = $this->input->post('nama_belakang');
+     // $foto = $this->upload_img('foto');
+     // Jika ada foto yang diunggah
+     if ($image) {
+         $kode = round(microtime(true) * 100);
+         $file_name = $kode . '_' . $image;
+         $upload_path = './image/' . $file_name;
 
-        if ( !$this->upload->do_upload( $value ) ) {//
-            return array( false, '' );
+         if (move_uploaded_file($foto_temp, $upload_path)) {
+             // Hapus image lama jika ada
+             $old_file = $this->m_model->get_foto_by_id($this->input->post('id'));
+             if ($old_file && file_exists(' ./image/' . $old_file)) {
+                 unlink(' ./image/' . $old_file);
+             }
+
+             $data = [
+                 'image' => $file_name,
+                 'username' => $username,
+                 'nama_depan' => $nama_depan,
+                 'nama_belakang' => $nama_belakang,
+             ];
+         } else {
+             // Gagal mengunggah image baru
+             redirect(base_url('admin/dasboard'));
+         }
+     } else {
+         // Jika tidak ada image yang diunggah
+         $data = [
+             'username' => $username,
+             'nama_depan' => $nama_depan,
+             'nama_belakang' => $nama_belakang,
+         ];
+     }
+
+     // Eksekusi dengan model ubah_data
+     $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+
+     if ($update_result) {
+         $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
+     Berhasil Merubah Profile
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>');
+         redirect(base_url('admin/profil_admin'));
+     } else {
+         redirect(base_url('admin/profil_admin'));
+     }
+}
+public function aksi_ubah_password()
+{
+
+    $password_baru = $this->input->post('password_baru');
+    $password_lama = $this->input->post('password_lama');
+    $konfirmasi_password = $this->input->post('konfirmasi_password');
+    
+
+        
+        if (!empty($password_baru) && strlen($password_baru) >= 8) {
+            if ( $password_baru === $konfirmasi_password) {
+                $data['password'] = md5($password_baru);
+            }
+        
+        $this->session->set_userdata($data);
+
+        $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+        $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
+        Berhasil Merubah Password
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>');
+        redirect(base_url('admin/profil_admin'));
         } else {
-            $fn = $this->upload->data();
-            $nama = $fn[ 'file_name' ];
-            return array( true, $nama );
+            $this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Password anda kurang dari 8
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>');
+            redirect(base_url('admin/profil_admin'));
         }
-    }
+}
+public function hapus_image()
+ { 
+    $data = array(
+        'image' => NULL
+    );
 
-   public function aksi_profil_admin()
+    $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->session->userdata('id')));
+    if($eksekusi) {
+        
+        $this->session->set_flashdata('sukses' , 'berhasil');
+        redirect(base_url('admin/profil_admin'));
+    } else {
+        $this->session->set_flashdata('error' , 'gagal...');
+        redirect(base_url('admin/profil_admin'));
+    }
+}
+
+   public function aksi_password()
    {
-       $username = $this->input->post('username');
-       $foto = $this->upload_image('image');
-       $email = $this->input->post('email');
-       $nama_depan  = $this->input->post('nama_depan');
-       $nama_belakang  = $this->input->post('nama_belakang');
        $password_baru = $this->input->post('password_baru');
        $konfirmasi_password = $this->input->post('konfirmasi_password');
   
-          if ( $foto[ 0 ] == false ) {//jika foto kosong maka akan menampilkan foto cain.jpg
-              //data yg akan diubah
-              $data = [
-                  'image'=> 'cain.jpg',
-                  'username'=> $username,
-                  'email'=> $email,
-                  'nama_depan'=> $nama_depan,
-                  'nama_belakang'=> $nama_belakang,
-              ];
-          } else {
-              //data yg akan diubah
-              $data = [//jika ada fotonya maka akan menampilkan foto tersebut
-                  'image'=> $foto[ 1 ],
-                  'username'=> $username,
-                  'email'=> $email,
-                  'nama_depan'=> $nama_depan,
-                  'nama_belakang'=> $nama_belakang,
-              ];
-          }
           //kondisi jika ada password baru
           if (!empty($password_baru)) {
             // Pastikan password baru dan konfirmasi password sama

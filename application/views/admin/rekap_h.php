@@ -47,7 +47,7 @@
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
-  <a href="<?php echo base_url('admin/dashboard')?>"><i class="fa-solid fa-house-chimney"></i>home<hr></i></a> 
+  <a href="<?php echo base_url('auth/login')?>">logout<hr></a> 
 
   </div>
 </nav>
@@ -55,7 +55,7 @@
 <br><br>
 
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-green" style="width:17%"><br>
+  <div class="w3-sidebar w3-bar-block w3-black" style="width:17%"><br>
    <h2 styl="color:black;">Admin <hr></h2>
   <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
   <a href="<?php echo base_url('admin/profil_admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> profil</span></a></a>
@@ -78,7 +78,7 @@
                     <i class="fa-solid fa-note-sticky"></i> LAPORAN HARIAN
                     </h1>
          </div>
-                    <a href="<?php echo base_url('admin/export_admin_mingguan')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
+                    <a href="<?php echo base_url('admin/export_admin_mingguan')?>" class="btn btn-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
                     </div>
                 <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
                     <table class="my-4 w-full divide-y divide-gray-300 text-center">

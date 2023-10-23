@@ -521,9 +521,9 @@ nav.close~.dashboard .top {
 </style>
 
 <body>
-<nav class="navbar bg-body-tertiary" style="position:   ; width:100%;">
+<nav class="navbar bg-body-tertiary" style=" width:100%;">
   <div class="container-fluid">
-    <i>Absensi karyawan <hr></i>
+<i style="margin-bottom:3%">Absensi karyawan </i>
     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
@@ -562,19 +562,22 @@ nav.close~.dashboard .top {
   </div>
 </nav>
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-green" style="width:15%"><br>
+  <div class="w3-sidebar w3-bar-block w3-black" style="width:15%"><br>
   <i>karyawan <hr></i>
-  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
+  <a href="/absensii/karyawan/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
+  
+  <a href="<?php echo base_url('karyawan/history')?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
+<a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 
 </div>
 <hr>
-<div style="margin-top:20px; margin-left:20%; margin-right:15%; " class = 'card w-20px p-3 shadow-lg p-3 mb-5       bg-body-primary rounded'>
-  <div class="row">
+<div style="margin-left:20%; margin-right:15%; position:fixed" class = 'card w-20px p-3 shadow-lg p-3 mb-5  rounded'>
+               <div class="container">
+                    <div class="row">
                                 <?php $no = 0;
                             foreach ($user as $row) : $no++; ?>
-                             <div class="w-100 m-auto p-3">
+                            <div class="w-100 m-auto p-3">
                                     <br>
                                     <div><?php echo $this->session->flashdata('message'); ?></div>
                                     <div><?php echo $this->session->flashdata('sukses'); ?></div>
@@ -585,7 +588,7 @@ nav.close~.dashboard .top {
                                         </div>
                                         <span class="border border-0 btn btn-link">
                                             <?php if (!empty($row->image)): ?>
-                                            <img src="<?php echo  base_url('./images/' . $row->image) ?>" height="150"
+                                            <img src="<?php echo  base_url('./image/karyawan' . $row->image) ?>" height="150"
                                                 width="150" class="rounded-circle">
 
                                             <?php else: ?>
@@ -593,7 +596,7 @@ nav.close~.dashboard .top {
                                                 src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" />
                                             <?php endif;?>
                                         </span>
-                                                
+                                                  
                                         <br>
                                         <br>
                                         <form method="post"
@@ -620,50 +623,61 @@ nav.close~.dashboard .top {
                                                         value="<?php echo $row->nama_belakang; ?>"></div>
                                             </div>
                                             <input type="file" name="foto" class="p-3">
-                                            <button type="submit" style="border-radius:10%;" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah
+                                            <button type="submit" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah
                                         Profile</button>
 
-                                            <form action="<?php echo base_url('karyawan/aksi_ubah_password'); ?>"
+                                            <form action="<?php echo base_url('karyawan/aksi_password'); ?>"
                                     enctype="multipart/form-data" method="post">
-                                    <div class="overview  p-1 mb-3 bg-body rounded">
-                                        <div class="d-flex form-outline flex-fill mb-0  ">
-                                            <input type="password" name="password_baru" id="password1"
-                                                class="form-control relaltive" placeholder="Password Baru">
-                                                 <br>
-
-                                            <i id="showPassword1" onclick="togglePasswordVisibility('password1')"
-                                                class="far fa-eye absolute p-2"></i>
-                                            <input type="password" name="konfirmasi_password" id="password2"
-                                                class="form-control relative" placeholder="Konfirmasi Password">
-                                            <i id="showPassword2" onclick="togglePasswordVisibility('password2')"
-                                                class="far fa-eye absolute p-2"></i>  </div>
-                                                <br>
-                                                <button type="submit" style="border-radius:10%;" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah Password</button>
-                                                <a class="btn btn-outline-dark col-5"                            href="<?php echo base_url('karyawan/hapus_image'); ?>">
-                                      Hapus
-                                      Foto</a>
-                                    </div>
-
-
-                             </form>
+                                    <div class="mb-3 col-5  " >
+                            <label for="password_baru" class="form-label">Password Baru</label>
+                            <div class="input-group">
+                            <input type="password" class="form-control" id="password_baru" name="password_baru">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                <input type="checkbox" id="showPasswordBaru"> cek
+                                </span>
+                            </div>
+                            </div>
+                                    <div class="mb-3 col-15  " >
+                            <label for="password_lama" class="form-label">Password Lama</label>
+                            <div class="input-group">
+                            <input type="password" class="form-control" id="password_lama" name="password_lama">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                <input type="checkbox" id="showPasswordlama"> cek
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-15">
+                            <label for="konfirmasi_password" class="form-label">Konfirmasi Password</label>
+                            <div class="input-group">
+                            <input type="password" class="form-control" id="konfirmasi_password" name="konfirmasi_password">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                <input type="checkbox" id="showKonfirmasiPassword"> cek
+                                </span>
+                            </div>
+                            </div>
+                                                <button type="submit" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah Password</button>
+                                                <a class="btn btn-outline-warning col-5" href="<?php echo base_url('karyawan/hapus_image'); ?>">
+                                                    Hapus
+                                                    Foto</a>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
-                                <br>
-
                                 </form>
                             </div>
                         </div>
                     </div>
-
-</form>
+                </div>
 </div>
 <!-- <div style="margin-top:20px; margin-left:20%; margin-right:15%; position:fixed" class = 'card w-20px p-3 shadow-lg p-3 mb-5  rounded'>
                <div class="container">
                     <div class="row">
                                 <?php $no = 0;
                             foreach ($user as $row) : $no++; ?>
-                             <div class="w-100 m-auto p-3">
+                            <div class="w-100 m-auto p-3">
                                     <br>
                                     <div><?php echo $this->session->flashdata('message'); ?></div>
                                     <div><?php echo $this->session->flashdata('sukses'); ?></div>
@@ -674,7 +688,7 @@ nav.close~.dashboard .top {
                                         </div>
                                         <span class="border border-0 btn btn-link">
                                             <?php if (!empty($row->image)): ?>
-                                            <img src="<?php echo  base_url('./images/' . $row->image) ?>" height="150"
+                                            <img src="<?php echo  base_url('./image/' . $row->image) ?>" height="150"
                                                 width="150" class="rounded-circle">
 
                                             <?php else: ?>
@@ -682,7 +696,7 @@ nav.close~.dashboard .top {
                                                 src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" />
                                             <?php endif;?>
                                         </span>
-                                                
+                                                  
                                         <br>
                                         <br>
                                         <form method="post"
@@ -709,131 +723,77 @@ nav.close~.dashboard .top {
                                                         value="<?php echo $row->nama_belakang; ?>"></div>
                                             </div>
                                             <input type="file" name="foto" class="p-3">
-                                            <button type="submit" style="border-radius:10%;" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah
+                                            <button type="submit" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah
                                         Profile</button>
 
-                                            <form action="<?php echo base_url('karyawan/aksi_ubah_password'); ?>"
+                                            <form action="<?php echo base_url('karyawan/aksi_password'); ?>"
                                     enctype="multipart/form-data" method="post">
-                                    <div class="overview shadow-lg p-1 mb-3 bg-body rounded">
-                                        <div class="d-flex form-outline flex-fill mb-0  ">
-                                            <input type="password" name="password_baru" id="password1"
-                                                class="form-control relaltive" placeholder="Password Baru">
-                                                 <br>
-
-                                            <i id="showPassword1" onclick="togglePasswordVisibility('password1')"
-                                                class="far fa-eye absolute p-2"></i>
-                                            <input type="password" name="konfirmasi_password" id="password2"
-                                                class="form-control relative" placeholder="Konfirmasi Password">
-                                            <i id="showPassword2" onclick="togglePasswordVisibility('password2')"
-                                                class="far fa-eye absolute p-2"></i>  </div>
-                                                <br>
-                                                <button type="submit" style="border-radius:10%;" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah Password</button>
-                                    </div>
-
-                                    <p>Password harus 8 angka</p>
-
-                                    <div class="d-flex p-2 row justify-content-evenly ">
-                                    </div>
-
-                                    <br>
-
-                             </form>
+                                    <div class="mb-3 col-5  " >
+                            <label for="password_baru" class="form-label">Password Baru</label>
+                            <div class="input-group">
+                            <input type="password" class="form-control" id="password_baru" name="password_baru">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                <input type="checkbox" id="showPasswordBaru"> cek
+                                </span>
+                            </div>
+                            </div>
+                                    <div class="mb-3 col-15  " >
+                            <label for="password_lama" class="form-label">Password Lama</label>
+                            <div class="input-group">
+                            <input type="password" class="form-control" id="password_lama" name="password_lama">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                <input type="checkbox" id="showPasswordlama"> cek
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-15">
+                            <label for="konfirmasi_password" class="form-label">Konfirmasi Password</label>
+                            <div class="input-group">
+                            <input type="password" class="form-control" id="konfirmasi_password" name="konfirmasi_password">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                <input type="checkbox" id="showKonfirmasiPassword"> cek
+                                </span>
+                            </div>
+                            </div>
+                                                <button type="submit" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah Password</button>
+                                                <a class="btn btn-outline-warning col-5" href="<?php echo base_url('karyawan/hapus_image'); ?>">
+                                                    Hapus
+                                                    Foto</a>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
-
-
-
-                                <div class="d-flex p-2 row justify-content-evenly ">
-                                  
-                                    <a class="btn btn-outline-dark col-5" style="border-radius:10%;"
-                                        href="<?php echo base_url('karyawan/hapus_image'); ?>">
-                                        Hapus
-                                        Foto</a>
-                                </div>
-
-                                <br>
-
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-<div class="overview shadow-lg p-1 mb-3 bg-body rounded"> -->
- </section>
+            </div> -->
 
     <script>
-    // show password
-
     function togglePasswordVisibility(inputId) {
-        const passwordInput = document.getElementById(inputId);
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-        } else {
-            passwordInput.type = "password";
-        }
+    const passwordInput = document.getElementById(inputId);
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+    } else {
+      passwordInput.type = "password";
     }
-    // jam
-    function updateClock() {
-        var now = new Date();
-        var clock = document.getElementById('clock');
-        clock.innerHTML = now.toLocaleTimeString();
-    }
+  }
 
-    // Memperbarui jam setiap detik
-    setInterval(updateClock, 1000);
-
-    function updateClock2() {
-        var now = new Date();
-        var clock = document.getElementById('clock2');
-        clock.innerHTML = now.toLocaleTimeString();
-    }
-
-    // Memperbarui jam setiap detik
-    setInterval(updateClock2, 1000);
-    </script>
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-    <script src="script.js"></script>
-    <script>
-    const body = document.querySelector("body"),
-        modeToggle = body.querySelector(".mode-toggle");
-    sidebar = body.querySelector("nav");
-    sidebarToggle = body.querySelector(".sidebar-toggle");
-
-    let getMode = localStorage.getItem("mode");
-    if (getMode && getMode === "dark") {
-        body.classList.toggle("dark");
-    }
-
-    let getStatus = localStorage.getItem("status");
-    if (getStatus && getStatus === "close") {
-        sidebar.classList.toggle("close");
-    }
-
-    modeToggle.addEventListener("click", () => {
-        body.classList.toggle("dark");
-        if (body.classList.contains("dark")) {
-            localStorage.setItem("mode", "dark");
-        } else {
-            localStorage.setItem("mode", "light");
-        }
-    });
-
-    sidebarToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
-        if (sidebar.classList.contains("close")) {
-            localStorage.setItem("status", "close");
-        } else {
-            localStorage.setItem("status", "open");
-        }
-    })
-    </script>
+  // Attach event listeners to the "Show" checkboxes
+  document.getElementById("showPasswordBaru").addEventListener("change", function () {
+    togglePasswordVisibility("password_baru");
+  });
+  document.getElementById("showKonfirmasiPassword").addEventListener("change", function () {
+    togglePasswordVisibility("konfirmasi_password");
+  });
+  document.getElementById("showPasswordlama").addEventListener("change", function () {
+    togglePasswordVisibility("password_lama");
+  });
+ </script>
 </body>
 <script>
 function logout(id) {

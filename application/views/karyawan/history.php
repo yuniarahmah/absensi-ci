@@ -50,13 +50,15 @@
               </script>
   </div>
 </nav><br>
-<br>
+<br><br>
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-green" style="width:15%"><br>
+  <div class="w3-sidebar w3-bar-block w3-black" style="width:15%"><br>
   <i>karyawan <hr></i>
-  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
+  <a href="/absensii/karyawan/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
+  
+  <a href="<?php echo base_url('karyawan/history')?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
+<a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 
 </div>
 <hr>
@@ -68,8 +70,8 @@
         <div class="col-5" style="margin-left: 10%;">
           <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
             <i>Total Karyawan</i>
-            <div class="card-header"><?php echo $user?>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVhCKxuUIspulbp9gs99Y8mheMb0Skhrf7Q&usqp=CAU" style="width:10%;"></div>
+            <div class="card-header"><h1><?php echo $user?></h1>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVhCKxuUIspulbp9gs99Y8mheMb0Skhrf7Q&usqp=CAU" style="width:30%;margin-left:70%;"></div>
             <div class="card-body">              <br>
               <div class="card text-center">
               </div>
@@ -79,8 +81,8 @@
         <div class="col-5" style="margin-left: 25px; ">
           <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
             <i>Total Absen</i>
-            <div class="card-header"><?php echo $absen ?>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVhCKxuUIspulbp9gs99Y8mheMb0Skhrf7Q&usqp=CAU" style="width:10%;"></div>
+            <div class="card-header"><h1><?php echo $absen ?></h1>
+            <img src="https://media.istockphoto.com/id/1470785066/id/vektor/ikon-absen-dalam-vektor-logo.jpg?s=612x612&w=0&k=20&c=G-4rvxKSEajSEsl_v7op2l9fJe_oFy2AUGpDvg8e5o0=" style="width:25%;margin-left:70%;"></div>
             <div class="card-body">
               <br>
             <div class="card text-center">
@@ -121,7 +123,7 @@
        <td><?php echo $row->keterangan?></td>
        <td onclick="myFunction()"><?php echo $row->status?></td>
        <td style="display:flex;"> 
-       <a href="<?php echo base_url('karyawan/ubah_karyawan/' . $row->id)?>" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+       <a href="<?php echo base_url('karyawan/ubah_karyawan/' . $row->id)?>" class="btn btn-dark"><i class="fa-solid fa-pen-to-square"></i></a>
                         <button onclick="hapus(<?php echo $row->id ?>)"
                         class="btn btn-danger">
                         <i class="fa-solid fa-trash"></i>

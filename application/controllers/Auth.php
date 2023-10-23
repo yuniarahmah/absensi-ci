@@ -131,34 +131,5 @@ class Auth extends CI_Controller {
             redirect(base_url('auth/register_k'));
         }
     }
-
- public function forgot_password() 
-   {
-        $this->load->view('auth/forgot_password');
- }
-
- public function update_password() {
-    $reset_token = $this->input->post('reset_token');
-    $new_password = $this->input->post('new_password');
-
-    // Validasi input atau token reset di sini, pastikan token valid dan tidak kedaluwarsa
-    $user = $this->User_model->getUserByResetToken($reset_token);
-
-    if (!$user) {
-        // Token tidak valid atau kedaluwarsa, handle kesalahan di sini
-        $this->load->view('password_reset_error', ['error' => 'Invalid or expired token']);
-    } else {
-        // Token valid, lakukan pembaruan kata sandi
-        $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
-        $this->User_model->updateUserPassword($user->id, $new_password_hash);
-
-        // Hapus token reset (jika diperlukan)
-        $this->User_model->deleteResetToken($user->id);
-
-        // Tampilkan pesan sukses atau arahkan pengguna ke halaman login
-        $this->load->view('login');
-    }
-}
-
 }
 ?>

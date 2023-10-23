@@ -54,9 +54,9 @@
     <br>
 
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-green">
+  <div class="w3-sidebar w3-bar-block w3-black">
   <br >
-   <h2 style="color:black;">Admin <hr></h2>
+   <h2 style="color:white;">Admin <hr></h2>
   <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
 
   <a href="<?php echo base_url('admin/admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Admin</span></a></a>

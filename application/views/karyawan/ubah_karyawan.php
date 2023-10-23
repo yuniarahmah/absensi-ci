@@ -48,28 +48,26 @@
               window.onload = date_time('date_time');
             </script>
 
-    <a href="<?php echo base_url('karyawan/history') ?>">home</a>
+    <a href="<?php echo base_url('auth/login') ?>">logout</a>
   </div>
 </nav><br>
 <br>
 <div class="d-flex">
-<div class="w3-sidebar w3-bar-block w3-green" style="width:20%">
+<div class="w3-sidebar w3-bar-block w3-black" style="width:20%">
   <br>
   <div class="flex">
     <i>karyawan<hr></i>
   </div>
-  <a href="/absensii/karyawan/history" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i>  profil</span></a></a>
+  <a href="/absensii/karyawan/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
+  
+  <a href="<?php echo base_url('karyawan/history')?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
+
+<a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 </div>
 </div>
 <?php foreach ($absen as $data):?>
 <form class="card w-50 p-5 shadow-lg " style="margin-left:23%;" method="post" enctype="multipart/from-data" action="<?php echo base_url('karyawan/aksi_ubah_karyawan')?>">
   <input type="hidden" name="id" value="<?php echo $data->id?>">
-  <div class="card-body" style="background:lightgreen;">
-    <b style="margin-left:20%; ">IZIN CUTI</b>
-    <div class="card" style="width: 30rem; margin-right:5%;">
-    <input type="text" name="keterangan" value="<?php echo $data->keterangan?>">
-  </div><br>
   <div class="card-body">
     <b style="margin-left:20%;">ABSEN</b>
     <div class="card" style="width: 30rem; margin-right:5%;">

@@ -11,20 +11,13 @@
 
 </head>
 <style>
-    body {font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #121212; /* fallback for old browsers */
-  overflow-x: hidden;
-
-  height: 100%;
-
-  /* code to make all text unselectable */
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  }
+body{
+    height: 100vh;
+    background-image: url(https://dosenit.com/wp-content/uploads/2020/10/Gunung-Fuji-Jepang-1024x640-1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
   /* test */
   .login-box {
     position: absolute;
@@ -74,81 +67,52 @@
   
   .login-box .user-box input:focus ~ label,
   .login-box .user-box input:valid ~ label {
-    top: -20px;
+    top: -40px;
     left: 0;
     color: #03e9f4;
     font-size: 12px;
-  }
-    .login-box a:hover {
-    background: #03e9f4;
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 5px #03e9f4,
-                0 0 25px #03e9f4,
-                0 0 50px #03e9f4,
-                0 0 100px #03e9f4;
-  }
-  
-  .login-box a span {
-    position: absolute;
-    display: block;
-  }
-  
-  .login-box a span:nth-child(1) {
-    top: 0;
-    left: -100%;
+  }  
+  .container form button{
     width: 100%;
-    height: 2px;
-  }
-    .login-box a:hover {
-    background: #03e9f4;
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 5px #03e9f4,
-                0 0 25px #03e9f4,
-                0 0 50px #03e9f4,
-                0 0 100px #03e9f4;
-  }
-  
-  .login-box a span {
-    position: absolute;
-    display: block;
-  }
-  
-  
+    height: 40px;
+    padding: 5px 0;
+    border: none;
+    background-color:#752BEA;
+    font-size: 18px;
+    color: #fafafa;
+    border-radius: 20px;
+} 
 </style>
 <body>
-  <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="color:white;">
-    <img src="https://cdn-icons-png.flaticon.com/512/2019/2019442.png" style="width:20%;">
-    </div>
-    <div class="login-box">
+    <div class="login-box"> 
+      <div class="container">
         <h1 style="color:white; text-align:center;">LOGIN</h1><br>
         <form action="<?php echo base_url('auth/fungsi_login')?>" method="post" style="text-align:center;">
 
           <div class="user-box">
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email"><br><br>
             <label>Email</label>
           </div>
           <div class="user-box">
-            <input type="password" name="password" id="pass">
-            <label>password</label>
-            <div class="input-group-append">
+            <div class="input-group-append" >
+            <input type="password" name="password" id="pass"><br>
+            <label>Password</label>
                             <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
-                            <span id="mybutton" onclick="change()" class="input-group-text">
+                            <span id="mybutton" onclick="change()" class="input-group-text" style="height:45px;">
     
                                 <!-- icon mata bawaan bootstrap  -->
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                    <path fill-rule="evenodd"
-                                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                </svg>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                                                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                                                    <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                                                                    </svg>
                             </span>
                         </div>
-          </div>
-          <p>tekan <a href="forgot_password">lupa password</a></p>
-            <button class="btn btn-outline-dark shadow" type="submit" name="submit"> Login </button>
+          </div><br>
+          <p style="color:white"> belum punya akun<a href="register"> silahkan register </a></p>
+            <button type="submit" name="submit"> Login </button>
         </form>
+      </div>
       </div>
     <script>
             // membuat fungsi change
@@ -163,11 +127,10 @@
                     //ubah form input password menjadi text
                     document.getElementById('pass').type = 'text';
                     
-                    //ubah icon mata terbuka menjadi tertutup
-                    document.getElementById('mybutton').innerHTML = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
-                                                                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
-                                                                    <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                     //ubah icon mata terbuka menjadi terbuka
+                    document.getElementById('mybutton').innerHTML = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                                    <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                                                                     </svg>`;
                 }
                 else {
@@ -176,9 +139,10 @@
                     document.getElementById('pass').type = 'password';
     
                     //ubah icon mata terbuka menjadi tertutup
-                    document.getElementById('mybutton').innerHTML = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                                                                    <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                    document.getElementById('mybutton').innerHTML = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                                                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                                                    <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
                                                                     </svg>`;
                 }
             }
