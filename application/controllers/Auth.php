@@ -42,12 +42,12 @@ class Auth extends CI_Controller {
                 redirect( base_url() . 'admin/dashboard' );
             }
             if ( $this->session->userdata( 'role' ) == 'karyawan' ) {//jika rolenya adalah karyawan maka yang akan ditampilkan setelah login adalah history karyawan
-                redirect( base_url() . 'karyawan/history' );
+                redirect( base_url() . 'karyawan/dashboard' );
             } else {
-                redirect( base_url() . 'auth' );
+                redirect( base_url() . ' auth/login' );
             }
         } else {
-            redirect( base_url() . 'auth' );
+            redirect( base_url() . 'auth/login' );
         }
     }
 
@@ -81,7 +81,7 @@ class Auth extends CI_Controller {
                     'nama_depan' => $this->input->post('nama_depan'),
                     'nama_belakang' => $this->input->post('nama_belakang'),
                     'role' => $role,
-                    'image' => 'User.png',
+                    'image' => '',
                     'password' => md5($this->input->post('password')),
                 ];
                 $this->m_model->register($data);
@@ -119,7 +119,7 @@ class Auth extends CI_Controller {
                     'nama_depan' => $this->input->post('nama_depan'),
                     'nama_belakang' => $this->input->post('nama_belakang'),
                     'role' => 'karyawan',
-                    'image' => 'User.png',
+                    'image' => '',
                     'password' => md5($this->input->post('password')),
                 ];
                 $this->m_model->register($data);

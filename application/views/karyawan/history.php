@@ -10,10 +10,9 @@
 </head>
 <body>
     
-<nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
+<nav class="navbar bg-body-tertiary" style=" width:100%;">
   <div class="container-fluid">
-    <i>Absensi karyawan <hr></i>
-    <?php
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQxjA2k8aeNuFReYdjwIvRzU6S9erT--bKmQ&usqp=CAU" style="width:10%;">     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
             <script type="text/javascript">
@@ -21,10 +20,10 @@
                 date = new Date;
                 year = date.getFullYear();
                 month = date.getMonth();
-                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+                months = new Array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
                 d = date.getDate();
                 day = date.getDay();
-                days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                days = new Array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
                 h = date.getHours();
                 if (h < 10) {
                   h = "0" + h;
@@ -44,13 +43,12 @@
               }
             </script>
             <span id="date_time" style="margin-right: 40%;"></span>
-            <a href="<?php echo base_url('auth/login')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
             <script type="text/javascript">
-              window.onload = date_time('date_time');
-              </script>
+                window.onload = date_time('date_time');
+                </script>
+                <a href="<?php echo base_url('auth/login')?>" id="logout-button"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
   </div>
-</nav><br>
-<br><br>
+</nav>
 <div class="d-flex">
   <div class="w3-sidebar w3-bar-block w3-black" style="width:15%"><br>
   <i>karyawan <hr></i>
@@ -63,50 +61,21 @@
 </div>
 <hr>
 
-<div class="row container p-3 col-10" style="margin-left:15%;">
-  <div style="width:100%; ">
-    <div class="shadow p-3 mb-5 bg-body-tertiary rounded"><i class="fa-solid fa-coins"> HISTORY KARYAWAN</i></div>
-      <div class="row mb-sm-0" style="margin-top: 25px;">
-        <div class="col-5" style="margin-left: 10%;">
-          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-            <i>Total Karyawan</i>
-            <div class="card-header"><h1><?php echo $user?></h1>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVhCKxuUIspulbp9gs99Y8mheMb0Skhrf7Q&usqp=CAU" style="width:30%;margin-left:70%;"></div>
-            <div class="card-body">              <br>
-              <div class="card text-center">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-5" style="margin-left: 25px; ">
-          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-            <i>Total Absen</i>
-            <div class="card-header"><h1><?php echo $absen ?></h1>
-            <img src="https://media.istockphoto.com/id/1470785066/id/vektor/ikon-absen-dalam-vektor-logo.jpg?s=612x612&w=0&k=20&c=G-4rvxKSEajSEsl_v7op2l9fJe_oFy2AUGpDvg8e5o0=" style="width:25%;margin-left:70%;"></div>
-            <div class="card-body">
-              <br>
-            <div class="card text-center">
-              </div>
-            </div>
-          </div>
-        </div>
-        
- </div>
-</div>
-<div class="how" style="widht:40vh; height:35vh; ">
+<div class="how" style="widht:40%; height:35vh; margin-left:18%; ">
  <table class="table table-striped-columns">
+  <div class="shadow p-3 mb-5 bg-body-tertiary rounded"><i class="fa-solid fa-clock-rotate-left"> History Karyawan</i>
+</div>
     <thead>
-   <tr class="table-success">
-       <th style="width:3%;">NO</th>
-       <!-- <th style="width:5%;">Foto</th> -->
-       <th style="width:5%;">Nama</th>
-       <th style="width:5%;">Kegiatan</th>
-       <th style="width:5%;">Date</th>
-       <th style="width:3%;">Jam Masuk</th>
-       <th style="width:3%;">Jam Pulang</th>
-       <th style="width:3%;">keterangan Izin</th>
-       <th style="width:3%;">Status</th>
-       <th style="width:3%;">Aksi</th>
+   <tr class="table-secondary">
+       <th>NO</th>
+       <th>Nama</th>
+       <th>Kegiatan</th>
+       <th>Date</th>
+       <th>Jam Masuk</th>
+       <th>Jam Pulang</th>
+       <th>keterangan Izin</th>
+       <th>Status</th>
+       <th>Aksi</th>
      </tr>
    </thead>
    <tbody>
@@ -114,7 +83,6 @@
 
      <tr>
        <th><?php echo $no ?></th>
-       <!-- <th><img src="https://i0.wp.com/www.stignatius.co.uk/wp-content/uploads/2020/10/default-user-icon.jpg?fit=415%2C415&ssl=1" style="width:10rem"></th> -->
        <td><?php echo tampil_karyawan_byid($row->id_karyawan)?></td>
        <td><?php echo $row->kegiatan?></td>
        <td><?php echo $row->date?></td>
@@ -122,7 +90,7 @@
        <td><?php echo $row->jam_pulang?></td>
        <td><?php echo $row->keterangan?></td>
        <td onclick="myFunction()"><?php echo $row->status?></td>
-       <td style="display:flex;"> 
+       <td style="display:flex; gap:5%"> 
        <a href="<?php echo base_url('karyawan/ubah_karyawan/' . $row->id)?>" class="btn btn-dark"><i class="fa-solid fa-pen-to-square"></i></a>
                         <button onclick="hapus(<?php echo $row->id ?>)"
                         class="btn btn-danger">
@@ -136,13 +104,13 @@
         </td>
      </tr>
      <?php endforeach ?>
-     <a href="<?php echo base_url('karyawan/export_karyawan')?>" class="btn btn-outline-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
-     
+     <a style="margin-bottom:2%" href="<?php echo base_url('karyawan/export_data_karyawan')?>" class="btn btn-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
    </tbody>
  </table>
 </div>
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script>
         function pulang(id){
           var yes = confirm('Yakin pulang?');
@@ -175,5 +143,29 @@
         });
     }
 </script>
+<script>
+    // Function to show SweetAlert confirmation
+    function showLogoutConfirmation() {
+        swal({
+            title: "Logout",
+            text: "Are you sure you want to log out?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willLogout) => {
+            if (willLogout) {
+                // Redirect to the logout URL after the user confirms
+                window.location.href = "<?php echo base_url('auth/logout'); ?>";
+            }
+        });
+    }
+
+    // Attach the SweetAlert confirmation to the "Logout" button
+    document.getElementById('logout-button').addEventListener('click', function (e) {
+        e.preventDefault();
+        showLogoutConfirmation();
+    });
+</script>
+
 </body>
 </html>

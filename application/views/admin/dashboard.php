@@ -12,8 +12,8 @@
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
-    <a style="text-align-center"><i>FROM ADMIN</i></a>
-    <?php
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQxjA2k8aeNuFReYdjwIvRzU6S9erT--bKmQ&usqp=CAU" style="width:10%;">    
+      <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
             <script type="text/javascript">
@@ -21,10 +21,10 @@
                 date = new Date;
                 year = date.getFullYear();
                 month = date.getMonth();
-                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+                months = new Array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
                 d = date.getDate();
                 day = date.getDay();
-                days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                days = new Array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
                 h = date.getHours();
                 if (h < 10) {
                   h = "0" + h;
@@ -45,7 +45,7 @@
             </script>
             <span id="date_time" style="margin-right: 40%;"></span>
             
-            <a href="<?php echo base_url('auth/login')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
+            <a href="<?php echo base_url('auth/login')?>" id="logout-button"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
@@ -57,9 +57,10 @@
 <br>
 
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-black" style="width:17%;"><br>
+  <div class="w3-sidebar w3-bar-block w3-black" style="width:15%;"><br>
    <h2 style="color:white;">Admin <hr></h2>
-  <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
+  <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-clock-rotate-left"></i>  Dashboard</span></a>
+
   <a href="<?php echo base_url('admin/profil_admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> profil</span></a></a>
   
   <a href="<?php echo base_url('admin/rekap_b') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap bulanan</span></a></a>
@@ -73,37 +74,34 @@
       <hr>
       <div class="row mb-sm-0" style="margin-top: 25px;">
         <di class="col-3" style="margin-left: 10%;">
-          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-            <div class="card-header">Daily Report</div><br>
+          <div class="shadow p-3 mb-5 bg-body-secondary rounded">
+            <div class="card-header"><b>Rekap Harian</b> <i class="fa-regular fa-calendar"></i></div><br>
             <div class="card-body">
-              <img src="https://static.promediateknologi.id/crop/0x82:1280x850/750x500/webp/photo/2023/05/20/Ilustrasi-Kalender-Jawa-Juni-2023-3877882117.png" style="width: 40%; margin-left:20%">
-              <br><br>
+              <p>Didalam rekap harian terdapat data karyawan yang absen hari ini</p>
               <div class="card text-center">
-                <a href="<?php echo base_url('admin/rekap_h')?>" class="btn btn-primary">Go Page</a>
+                <a href="<?php echo base_url('admin/rekap_h')?>" class="btn btn-primary">Lihat Selengkapnya</a>
               </div>
             </div>
           </div>
         </di>
         <div class="col-3" style="margin-left: 25px; ">
-          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-            <div class="card-header">Weekly Report</div><br>
+          <div class="shadow p-3 mb-5 bg-body-secondary rounded">
+            <div class="card-header"><b>Rekap Mingguan</b> <i class="fa-solid fa-calendar-week"></i></div><br>
             <div class="card-body">
-              <img src="https://static.promediateknologi.id/crop/0x82:1280x850/750x500/webp/photo/2023/05/20/Ilustrasi-Kalender-Jawa-Juni-2023-3877882117.png" style="width: 40%; margin-left:20% ">
-              <br><br>
+            <p>Didalam rekap mingguan terdapat data yang mencatat absen karyawan perminggunya</p>
             <div class="card text-center">
-                <a href="<?php echo base_url('admin/rekap_m') ?>" class="btn btn-primary">Go Page</a>
+                <a href="<?php echo base_url('admin/rekap_m') ?>" class="btn btn-primary">Lihat Selengkapnya</a>
               </div>
             </div>
           </div>
         </div>
         <div class="col-3" style="margin-left: 25px; ">
-          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-            <div class="card-header">Monthly Report</div><br>
+          <div class="shadow p-3 mb-5 bg-body-secondary rounded">
+            <div class="card-header"><b>Rekap Bulanan</b> <i class="fa-solid fa-calendar-day"></i></div><br>
             <div class="card-body">
-              <img src="https://static.promediateknologi.id/crop/0x82:1280x850/750x500/webp/photo/2023/05/20/Ilustrasi-Kalender-Jawa-Juni-2023-3877882117.png" style="width: 40%; margin-left:20%">
-              <br><br>
+             <p>Didalam rekap bulan terdapat data absen karyawan setiap bulan</p>
               <div class="card text-center ">
-              <a href="<?php echo base_url('admin/rekap_b')?>" class="btn btn-primary">Go Page</a>
+              <a href="<?php echo base_url('admin/rekap_b')?>" class="btn btn-primary">Lihat Selengkapnya</a>
             </div>
             </div>
           </div>
@@ -184,6 +182,7 @@
 </div>
  </div>
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
   function hapus(id) {
         swal.fire({
@@ -210,5 +209,27 @@
         });
     }
 </script>
+<script>
+function showLogoutConfirmation() {
+        swal({
+            title: "Logout",
+            text: "Are you sure you want to log out?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willLogout) => {
+            if (willLogout) {
+                // Redirect to the logout URL after the user confirms
+                window.location.href = "<?php echo base_url('auth/logout'); ?>";
+            }
+        });
+    }
+
+    // Attach the SweetAlert confirmation to the "Logout" button
+    document.getElementById('logout-button').addEventListener('click', function (e) {
+        e.preventDefault();
+        showLogoutConfirmation();
+    });
+    </script>
 </body>
 </html>

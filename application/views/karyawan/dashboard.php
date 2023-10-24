@@ -10,10 +10,9 @@
 </head>
 <body>
     
-<nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
+<nav class="navbar bg-body-tertiary" style="width:100%; position:fixed;">
   <div class="container-fluid">
-  <i>Absensi karyawan <hr></i>
-    <?php
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQxjA2k8aeNuFReYdjwIvRzU6S9erT--bKmQ&usqp=CAU" style="width:10%;">     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
             <script type="text/javascript">
@@ -21,10 +20,10 @@
                 date = new Date;
                 year = date.getFullYear();
                 month = date.getMonth();
-                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+                months = new Array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
                 d = date.getDate();
                 day = date.getDay();
-                days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                days = new Array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
                 h = date.getHours();
                 if (h < 10) {
                   h = "0" + h;
@@ -44,81 +43,65 @@
               }
             </script>
             <span id="date_time" style="margin-right: 40%;"></span>
-            
-            <a href="<?php echo base_url('auth/login')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
             <script type="text/javascript">
-              window.onload = date_time('date_time');
-            </script>
-
+                window.onload = date_time('date_time');
+                </script>
+                <a href="<?php echo base_url('auth/login')?>" id="logout-button"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
   </div>
 </nav>
-<br>
-<br>
-<br>
-
 <div class="d-flex">
-  <div class="w3-sidebar w3-bar-block w3-black" style="width:17%;"><br>
+  <div class="w3-sidebar w3-bar-block w3-black" style="width:15%; margin-top:5%"><br>
   <i>karyawan <hr></i>
-  <a href="/absensii/karyawan/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
+  <a href="/absensii/karyawan/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-clock-rotate-left"></i>  Dashboard</span></a>
+  
+  <a href="<?php echo base_url('karyawan/menu_absen') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Menu Absen</span></a></a>
+
+  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Menu Izin</span></a></a>
+
+  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
   
   <a href="<?php echo base_url('karyawan/history')?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
 
-<a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
-
 </div>
 
-<div style="width:100%; margin-left:20%">
-      <hr>
-      <div class="row mb-sm-0" style="margin-top: 25px;">
-        <di class="col-3" style="margin-left: 10%;">
-          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-            <div class="card-header">Daily Report</div><br>
-            <div class="card-body">
-              <img src="https://static.promediateknologi.id/crop/0x82:1280x850/750x500/webp/photo/2023/05/20/Ilustrasi-Kalender-Jawa-Juni-2023-3877882117.png" style="width: 40%; margin-left:20%">
-              <br><br>
-              <div class="card text-center">
-                <a href="<?php echo base_url('admin/rekap_h')?>" class="btn btn-primary">Go Page</a>
-              </div>
-            </div>
-          </div>
-        </di>
-        <div class="col-3" style="margin-left: 25px; ">
-          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-            <div class="card-header">Weekly Report</div><br>
-            <div class="card-body">
-              <img src="https://static.promediateknologi.id/crop/0x82:1280x850/750x500/webp/photo/2023/05/20/Ilustrasi-Kalender-Jawa-Juni-2023-3877882117.png" style="width: 40%; margin-left:20% ">
-              <br><br>
-            <div class="card text-center">
-                <a href="<?php echo base_url('admin/rekap_m') ?>" class="btn btn-primary">Go Page</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-3" style="margin-left: 25px; ">
-          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-            <div class="card-header">Monthly Report</div><br>
-            <div class="card-body">
-              <img src="https://static.promediateknologi.id/crop/0x82:1280x850/750x500/webp/photo/2023/05/20/Ilustrasi-Kalender-Jawa-Juni-2023-3877882117.png" style="width: 40%; margin-left:20%">
-              <br><br>
-              <div class="card text-center ">
-              <a href="<?php echo base_url('admin/rekap_b')?>" class="btn btn-primary">Go Page</a>
-            </div>
-            </div>
-          </div>
-        </div>
-<div class="relative min-h-screen md:flex" data-dev-hint="container" style="margin-left:3%;">
-        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
-            <div class="container mx-auto"> 
-                    <div class="flex justify-center mb-2 md:justify-start md:pl-6">
-                     
- <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+
+<div class="row container p-3 col-10" style="margin-left:15%;margin-top:5%">
+  <div style="width:100%; ">
+  <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
                     <h1 class="flex justify-center mb-2 md:justify-start md:pl-6">
                     <i class="fa-solid fa-note-sticky"></i> Data Karyawan
                     </h1>
-   </div>
-                    <a href="<?php echo base_url('admin/export_admin_mingguan')?>" class="btn btn-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
-                    </div>
-                <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
+   </div>    
+     <div class="row mb-sm-0" style="margin-top: 25px;">
+        <div class="col-4" style="margin-left: 10%;">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <i>Total Karyawan</i>
+            <div class="card-header">
+        </div>
+            <div class="card-body">  
+              <font size="20"><?php echo $absen?>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png" style="width:10%;margin-left:65%;"></font> 
+            </div>
+          </div>
+        </div>
+        <div class="col-4" style="margin-left: 25px; ">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <i>Total Absen</i>
+            <div class="card-header">
+          </div>
+            <div class="card-body">
+              <font size="15"><?php echo $user?>
+                <img src="https://i.pinimg.com/originals/3a/68/9c/3a689c7e5ee4d67ac98240652e8c28c4.png" style="width:10%; margin-left:65%"></font>
+            </div>
+          </div>
+        </div>
+        
+ </div>
+</div>
+<div class="relative min-h-screen md:flex" data-dev-hint="container" style="margin-left:1%;">
+        <main id="content" class="max-h-screen overflow-y-auto flex-1 p-6 lg:px-8">
+            <div class="container mx-auto"> 
+                    <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
                     <table class="my-4 w-full divide-y divide-gray-300 text-center">
                         <thead class="bg-gray-50">
                             <tr>
@@ -133,7 +116,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
-                            <?php $no=0; foreach ($absensi as $absen): $no++ ?>
+                            <?php $no=0; foreach ($absenn as $absen): $no++ ?>
                             <tr class="whitespace-nowrap">
                                 <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
                                 <td class="px-3 py-4">
@@ -176,12 +159,10 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </main>
-</div>
 </div>
  </div>
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
   function hapus(id) {
         swal.fire({
@@ -202,11 +183,35 @@
                     timer: 1500,
 
                 }).then(function() {
-                    window.location.href = "<?php echo base_url('admin/hapus_admin/')?>" + id;
+                    window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/')?>" + id;
                 });
             }
         });
     }
 </script>
+<script>
+    // Function to show SweetAlert confirmation
+    function showLogoutConfirmation() {
+        swal({
+            title: "Logout",
+            text: "Are you sure you want to log out?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willLogout) => {
+            if (willLogout) {
+                // Redirect to the logout URL after the user confirms
+                window.location.href = "<?php echo base_url('auth/logout'); ?>";
+            }
+        });
+    }
+
+    // Attach the SweetAlert confirmation to the "Logout" button
+    document.getElementById('logout-button').addEventListener('click', function (e) {
+        e.preventDefault();
+        showLogoutConfirmation();
+    });
+</script>
+
 </body>
 </html>

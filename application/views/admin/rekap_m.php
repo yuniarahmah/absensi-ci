@@ -12,7 +12,7 @@
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
   <div class="container-fluid">
-  <a style="text-align-center"><i>FROM ADMIN</i></a>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQxjA2k8aeNuFReYdjwIvRzU6S9erT--bKmQ&usqp=CAU" style="width:10%;">
     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
@@ -21,10 +21,10 @@
                 date = new Date;
                 year = date.getFullYear();
                 month = date.getMonth();
-                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+                months = new Array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
                 d = date.getDate();
                 day = date.getDay();
-                days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                days = new Array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
                 h = date.getHours();
                 if (h < 10) {
                   h = "0" + h;
@@ -47,7 +47,7 @@
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
-  <a href="<?php echo base_url('auth/login')?>"><i class="fa-solid fa-house-chimney"></i>logout<hr></a> 
+  <a href="<?php echo base_url('auth/login')?>" id="lagout-button"><i class="fa-solid fa-house-chimney"></i>logout<hr></a> 
 
   </div>
 </nav>
@@ -133,6 +133,30 @@
             </div>
         </main>
     </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+    // Function to show SweetAlert confirmation
+    function showLogoutConfirmation() {
+        swal({
+            title: "Logout",
+            text: "Are you sure you want to log out?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willLogout) => {
+            if (willLogout) {
+                // Redirect to the logout URL after the user confirms
+                window.location.href = "<?php echo base_url('auth/logout'); ?>";
+            }
+        });
+    }
+
+    // Attach the SweetAlert confirmation to the "Logout" button
+    document.getElementById('logout-button').addEventListener('click', function (e) {
+        e.preventDefault();
+        showLogoutConfirmation();
+    });
+</script>
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {

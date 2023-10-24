@@ -76,7 +76,6 @@ body {
         <form action="<?php echo base_url('auth/aksi_register')?>" method="post" style="text-align:center;">
                 <h1>REGISTER ADMIN</h1>
                 <hr>
-                <p>Isi data dibawah ini untuk registrasi </p>
                 <div class="user-box">
                   <label>Username</label>
             <input type="text" name="username" id="username">

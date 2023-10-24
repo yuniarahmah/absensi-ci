@@ -12,7 +12,7 @@ class Admin extends CI_Controller {
         $this->load->helper( 'my_helper' );
         $this->load->library( 'upload' );
         if ( $this->session->userdata( 'loged_in' ) != true || $this->session->userdata( 'role' ) != 'admin' ) {
-            redirect( base_url().'auth' );
+            redirect( base_url().'auth/login' );
         }
     }
 
@@ -127,7 +127,7 @@ class Admin extends CI_Controller {
         $sheet->getStyle( 'H3' )->applyFromArray( $style_col );
 
         // Get data from database
-        $data = $this->m_model->get_karyawan();
+        $data = $this->m_model->getAbsensiLast7Days();
 
         $no = 1;
         $numrow = 4;
@@ -331,13 +331,13 @@ class Admin extends CI_Controller {
      if ($image) {
          $kode = round(microtime(true) * 100);
          $file_name = $kode . '_' . $image;
-         $upload_path = './image/' . $file_name;
+         $upload_path = './image/admin' . $file_name;
 
          if (move_uploaded_file($foto_temp, $upload_path)) {
              // Hapus image lama jika ada
              $old_file = $this->m_model->get_foto_by_id($this->input->post('id'));
-             if ($old_file && file_exists(' ./image/' . $old_file)) {
-                 unlink(' ./image/' . $old_file);
+             if ($old_file && file_exists(' ./image/admin' . $old_file)) {
+                 unlink(' ./image/admin' . $old_file);
              }
 
              $data = [
@@ -411,7 +411,10 @@ public function hapus_image()
     $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->session->userdata('id')));
     if($eksekusi) {
         
-        $this->session->set_flashdata('sukses' , 'berhasil');
+        $this->session->set_flashdata('sukses','<div class="alert alert-dark alert-dismissible fade show" role="alert">
+        Berhasil Menghapus Profile
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
         redirect(base_url('admin/profil_admin'));
     } else {
         $this->session->set_flashdata('error' , 'gagal...');
@@ -455,7 +458,7 @@ public function hapus_image()
         
   
           //untuk melakukan pembaruan data
-          $this->session->set_userdata($data);
+        //   $this->session->set_userdata($data);
           $update_result = $this->m_model->ubah_data( 'user', $data, array( 'id' => $this->session->userdata( 'id' )));
   
           if ($update_result) {

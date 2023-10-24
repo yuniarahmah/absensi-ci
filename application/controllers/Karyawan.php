@@ -21,7 +21,10 @@ class Karyawan extends CI_Controller {
 
     public function dashboard()
  {
-        $this->load->view( 'karyawan/dashboard');
+        $data['absen'] = $this->m_model->get_data('absen')->num_rows();
+        $data['user'] = $this->m_model->get_data('user')->num_rows();
+        $data['absenn'] = $this->m_model->get_data('absen')->result();
+        $this->load->view( 'karyawan/dashboard', $data);
     }
     public function history()
  {
@@ -86,110 +89,85 @@ public function aksi_ubah_karyawan()
         $this->m_model->delete( 'absen', 'id', $id );
         redirect( base_url( 'karyawan/history' ) );
     }  
-    public function export_karyawan()
-     {
-            $spreadsheet = new Spreadsheet();
-            $sheet = $spreadsheet->getActiveSheet();
-    
-            $style_col = [
-                'font' => [ 'bold' => true ],
-                'alignment' => [
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-                ],
-                'borders' => [
-                    'top' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                    'right' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                    'bottom' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                    'left' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ]
-                ]
-            ];
-    
-            $style_row = [
-                'alignment' => [
-                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-                ],
-                'borders' => [
-                    'top' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                    'right' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                    'bottom' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                    'left' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ]
-                ]
-            ];
-    
-            $sheet->setCellValue( 'A1', 'DATA KARYAWAN' );
-            $sheet->mergeCells( 'A1:E1' );
-            $sheet->getStyle( 'A1' )->getFont()->setBold( true );
-    
-            // Head
-            $sheet->setCellValue( 'A3', 'NO' );
-            $sheet->setCellValue( 'B3', 'NAMA' );
-            $sheet->setCellValue( 'C3', 'KEGIATAN' );
-            $sheet->setCellValue( 'D3', 'DATE' );
-            $sheet->setCellValue( 'E3', 'JAM MASUK' );
-            $sheet->setCellValue( 'F3', 'JAM PULANG' );
-            $sheet->setCellValue( 'G3', 'KETERANGAN IZIN' );
-            $sheet->setCellValue( 'H3', 'STATUS' );
-    
-            $sheet->getStyle( 'A3' )->applyFromArray( $style_col );
-            $sheet->getStyle( 'B3' )->applyFromArray( $style_col );
-            $sheet->getStyle( 'C3' )->applyFromArray( $style_col );
-            $sheet->getStyle( 'D3' )->applyFromArray( $style_col );
-            $sheet->getStyle( 'E3' )->applyFromArray( $style_col );
-            $sheet->getStyle( 'F3' )->applyFromArray( $style_col );
-            $sheet->getStyle( 'G3' )->applyFromArray( $style_col );
-            $sheet->getStyle( 'H3' )->applyFromArray( $style_col );
-    
-            // Get data from database
-            $data = $this->m_model->get_karyawan();
-    
-            $no = 1;
-            $numrow = 4;
-            foreach ( $data as $dataa ) {
-                $sheet->setCellValue( 'A'.$numrow, $no );
-                $sheet->setCellValue( 'B'.$numrow, $dataa->id );
-                $sheet->setCellValue( 'C'.$numrow, $dataa->username  );
-                $sheet->setCellValue( 'D'.$numrow, $dataa->keterangan  );
-                $sheet->setCellValue( 'E'.$numrow, $dataa->date  );
-                $sheet->setCellValue( 'F'.$numrow, $dataa->jam_masuk  );
-                $sheet->setCellValue( 'G'.$numrow, $dataa->jam_pulang );
-                $sheet->setCellValue( 'H'.$numrow, $dataa->status );
-    
-                $sheet->getStyle( 'A'.$numrow )->applyFromArray( $style_row );
-                $sheet->getStyle( 'B'.$numrow )->applyFromArray( $style_row );
-                $sheet->getStyle( 'C'.$numrow )->applyFromArray( $style_row );
-                $sheet->getStyle( 'D'.$numrow )->applyFromArray( $style_row );
-                $sheet->getStyle( 'E'.$numrow )->applyFromArray( $style_row );
-                $sheet->getStyle( 'E'.$numrow )->applyFromArray( $style_row );
-                $sheet->getStyle( 'G'.$numrow )->applyFromArray( $style_row );
-                $sheet->getStyle( 'H'.$numrow )->applyFromArray( $style_row );
-    
-                $no++;
-                $numrow++;
-            }
-    
-            $sheet->getColumnDimension( 'A' )->setWidth( 5 );
-            $sheet->getColumnDimension( 'B' )->setWidth( 25 );
-            $sheet->getColumnDimension( 'C' )->setWidth( 25 );
-            $sheet->getColumnDimension( 'D' )->setWidth( 20 );
-            $sheet->getColumnDimension( 'E' )->setWidth( 10 );
-            $sheet->getColumnDimension( 'F' )->setWidth( 25 );
-            $sheet->getColumnDimension( 'G' )->setWidth( 25 );
-            $sheet->getColumnDimension( 'H' )->setWidth( 15 );
-    
-            $sheet->getDefaultRowDimension()->setRowHeight( -1 );
-    
-            $sheet->getPageSetup()->setOrientation( \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE );
-    
-            $sheet->setTitle( 'LAPORAN DATA KARYAWAN' );
-    
-            header( 'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
-            header( 'Content-Disposition: attachment; filename="karyawan.xlsx"' );
-            header( 'Cache-Control: max-age=0' );
-    
-            $writer = new Xlsx( $spreadsheet );
-            $writer->save( 'php://output' );
-   } 
+    public function export_data_karyawan()
+    {
+      $spreadsheet = new Spreadsheet();
+          $sheet = $spreadsheet->getActiveSheet();
+  
+          $style_col = [
+              'font' => ['bold' => true ],
+              'alignment' => [
+                  'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                  'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+              ],
+              'borders' => [
+                  'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                  'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                  'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                  'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+              ]
+              ];
+          $style_row = [
+              'alignment' => [
+                  'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+              ],
+              'borders' => [
+                  'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                  'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                  'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                  'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+              ]
+          ];
+  
+          $sheet->setCellValue('A1', "DATA KARYAWAN");
+          $sheet->mergeCells('A1:E1');
+          $sheet->getStyle('A1')->getFont()->setBold(true);
+  
+          $sheet->setCellValue('A3', "NO");
+          $sheet->setCellValue('B3', "ID KARYAWAN");
+          $sheet->setCellValue('C3', "date");
+  
+         
+          $sheet->getStyle('A3')->applyFromArray($style_col);
+          $sheet->getStyle('B3')->applyFromArray($style_col);
+          $sheet->getStyle('C3')->applyFromArray($style_col);
+  
+          $data_karyawan= $this->m_model->getDataKaryawan();
+        
+          $no= 1;
+          $numrow = 4;
+          foreach($data_karyawan as $data) {
+              
+          $sheet->setCellValue('A'.$numrow,$no);
+          $sheet->setCellValue('B'.$numrow,$data->username);
+          $sheet->setCellValue('C'.$numrow,$data->date); 
+  
+          $sheet->getStyle('A'.$numrow)->applyFromArray($style_row);
+          $sheet->getStyle('B'.$numrow)->applyFromArray($style_row);
+          $sheet->getStyle('C'.$numrow)->applyFromArray($style_row);
+  
+          $no++;
+          $numrow++;
+  
+          }
+  
+          $sheet->getColumnDimension('A')->setWidth(5);
+          $sheet->getColumnDimension('B')->setWidth(25);
+          $sheet->getColumnDimension('C')->setWidth(25);
+  
+  
+          $sheet->getDefaultRowDimension()->setRowHeight(-1);
+  
+          $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+  
+          $sheet->SetTitle("LAPORAN DATA KARYAWAN");
+  
+          header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+          header('Content-Disposition: attachment; filename="DATA KARYAWAN.xlsx"');
+          header('Cache-Control: max-age=0');
+          $writer = new Xlsx($spreadsheet);
+          $writer->save('php://output');
+    }
 
    //untuk menampilkan from profil
     public function profil_karyawan()
@@ -224,6 +202,9 @@ public function aksi_ubah_karyawan()
      $username = $this->input->post('username');
      $nama_depan = $this->input->post('nama_depan');
      $nama_belakang = $this->input->post('nama_belakang');
+    //  $password_lama = $this->input->post('password_lama');
+    //  $password_baru = $this->input->post('password_baru');
+    //  $konfirmasi_password = $this->input->post('konf$konfirmasi_password');
      // $foto = $this->upload_img('foto');
      // Jika ada foto yang diunggah
      if ($image) {
@@ -243,6 +224,9 @@ public function aksi_ubah_karyawan()
                  'username' => $username,
                  'nama_depan' => $nama_depan,
                  'nama_belakang' => $nama_belakang,
+                //  'password_lama' => $password_lama,
+                //  'password_baru' => $password_baru,
+                //  'konfirmasi_password' => $konfirmasi_password,
              ];
          } else {
              // Gagal mengunggah image baru
@@ -254,6 +238,9 @@ public function aksi_ubah_karyawan()
              'username' => $username,
              'nama_depan' => $nama_depan,
              'nama_belakang' => $nama_belakang,
+            //  'password_lama' => $password_lama,
+            //  'password_baru' => $password_baru,
+            //  'konfirmasi_password' => $konfirmasi_password,
          ];
      }
 
@@ -279,7 +266,10 @@ public function hapus_image()
     $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->session->userdata('id')));
     if($eksekusi) {
         
-        $this->session->set_flashdata('sukses' , 'berhasil');
+        $this->session->set_flashdata('sukses','<div class="alert alert-dark alert-dismissible fade show" role="alert">
+        Berhasil Menghapus Profile
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
         redirect(base_url('karyawan/profil_karyawan'));
     } else {
         $this->session->set_flashdata('error' , 'gagal...');
@@ -356,14 +346,16 @@ public function aksi_ubah_password()
         
   
           //untuk melakukan pembaruan data
-          $this->session->set_userdata($data);
-          $update_result = $this->m_model->ubah_data( 'user', $data, array( 'id' => $this->session->userdata( 'id' )));
-  
-          if ($update_result) {
-              redirect( base_url( 'karyawan/profil_karyawan' ) );
-          } else {
-              redirect( base_url( 'karyawan/profil_karyawan' ) );
-          }
+        //   $this->session->set_userdata($data);
  } 
+ public function menu_absen()
+ {
+    $data['absen'] = $this->m_model->get_by_karyawan('absen', 'kegiatan', $id)->result();
+        $this->load->view( 'karyawan/menu_absen');
+    }
+ public function menu_izin()
+ {
+        $this->load->view( 'karyawan/menu_izin');
+    }
 }
 ?>

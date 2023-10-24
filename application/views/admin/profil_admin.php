@@ -523,7 +523,7 @@ nav.close~.dashboard .top {
 <body>
 <nav class="navbar bg-body-tertiary" style="position:   ; width:100%;">
   <div class="container-fluid">
-  <a style="text-align-center"><i>FROM ADMIN</i></a>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQxjA2k8aeNuFReYdjwIvRzU6S9erT--bKmQ&usqp=CAU" style="width:10%;">
     <?php
             date_default_timezone_set("Asia/Jakarta");
             ?>
@@ -532,10 +532,10 @@ nav.close~.dashboard .top {
                 date = new Date;
                 year = date.getFullYear();
                 month = date.getMonth();
-                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+                months = new Array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
                 d = date.getDate();
                 day = date.getDay();
-                days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                days = new Array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
                 h = date.getHours();
                 if (h < 10) {
                   h = "0" + h;
@@ -555,7 +555,7 @@ nav.close~.dashboard .top {
               }
             </script>
             <span id="date_time" style="margin-right: 40%;"></span>
-            <a href="<?php echo base_url('auth/login')?>"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
+            <a href="<?php echo base_url('auth/login')?>" id="logout-button"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
             <script type="text/javascript">
               window.onload = date_time('date_time');
               </script>
@@ -577,7 +577,7 @@ nav.close~.dashboard .top {
 </div>
 <hr>
 
-<div style="margin-top:20px; margin-left:20%; margin-right:15%; position:fixed" class = 'card w-20px p-3 shadow-lg p-3 mb-5  rounded'>
+<div style="margin-left:18%; margin-right:15%; position:fixed" class = 'card w-20px p-3 shadow-lg p-3 mb-5  rounded'>
                <div class="container">
                     <div class="row">
                                 <?php $no = 0;
@@ -608,66 +608,95 @@ nav.close~.dashboard .top {
                                             action="<?php echo base_url('admin/aksi_update_profile'); ?>"
                                             enctype="multipart/form-data">
                                             <input name="id" type="hidden" value="<?php echo $row->id; ?>">
-                                            <div class="d-flex flex-row ">
-                                                <div class="p-2 col-6">
+                                            <div class="row">
+                                                <div class="col-6">
                                                     <label for="" class="form-label fs-5"><b>Nama Depan</b></label>
                                                     <input type="text" class="form-control" id="nama_depan"
                                                         name="nama_depan" placeholder="Nama Depan"
                                                         value="<?php echo $row->nama_depan; ?>">
-
+                                                </div>
+                                                <div class="col-6">
                                                     <label for="" class="form-label fs-5"><b>Username</b></label>
                                                     <input type="text" class="form-control" id="username"
                                                         name="username" placeholder="Username"
                                                         value="<?php echo $row->username; ?>">
-                                                </div>
+                                                    </div>
                                                 <br>
-                                                <div class="p-2 col-6">
+                                                <div class="col-6">
                                                     <label for="" class="form-label fs-5"><b>Nama Belakang</b></label>
                                                     <input type="text" class="form-control" id="nama_belakang"
                                                         name="nama_belakang" placeholder="Nama Belakang"
-                                                        value="<?php echo $row->nama_belakang; ?>"></div>
-                                            </div>
-                                            <input type="file" name="foto" class="p-3">
-                                            <button type="submit" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah
-                                        Profile</button>
+                                                        value="<?php echo $row->nama_belakang; ?>">
+                                                </div>
 
-                                            <form action="<?php echo base_url('admin/aksi_password'); ?>"
-                                    enctype="multipart/form-data" method="post">
-                                    <div class="mb-3 col-5  " >
-                            <label for="password_baru" class="form-label">Password Baru</label>
-                            <div class="input-group">
-                            <input type="password" class="form-control" id="password_baru" name="password_baru">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                <input type="checkbox" id="showPasswordBaru"> cek
-                                </span>
-                            </div>
-                            </div>
-                                    <div class="mb-3 col-15  " >
-                            <label for="password_lama" class="form-label">Password Lama</label>
-                            <div class="input-group">
-                            <input type="password" class="form-control" id="password_lama" name="password_lama">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                <input type="checkbox" id="showPasswordlama"> cek
-                                </span>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="mb-3 col-15">
-                            <label for="konfirmasi_password" class="form-label">Konfirmasi Password</label>
-                            <div class="input-group">
-                            <input type="password" class="form-control" id="konfirmasi_password" name="konfirmasi_password">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                <input type="checkbox" id="showKonfirmasiPassword"> cek
-                                </span>
-                            </div>
-                            </div>
-                                                <button type="submit" class="btn btn-sm btn-outline-success col-5" name=" submit">Ubah Password</button>
-                                                <a class="btn btn-outline-warning col-5" href="<?php echo base_url('admin/hapus_image'); ?>">
+                                                <div class="col-6">
+                                                    <label for="exampleInputEmail1" class="form-label fs-5"><b>Password Lama</b></label>
+                                                        <div class="input-group">
+                                                            <input type="password" id="pass" name = "password" class="form-control">
+                                                            <div class="input-group-append">
+                                                                <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
+                                                                <span id="mybutton" onclick="change()" class="input-group-text">
+                                        
+                                                                    <!-- icon mata bawaan bootstrap  -->
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                                                        <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                                                                                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                                                                                        <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                                                                                                        </svg> 
+                                                                </span>
+                                                           </div>
+                                                       </div>
+                                                </div>
+                                                <div class="col-6">
+                                                <label for="exampleInputEmail1" class="form-label fs-5"><b>Password Baru</b></label>
+                                                        <div class="input-group">
+                                                            <input type="password" id="pass" name = "password" class="form-control">
+                                                            <div class="input-group-append">
+                                                                <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
+                                                                <span id="mybutton" onclick="change()" class="input-group-text">
+                                        
+                                                                    <!-- icon mata bawaan bootstrap  -->
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                                                        <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                                                                                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                                                                                        <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                                                                                                        </svg> 
+                                                                </span>
+                                                           </div>
+                                                       </div>
+                                                </div>
+                                                <div class="col-6" >
+                                                <label for="exampleInputEmail1" class="form-label fs-5"><b>Konfirmasi Password</b></label>
+                                                        <div class="input-group">
+                                                            <input type="password" id="pass" name = "password" class="form-control">
+                                                            <div class="input-group-append">
+                                                                <!-- kita pasang onclick untuk merubah icon buka/tutup mata setiap diklik  -->
+                                                                <span id="mybutton" onclick="change()" class="input-group-text">
+                                        
+                                                                    <!-- icon mata bawaan bootstrap  -->
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                                                        <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                                                                                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                                                                                        <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                                                                                                        </svg> 
+                                                                </span>
+                                                           </div>
+                                                       </div>
+                                                </div>
+                                            </div class="col-6">
+                                            <input type="file" name="foto" class="p-3">
+                                            </div>
+
+                                            <div class="d-flex gap-4">
+                                            <button type="submit" class="btn btn-sm btn-dark col-3" name=" submit">Ubah</button>
+                                                <a class="btn btn-secondary col-3" href="<?php echo base_url('admin/aksi_ubah_password'); ?>">
+                                                    ubah password
+                                            </a>
+                                                <a class="btn btn-danger col-3" href="<?php echo base_url('admin/hapus_image'); ?>">
                                                     Hapus
                                                     Foto</a>
+                                            </div>
+                                           
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
@@ -677,6 +706,7 @@ nav.close~.dashboard .top {
                     </div>
                 </div>
 </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
     function togglePasswordVisibility(inputId) {
     const passwordInput = document.getElementById(inputId);
@@ -698,32 +728,27 @@ nav.close~.dashboard .top {
     togglePasswordVisibility("password_lama");
   });
  </script>
-</body>
-<script>
-function logout(id) {
-    swal.fire({
-        title: ' Yakin Ingin Log Out',
-        text: "",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Batal',
-        confirmButtonText: 'Log Out'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Log Out',
-                showConfirmButton: false,
-                timer: 1500,
+ <script>
+    function showLogoutConfirmation() {
+        swal({
+            title: "Logout",
+            text: "Are you sure you want to log out?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willLogout) => {
+            if (willLogout) {
+                // Redirect to the logout URL after the user confirms
+                window.location.href = "<?php echo base_url('auth/logout'); ?>";
+            }
+        });
+    }
 
-            }).then(function() {
-                window.location.href = "<?php echo base_url('auth/logout/')?>" + id;
-            });
-        }
+    // Attach the SweetAlert confirmation to the "Logout" button
+    document.getElementById('logout-button').addEventListener('click', function (e) {
+        e.preventDefault();
+        showLogoutConfirmation();
     });
-}
-</script>
-
+    </script>
+</body>
 </html>
