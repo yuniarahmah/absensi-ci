@@ -61,7 +61,7 @@
 
   <a href="<?php echo base_url('admin/admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-book-open"></i> Admin</span></a></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
+  <a href="<?php echo base_url('karyawan/profile') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Karyawan</span></a></a>
 
   <a href="<?php echo base_url('auth/login')?>"><i class="fa- fa-right-from-bracket">Logout<hr></i></a> 
 </div>

@@ -49,7 +49,7 @@
             <script type="text/javascript">
               window.onload = date_time('date_time');
             </script>
-  <a href="<?php echo base_url('auth/login')?>" id="logout-button"><i class="fa-solid fa-house-chimney"></i>logout<hr></i></a> 
+            <a href="<?php echo base_url('auth/login')?>" id="logout-button"><i class="fa-solid fa-right-from-bracket">Logout<hr></i></a> 
 
   </div>
 </nav>
@@ -60,13 +60,16 @@
   <div class="w3-sidebar w3-bar-block w3-black" style="width:17%"><br>
    <h2 styl="color:white;">Admin <hr></h2>
   <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
- <a href="<?php echo base_url('admin/profil_admin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> profil</span></a></a>
+
+ <a href="<?php echo base_url('admin/data_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Data Karyawan</span></a></a>
+
+ <a href="<?php echo base_url('admin/profile') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> profil</span></a></a>
  
-  <a href="<?php echo base_url('admin/rekap_b') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap bulanan</span></a></a>
+  <a href="<?php echo base_url('admin/rekap_b') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-calendar-day"></i> rekap bulanan</span></a></a>
 
-  <a href="<?php echo base_url('admin/rekap_h') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap harian </span></a></a>
+  <a href="<?php echo base_url('admin/rekap_h') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-calendar"></i> rekap harian </span></a></a>
 
-  <a href="<?php echo base_url('admin/rekap_m') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-list-check"></i> rekap mingguan</span></a></a>
+  <a href="<?php echo base_url('admin/rekap_m') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-calendar-week"></i> rekap mingguan</span></a></a>
 
 
 </div>
@@ -79,7 +82,7 @@
                     <i class="fa-solid fa-note-sticky" style="color:black;"></i> LAPORAN BULANAN
                     </h1>
          </div>
-                    <a href="<?php echo base_url('admin/export_admin_mingguan')?>" class="btn btn-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
+                    <a href="<?php echo base_url('admin/export_admin_bulanan')?>" class="btn btn-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
 
                 <div class="overflow-x-auto w-full px-4 bg-white rounded-b-lg shadow">
                   <form action="<?php echo base_url('admin/rekap_b')?>" method="post">

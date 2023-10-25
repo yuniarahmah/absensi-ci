@@ -55,9 +55,9 @@ class M_model extends CI_Model {
     }
    public function getDataKaryawan() {
         $this->db->select('absen.*, user.username' );
-        $this->db->from('absen');
         $this->db->where('role', 'karyawan');
-        $query = $this->db->get();
+        $this->db->join('user', 'user.id = absen.id_karyawan', 'left');
+        $query = $this->db->get('absen');
         return $query->result();
     }
     function get_absensi() {
@@ -105,7 +105,31 @@ class M_model extends CI_Model {
     $query = $this->db->get();
     return $query;  // Pastikan hasil query dikembalikan sebagai objek
 }
-
+public function get_izin($table, $id)
+    {
+      return $this->db->where('id', $id)
+        ->where('kegiatan', '-')
+        ->get($table);
+}
+public function absensi($data) {
+    $this->db->insert('absen', $data);
+}
+public function getlast($table, $where) {
+    $this->db->select('*');
+    $this->db->from($table);
+    $this->db->where($where);
+    $this->db->order_by('id', 'DESC');
+    $this->db->limit(1);
+    return $this->db->get()->row();
+}
+function get_karyawan()
+    {
+        $this->db->select('absensi.*, user.nama_depan, user.nama_belakang');
+        $this->db->from('absensi');
+        $this->db->join('user', 'absensi.id_karyawan = user.id', 'left');
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
 ?>
 

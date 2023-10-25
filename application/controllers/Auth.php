@@ -10,10 +10,10 @@ class Auth extends CI_Controller {
         $this->load->library( 'form_validation' );
     }
 
-    public function index()
- {
-        $this->load->view( 'home' );
-    }
+//     public function index()
+//  {
+//         $this->load->view( 'home' );
+//     }
 
     public function login()
  {

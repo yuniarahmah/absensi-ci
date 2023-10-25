@@ -21,6 +21,7 @@ class Karyawan extends CI_Controller {
 
     public function dashboard()
  {
+        $data['jumlah_izin'] = $this-> m_model->get_izin('absen' , $this->session->userdata('id'))->num_rows();
         $data['absen'] = $this->m_model->get_data('absen')->num_rows();
         $data['user'] = $this->m_model->get_data('user')->num_rows();
         $data['absenn'] = $this->m_model->get_data('absen')->result();
@@ -53,7 +54,10 @@ public function aksi_ubah_karyawan()
     $eksekusi = $this->m_model->ubah_data
     ('absen', $data, array('id' => $this->input->post('id')));
     if ($eksekusi) {
-      $this->session->set_flashdata('sukses', 'berhasil');
+      $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
+      Berhasil Merubah Profile
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>');
       redirect(base_url('karyawan/history'));
     } else {
       $this->session->set_flashdata('error', 'gagal..');
@@ -68,8 +72,8 @@ public function aksi_ubah_karyawan()
     if ($absensi) {//validasi disini berisi jika button pulang di tekan maka status akan otomatis done dan jam pulang terisi
         $data = [
             'jam_pulang' => date('H.i.s'),
-            'jam_masuk' => date('00:00:00'),
-            'kegiatan' => date('-'),
+            'keterangan' => ('pulang'),
+            'kegiatan' => ('-'),
             'status' => 'done'
         ];
         $this->db->where('id',$id);
@@ -85,277 +89,318 @@ public function aksi_ubah_karyawan()
     $this->load->view('pages/karyawan/rekap_mingguan', $data);
 }
 //function untuk menghapus
-    public function hapus_karyawan( $id ) {
-        $this->m_model->delete( 'absen', 'id', $id );
-        redirect( base_url( 'karyawan/history' ) );
-    }  
-    public function export_data_karyawan()
-    {
-      $spreadsheet = new Spreadsheet();
-          $sheet = $spreadsheet->getActiveSheet();
-  
-          $style_col = [
-              'font' => ['bold' => true ],
-              'alignment' => [
-                  'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                  'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-              ],
-              'borders' => [
-                  'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                  'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                  'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                  'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-              ]
-              ];
-          $style_row = [
-              'alignment' => [
-                  'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-              ],
-              'borders' => [
-                  'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                  'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                  'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-                  'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
-              ]
-          ];
-  
-          $sheet->setCellValue('A1', "DATA KARYAWAN");
-          $sheet->mergeCells('A1:E1');
-          $sheet->getStyle('A1')->getFont()->setBold(true);
-  
-          $sheet->setCellValue('A3', "NO");
-          $sheet->setCellValue('B3', "ID KARYAWAN");
-          $sheet->setCellValue('C3', "date");
-  
-         
-          $sheet->getStyle('A3')->applyFromArray($style_col);
-          $sheet->getStyle('B3')->applyFromArray($style_col);
-          $sheet->getStyle('C3')->applyFromArray($style_col);
-  
-          $data_karyawan= $this->m_model->getDataKaryawan();
-        
-          $no= 1;
-          $numrow = 4;
-          foreach($data_karyawan as $data) {
-              
-          $sheet->setCellValue('A'.$numrow,$no);
-          $sheet->setCellValue('B'.$numrow,$data->username);
-          $sheet->setCellValue('C'.$numrow,$data->date); 
-  
-          $sheet->getStyle('A'.$numrow)->applyFromArray($style_row);
-          $sheet->getStyle('B'.$numrow)->applyFromArray($style_row);
-          $sheet->getStyle('C'.$numrow)->applyFromArray($style_row);
-  
-          $no++;
-          $numrow++;
-  
-          }
-  
-          $sheet->getColumnDimension('A')->setWidth(5);
-          $sheet->getColumnDimension('B')->setWidth(25);
-          $sheet->getColumnDimension('C')->setWidth(25);
-  
-  
-          $sheet->getDefaultRowDimension()->setRowHeight(-1);
-  
-          $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
-  
-          $sheet->SetTitle("LAPORAN DATA KARYAWAN");
-  
-          header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-          header('Content-Disposition: attachment; filename="DATA KARYAWAN.xlsx"');
-          header('Cache-Control: max-age=0');
-          $writer = new Xlsx($spreadsheet);
-          $writer->save('php://output');
+public function export()
+  {
+
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+
+    $style_col = [
+      'font' => ['bold' => true],
+      'alignment' => [
+        'horizontal' => \PhpOffice\PhpSpreadsheet\style\Alignment::HORIZONTAL_CENTER,
+        'vertical' => \PhpOffice\PhpSpreadsheet\style\Alignment::VERTICAL_CENTER
+      ],
+      'borders' => [
+        'top' => ['borderstyle' => \PhpOffice\PhpSpreadsheet\style\Border::BORDER_THIN],
+        'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\style\Border::BORDER_THIN],
+        'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\style\Border::BORDER_THIN],
+        'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\style\Border::BORDER_THIN]
+      ]
+    ];
+
+    $style_row = [
+      'alignment' => [
+        'vertical' => \PhpOffice\PhpSpreadsheet\style\Alignment::VERTICAL_CENTER
+      ],
+      'borders' => [
+        'top' => ['borderstyle' => \PhpOffice\PhpSpreadsheet\style\Border::BORDER_THIN],
+        'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\style\Border::BORDER_THIN],
+        'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\style\Border::BORDER_THIN],
+        'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\style\Border::BORDER_THIN]
+      ]
+    ];
+
+    $sheet->setCellValue('A1', "DATA ABSEN KARYAWAN");
+    $sheet->mergeCells('A1:E1');
+    $sheet->getStyle('A1')->getFont()->setBold(true);
+
+    $sheet->setCellValue('A3', "ID");
+    $sheet->setCellValue('B3', "USERNAME");
+    $sheet->setCellValue('C3', "NAMA DEPAN");
+    $sheet->setCellValue('D3', "NAMA BELAKANG");
+    $sheet->setCellValue('E3', "IMAGE");
+    $sheet->setCellValue('F3', "EMAIL");
+
+    $sheet->getStyle('A3')->applyFromArray($style_col);
+    $sheet->getStyle('B3')->applyFromArray($style_col);
+    $sheet->getStyle('C3')->applyFromArray($style_col);
+    $sheet->getStyle('D3')->applyFromArray($style_col);
+    $sheet->getStyle('E3')->applyFromArray($style_col);
+    $sheet->getStyle('F3')->applyFromArray($style_col);
+
+    $karyawan = $this->m_model->getDataKaryawan();
+
+    $no = 1;
+    $numrow = 4;
+    foreach ($karyawan as $data) {
+      $sheet->setCellValue('A' . $numrow, $no);
+      $sheet->setCellValue('B' . $numrow, $data->username);
+      $sheet->setCellValue('C' . $numrow, $data->nama_depan);
+      $sheet->setCellValue('D' . $numrow, $data->nama_belakang);
+      $sheet->setCellValue('E' . $numrow, $data->email);
+
+      $sheet->getStyle('A' . $numrow)->applyFromArray($style_row);
+      $sheet->getStyle('B' . $numrow)->applyFromArray($style_row);
+      $sheet->getStyle('C' . $numrow)->applyFromArray($style_row);
+      $sheet->getStyle('D' . $numrow)->applyFromArray($style_row);
+      $sheet->getStyle('E' . $numrow)->applyFromArray($style_row);
+
+      $no++;
+      $numrow++;
     }
 
-   //untuk menampilkan from profil
-    public function profil_karyawan()
+    $sheet->getColumnDimension('A')->setWidth(5);
+    $sheet->getColumnDimension('B')->setWidth(25);
+    $sheet->getColumnDimension('C')->setWidth(50);
+    $sheet->getColumnDimension('D')->setWidth(20);
+    $sheet->getColumnDimension('E')->setWidth(30);
+
+    $sheet->getDefaultRowDimension()->setRowHeight(-1);
+
+    $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+
+    $sheet->setTitle("LAPORAN DATA ABSEN KARYAWAN");
+    header('Content-Type: aplication/vnd.openxmlformants-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="data_karyawan.xlsx"');
+    header('Cache-Control: max-age=0');
+
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('php://output');
+
+  }
+
+ public function absen()
     {
-        $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
-        $this->load->view('karyawan/profil_karyawan', $data); // Mengirimkan variabel $data ke tampilan
- }
-    
- public function upload_img($value)
- {
-     $kode = round(microtime(true) * 1000);
-     $config['upload_path'] = '../../image/karyawan';
-     $config['allowed_types'] = 'jpg|png|jpeg';
-     $config['max_size'] = '30000';
-     $config['file_name'] = $kode;
-     
-     $this->load->library('upload', $config); // Load library 'upload' with config
-     
-     if (!$this->upload->do_upload($value)) {
-         return array(false, '');
-     } else {
-         $fn = $this->upload->data();
-         $nama = $fn['file_name'];
-         return array(true, $nama);
-     }
- }
+        $this->load->view('karyawan/absen');
+    }
 
- public function aksi_update_profile()
- {
-     $image = $_FILES['foto']['name'];
-     $foto_temp = $_FILES['foto']['tmp_name'];
-     $username = $this->input->post('username');
-     $nama_depan = $this->input->post('nama_depan');
-     $nama_belakang = $this->input->post('nama_belakang');
-    //  $password_lama = $this->input->post('password_lama');
-    //  $password_baru = $this->input->post('password_baru');
-    //  $konfirmasi_password = $this->input->post('konf$konfirmasi_password');
-     // $foto = $this->upload_img('foto');
-     // Jika ada foto yang diunggah
-     if ($image) {
-         $kode = round(microtime(true) * 100);
-         $file_name = $kode . '_' . $image;
-         $upload_path = './image/karyawan' . $file_name;
+    public function aksi_absen()
+    {        
+        date_default_timezone_set('Asia/Jakarta');
+        $waktu_sekarang = date('H:i:s');
+        $id_karyawan = $this->session->userdata('id');
+        $tanggal_absensi = date('Y-m-d');
 
-         if (move_uploaded_file($foto_temp, $upload_path)) {
-             // Hapus image lama jika ada
-             $old_file = $this->m_model->get_foto_by_id($this->input->post('id'));
-             if ($old_file && file_exists(' .image/karyawan' . $old_file)) {
-                 unlink(' ./image/karyawan' . $old_file);
-             }
+        // Cek apakah karyawan sudah pulang
+        $absensi_terakhir = $this->m_model->getlast('absen', array(
+            'id_karyawan' => $id_karyawan
+        ));
 
-             $data = [
-                 'image' => $file_name,
-                 'username' => $username,
-                 'nama_depan' => $nama_depan,
-                 'nama_belakang' => $nama_belakang,
-                //  'password_lama' => $password_lama,
-                //  'password_baru' => $password_baru,
-                //  'konfirmasi_password' => $konfirmasi_password,
-             ];
-         } else {
-             // Gagal mengunggah image baru
-             redirect(base_url('karyawan/history'));
-         }
-     } else {
-         // Jika tidak ada image yang diunggah
-         $data = [
-             'username' => $username,
-             'nama_depan' => $nama_depan,
-             'nama_belakang' => $nama_belakang,
-            //  'password_lama' => $password_lama,
-            //  'password_baru' => $password_baru,
-            //  'konfirmasi_password' => $konfirmasi_password,
-         ];
-     }
+        // Mengecek apakah tanggal terakhir absensi sudah berbeda
+        if ($absensi_terakhir && $absensi_terakhir->date !== $tanggal_absensi) {
+            $absensi_terakhir = null; // Atur $absensi_terakhir menjadi null jika tanggal berbeda
+        }
 
-     // Eksekusi dengan model ubah_data
-     $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
-
-     if ($update_result) {
-         $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
-     Berhasil Merubah Profile
-             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-         </div>');
-         redirect(base_url('karyawan/profil_karyawan'));
-     } else {
-         redirect(base_url('karyawan/profil_karyawan'));
-     }
-}
-public function hapus_image()
- { 
-    $data = array(
-        'image' => NULL
-    );
-
-    $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->session->userdata('id')));
-    if($eksekusi) {
-        
-        $this->session->set_flashdata('sukses','<div class="alert alert-dark alert-dismissible fade show" role="alert">
-        Berhasil Menghapus Profile
+        if ($absensi_terakhir && $absensi_terakhir->jam_keluar === null) {
+            // Karyawan belum pulang, tidak dapat melakukan absensi tambahan
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Anda tidak dapat melakukan absensi tambahan
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
-        redirect(base_url('karyawan/profil_karyawan'));
+            redirect(base_url('karyawan/absen'));
+        } else {
+            // Karyawan sudah pulang atau belum ada catatan absensi
+            $data = [
+                'id_karyawan' => $id_karyawan,
+                'kegiatan' => $this->input->post('kegiatan'),
+                'jam_pulang' => '-',
+                'jam_masuk' => $waktu_sekarang, 
+                'date' => $tanggal_absensi,  
+                'keterangan' => '-',
+                'status' => 'not'
+            ];
+
+            $this->m_model->tambah_data('absen', $data);
+            redirect(base_url('karyawan/history'));
+        }
+    }
+public function izin()
+    {       
+     
+        $this->load->view('karyawan/izin');
+    }
+public function aksi_izin()
+{        
+    date_default_timezone_set('Asia/Jakarta');
+    $waktu_sekarang = date('H:i:s');
+    $id_karyawan = $this->session->userdata('id');
+    $tanggal = date('Y-m-d');
+
+    
+    $izin = $this->m_model->getwhere('absen', array(
+        'id' => $id,
+        'date' => $tanggal
+    ));
+
+    if ($izin->num_rows() > 0) {
+        // Karyawan sudah memiliki catatan izin pada tanggal yang sama
+        $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Anda Sudah Mengajukan Izin Hari Ini
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>');
+        redirect(base_url('karyawan/izin'));
     } else {
-        $this->session->set_flashdata('error' , 'gagal...');
-        redirect(base_url('karyawan/profil_karyawan'));
+    
+        
+        // Tambahkan pengecekan apakah sudah ada data absen pada tanggal yang sama
+        $absen = $this->m_model->getwhere('absen', array(
+            'id_karyawan' => $id_karyawan,
+            'date' => $tanggal
+        ));
+
+        if ($absen->num_rows() > 0) {
+            // Karyawan sudah memiliki catatan absen pada tanggal yang sama
+            $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Anda Sudah Melakukan Absen Hari Ini
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+            redirect(base_url('karyawan/izin'));
+        } else {
+            // Karyawan belum memiliki catatan izin atau absen pada tanggal yang sama, bisa melanjutkan
+            $data = [
+                'id_karyawan' => $id_karyawan,
+                'kegiatan' => '-',
+                'jam_pulang' => '-',
+                'jam_masuk' => '-', 
+                'date' => $tanggal,  
+                'keterangan' => $this->input->post('izin'),
+                'status' => 'done'
+            ];
+        
+            $this->m_model->tambah_data('absen', $data);
+            
+            redirect(base_url('karyawan/history'));
+        }
     }
 }
 
-public function aksi_ubah_password()
-{
-
-    $password_baru = $this->input->post('password_baru');
-    $konfirmasi_password = $this->input->post('konfirmasi_password');
-    
-
-        
-        if (!empty($password_baru) && strlen($password_baru) >= 8) {
-            if ($password_baru === $konfirmasi_password) {
-                $data['password'] = md5($password_baru);
-            }
-        
-        $this->session->set_userdata($data);
-
-        $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
-        $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
-        Berhasil Merubah Password
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>');
-        redirect(base_url('karyawan/profil_karyawan'));
-        } else {
-            $this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    Password anda kurang dari 8
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>');
-            redirect(base_url('karyawan/profil_karyawan'));
-        }
-    
-
-    
-    }
-    public function aksi_password()
+   //untuk menampilkan from profil
+   public function profile()
    {
-      $password_baru = $this->input->post('password_baru');
-      $password_lama = $this->input->post('password_lama');
+       $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
+       $this->load->view('karyawan/profile', $data); // Mengirimkan variabel $data ke tampilan
+}
+   
+public function upload_img($value)
+{
+    $kode = round(microtime(true) * 1000);
+    $config['upload_path'] = '../../image/karyawan';
+    $config['allowed_types'] = 'jpg|png|jpeg';
+    $config['max_size'] = '30000';
+    $config['file_name'] = $kode;
+    
+    $this->load->library('upload', $config); // Load library 'upload' with config
+    
+    if (!$this->upload->do_upload($value)) {
+        return array(false, '');
+    } else {
+        $fn = $this->upload->data();
+        $nama = $fn['file_name'];
+        return array(true, $nama);
+    }
+}
+public function aksi_ubah_profilee()
+   {
+       $image = $_FILES['foto']['name'];
+       $foto_temp = $_FILES['foto']['tmp_name'];
+       $password_baru = $this->input->post('password_baru');
        $konfirmasi_password = $this->input->post('konfirmasi_password');
-  
-          //kondisi jika ada password baru
-          if (!empty($password_baru)) {
-            // Pastikan password baru dan konfirmasi password sama
-            if ($password_baru === $konfirmasi_password) {
-                // Enkripsi password baru dengan md5 (harap ganti dengan metode keamanan yang lebih kuat seperti bcrypt)
-                $hashed_password = md5($password_baru);
-        
-                // Perbarui data password pengguna di sesi
-                $this->session->set_userdata('password', $hashed_password);
-        
-                // Perbarui data password pengguna di database
-                $data['password'] = $hashed_password;
-        
-                // Simpan data pengguna ke database
-                $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
-        
-                if ($update_result) {
-                    redirect(base_url('karyawan/profil_karyawan'));
-                } else {
-                    // Handle error jika gagal menyimpan data ke database
-                    $this->session->set_flashdata('message', 'Terjadi kesalahan saat menyimpan data ke database.');
-                    redirect(base_url('karyawan/profil_karyawan'));
-                }
-            } else {
-                $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama');
-                redirect(base_url('karyawan/profil_karyawan'));
-            }
-        }
-        
-  
-          //untuk melakukan pembaruan data
-        //   $this->session->set_userdata($data);
- } 
- public function menu_absen()
- {
-    $data['absen'] = $this->m_model->get_by_karyawan('absen', 'kegiatan', $id)->result();
-        $this->load->view( 'karyawan/menu_absen');
-    }
- public function menu_izin()
- {
-        $this->load->view( 'karyawan/menu_izin');
-    }
+       $email = $this->input->post('email');
+       $username = $this->input->post('username');
+       $nama_depan = $this->input->post('nama_depan');
+       $nama_belakang = $this->input->post('nama_belakang');
+
+       // Jika ada foto yang diunggah
+       if ($image) {
+           $kode = round(microtime(true) * 100);
+           $file_name = $kode . '_' . $image;
+           $upload_path = './image/karyawan/' . $file_name;
+
+           if (move_uploaded_file($foto_temp, $upload_path)) {
+               // Hapus image lama jika ada
+               $old_file = $this->m_model->get_foto_by_id($this->session->userdata('id'));
+               if ($old_file && file_exists('./image/karyawan/' . $old_file)) {
+                   unlink('./image/karyawan/' . $old_file);
+               }
+
+               $data = [
+                   'image' => $file_name,
+                   'email' => $email,
+                   'username' => $username,
+                   'nama_depan' => $nama_depan,
+                   'nama_belakang' => $nama_belakang,
+               ];
+           } else {
+               // Gagal mengunggah image baru
+               redirect(base_url('karyawan/profile'));
+           }
+       } else {
+           // Jika tidak ada image yang diunggah
+           $data = [
+               'email' => $email,
+               'username' => $username,
+               'nama_depan' => $nama_depan,
+               'nama_belakang' => $nama_belakang,
+           ];
+       }
+
+       // Kondisi jika ada password baru
+       if (!empty($password_baru)) {
+           // Pastikan password baru dan konfirmasi password sama
+           if ($password_baru === $konfirmasi_password) {
+               // Wadah password baru
+               $data['password'] = md5($password_baru);
+           } else {
+               $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama');
+               redirect(base_url('karyawan/profile'));
+           }
+       }
+
+       // Eksekusi dengan model ubah_data
+       $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
+
+       if ($update_result) {
+           $this->session->set_flashdata('sukses', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+       Berhasil Merubah Profile
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>');
+           redirect(base_url('karyawan/profile'));
+       } else {
+           redirect(base_url('karyawan/profile'));
+       }
+   }
+
+   public function hapus_image()
+{ 
+   $data = array(
+       'image' => NULL
+   );
+
+   $eksekusi = $this->m_model->ubah_data('user', $data, array('id'=>$this->session->userdata('id')));
+   if($eksekusi) {
+       
+       $this->session->set_flashdata('sukses','<div class="alert alert-dark alert-dismissible fade show" role="alert">
+       Berhasil Menghapus Profile
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>');
+       redirect(base_url('karyawan/profile'));
+   } else {
+       $this->session->set_flashdata('error' , 'gagal...');
+       redirect(base_url('karyawan/profile'));
+   }
+}
+
+
 }
 ?>

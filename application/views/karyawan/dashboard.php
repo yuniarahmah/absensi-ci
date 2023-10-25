@@ -54,11 +54,11 @@
   <i>karyawan <hr></i>
   <a href="/absensii/karyawan/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-clock-rotate-left"></i>  Dashboard</span></a>
   
-  <a href="<?php echo base_url('karyawan/menu_absen') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Menu Absen</span></a></a>
+  <a href="<?php echo base_url('karyawan/absen') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-newspaper"></i> Menu Absen</span></a></a>
 
-  <a href="<?php echo base_url('karyawan/menu_izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Menu Izin</span></a></a>
+  <a href="<?php echo base_url('karyawan/izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-envelope"></i> Menu Izin</span></a></a>
 
-  <a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
+  <a href="<?php echo base_url('karyawan/profile') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
   
   <a href="<?php echo base_url('karyawan/history')?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
 
@@ -73,7 +73,7 @@
                     </h1>
    </div>    
      <div class="row mb-sm-0" style="margin-top: 25px;">
-        <div class="col-4" style="margin-left: 10%;">
+        <div class="col-4" >
           <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
             <i>Total Karyawan</i>
             <div class="card-header">
@@ -84,13 +84,24 @@
             </div>
           </div>
         </div>
-        <div class="col-4" style="margin-left: 25px; ">
+        <div class="col-4" >
           <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
             <i>Total Absen</i>
             <div class="card-header">
           </div>
             <div class="card-body">
               <font size="15"><?php echo $user?>
+                <img src="https://i.pinimg.com/originals/3a/68/9c/3a689c7e5ee4d67ac98240652e8c28c4.png" style="width:10%; margin-left:65%"></font>
+            </div>
+          </div>
+        </div>
+        <div class="col-4" >
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <i>Total Izin</i>
+            <div class="card-header">
+          </div>
+            <div class="card-body">
+              <font size="15"><?php echo $jumlah_izin;?> 
                 <img src="https://i.pinimg.com/originals/3a/68/9c/3a689c7e5ee4d67ac98240652e8c28c4.png" style="width:10%; margin-left:65%"></font>
             </div>
           </div>

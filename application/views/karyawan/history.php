@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="path_to_sweetalert/sweetalert.css">
+
 </head>
 <body>
     
@@ -52,11 +54,15 @@
 <div class="d-flex">
   <div class="w3-sidebar w3-bar-block w3-black" style="width:15%"><br>
   <i>karyawan <hr></i>
-  <a href="/absensii/karyawan/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i>  Dashboard</span></a>
+  <a href="/absensii/karyawan/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-clock-rotate-left"></i>  Dashboard</span></a>
+  
+  <a href="<?php echo base_url('karyawan/absen') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-newspaper"></i> Menu Absen</span></a></a>
+
+  <a href="<?php echo base_url('karyawan/izin') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-envelope"></i> Menu Izin</span></a></a>
+
+  <a href="<?php echo base_url('karyawan/profile') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
   
   <a href="<?php echo base_url('karyawan/history')?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
-
-<a href="<?php echo base_url('karyawan/profil_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 
 </div>
 <hr>
@@ -92,55 +98,117 @@
        <td onclick="myFunction()"><?php echo $row->status?></td>
        <td style="display:flex; gap:5%"> 
        <a href="<?php echo base_url('karyawan/ubah_karyawan/' . $row->id)?>" class="btn btn-dark"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <button onclick="hapus(<?php echo $row->id ?>)"
-                        class="btn btn-danger">
-                        <i class="fa-solid fa-trash"></i>
-          </button>
-  <?php if ($row->status === "done"):?>
-    <button disabled class="btn btn-success" type="submit">pulang</i></a></button>
-    <?php else:?>
-    <button onclick="pulang('<?php echo $row->id?>')" class="btn btn-success" type="submit">pulang</i></a></button>
-    <?php endif;?>
+       <button onclick="hapus(<?php echo $row->id ?>)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+       <?php if ($row->status === "done") : ?>
+  <button disabled class="btn btn-success" type="button"><i class="fas fa-check"></i></button>
+<?php else : ?>
+  <button onclick="pulang(<?= $row->id ?>)" class="btn btn-success" type="button"><i class="fas fa-home"></i></button>
+<?php endif; ?>
+
         </td>
      </tr>
      <?php endforeach ?>
-     <a style="margin-bottom:2%" href="<?php echo base_url('karyawan/export_data_karyawan')?>" class="btn btn-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
+     <a style="margin-bottom:2%" href="<?php echo base_url('karyawan/export')?>" class="btn btn-secondary">Export <i class="fa-solid fa-file-arrow-down"></i> </a>
    </tbody>
  </table>
 </div>
 </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script>
-        function pulang(id){
-          var yes = confirm('Yakin pulang?');
-          if(yes == true) {
-            window.location.href = "<?php echo base_url('karyawan/pulang/')?>" + id;
-        }
-    }
-    function hapus(id) {
-        swal.fire({
-            title: 'Yakin untuk menghapus data ini?',
-            text: "Data ini akan terhapus permanen",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'Batal',
-            confirmButtonText: 'Ya Hapus'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil Dihapus',
-                    showConfirmButton: false,
-                    timer: 1500,
+<script>
+function pulang(id) {
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger',
+    },
+    buttonsStyling: false,
+  });
 
-                }).then(function() {
-                    window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/')?>" + id;
-                });
-            }
-        });
+  // Get the current time
+  const currentTime = new Date();
+  const currentHour = currentTime.getHours();
+
+  // Define the allowed time (e.g., 14:00)
+  const allowedHour = 13;
+
+  if (currentHour < allowedHour) {
+    // Display an error message if it's too early to leave
+    swalWithBootstrapButtons.fire(
+      'Pulang Dilarang',
+      'Anda tidak dapat pulang sebelum jam 14.00.',
+      'error'
+    );
+  } else {
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Pulang?',
+        text: 'Anda Yakin Ingin pulang!',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, pulang!',
+        cancelButtonText: 'Tidak, batalkan!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to the URL after confirmation
+          window.location.href = '<?= base_url("karyawan/pulang/") ?>' + id;
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire('Dibatalkan', 'Tidak Jadi Pulang :)', 'error');
+        }
+      });
+  }
+}
+</script>
+
+  <script>
+    //     function pulang(id){
+    //       var yes = confirm('Yakin pulang?');
+    //       if(yes == true) {
+    //         window.location.href = "<?php echo base_url('karyawan/pulang/')?>" + id;
+    //     }
+    // }
+    function hapus(id) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger',
+        },
+
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+
+            )
+            .then(function() {
+              window.location.href = "<?php echo base_url('karyawan/hapus_karyawan/') ?>" + id;
+            })
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'cancel',
+            'Your file data is safe :>',
+            'error'
+          )
+        }
+      })
     }
 </script>
 <script>

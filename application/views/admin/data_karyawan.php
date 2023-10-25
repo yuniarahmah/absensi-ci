@@ -8,12 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<style>
-  body{
-   width: 100%;
-   min-height: 200px;
-}
-</style>
 <body>
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;">
@@ -70,15 +64,15 @@
   <a href="<?php echo base_url('admin/data_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Data Karyawan</span></a></a>
 
   <a href="<?php echo base_url('admin/profile') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> profil</span></a></a>
-  
+
   <a href="<?php echo base_url('admin/rekap_b') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-calendar-day"></i> rekap bulanan</span></a></a>
 
-  <a href="<?php echo base_url('admin/rekap_h') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-calendar"></i> rekap harian </span></a></a>
+<a href="<?php echo base_url('admin/rekap_h') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-regular fa-calendar"></i> rekap harian </span></a></a>
 
-  <a href="<?php echo base_url('admin/rekap_m') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-calendar-week"></i> rekap mingguan</span></a></a>
+<a href="<?php echo base_url('admin/rekap_m') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-calendar-week"></i> rekap mingguan</span></a></a>
 </div>
 
-<div style="width:80%; margin-left:12%">
+<div style="width:100%; margin-left:15%">
       <hr>
       <div class="row mb-sm-0" style="margin-top: 25px;">
         <di class="col-3" style="margin-left: 10%;">
@@ -130,52 +124,46 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-3 py-2 text-xs text-gray-500">NO</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KARYAWAN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KEGIATAN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">TANGGAL</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KETERANGAN IZIN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">STATUS</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">USERNAME</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">EMAIL</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">NAMA DEPAN</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">NAMA BELAKANG</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">PASSWORD</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">IMAGE</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
-                            <?php $no=0; foreach ($absensi as $absen): $no++ ?>
+                            <?php $no=0; foreach ($user as $absen): $no++ ?>
                             <tr class="whitespace-nowrap">
                                 <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo tampil_karyawan_byid($absen->id_karyawan); ?>
+                                        <?php echo $absen->id; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->kegiatan; ?>
+                                        <?php echo $absen->username; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->date; ?>
+                                        <?php echo $absen->email; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->jam_masuk; ?>
+                                        <?php echo $absen->nama_depan; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->jam_pulang; ?>
+                                        <?php echo $absen->nama_belakang; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->keterangan; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $absen->status; ?>
+                                    <img src="<?php echo base_url('image/karyawan/' . $absen->image) ?>" width="50px" height="40px">
                                     </div>
                                 </td>
                             </tr>

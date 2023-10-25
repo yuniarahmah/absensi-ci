@@ -3,6 +3,10 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
 
 class Admin extends CI_Controller {
 
@@ -183,109 +187,96 @@ class Admin extends CI_Controller {
     }
 
     public function export_admin_bulanan()
- {
+    {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-
+    
         $style_col = [
-            'font' => [ 'bold' => true ],
+            'font' => ['bold' => true],
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER
             ],
             'borders' => [
-                'top' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                'right' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                'bottom' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                'left' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ]
+                'top' => ['borderStyle' => Border::BORDER_THIN],
+                'right' => ['borderStyle' => Border::BORDER_THIN],
+                'bottom' => ['borderStyle' => Border::BORDER_THIN],
+                'left' => ['borderStyle' => Border::BORDER_THIN]
             ]
         ];
-
+    
         $style_row = [
             'alignment' => [
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+                'vertical' => Alignment::VERTICAL_CENTER
             ],
             'borders' => [
-                'top' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                'right' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                'bottom' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ],
-                'left' => [ 'borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN ]
+                'top' => ['borderStyle' => Border::BORDER_THIN],
+                'right' => ['borderStyle' => Border::BORDER_THIN],
+                'bottom' => ['borderStyle' => Border::BORDER_THIN],
+                'left' => ['borderStyle' => Border::BORDER_THIN]
             ]
         ];
-
-        $sheet->setCellValue( 'A1', 'DATA admin' );
-        $sheet->mergeCells( 'A1:E1' );
-        $sheet->getStyle( 'A1' )->getFont()->setBold( true );
-
+    
+        $sheet->setCellValue('A1', 'DATA admin');
+        $sheet->mergeCells('A1:H1');
+        $sheet->getStyle('A1')->getFont()->setBold(true);
+    
         // Head
-        $sheet->setCellValue( 'A3', 'NO' );
-        $sheet->setCellValue( 'B3', 'NAMA' );
-        $sheet->setCellValue( 'C3', 'KEGIATAN' );
-        $sheet->setCellValue( 'D3', 'DATE' );
-        $sheet->setCellValue( 'E3', 'JAM MASUK' );
-        $sheet->setCellValue( 'F3', 'JAM PULANG' );
-        $sheet->setCellValue( 'G3', 'KETERANGAN IZIN' );
-        $sheet->setCellValue( 'H3', 'STATUS' );
-
-        $sheet->getStyle( 'A3' )->applyFromArray( $style_col );
-        $sheet->getStyle( 'B3' )->applyFromArray( $style_col );
-        $sheet->getStyle( 'C3' )->applyFromArray( $style_col );
-        $sheet->getStyle( 'D3' )->applyFromArray( $style_col );
-        $sheet->getStyle( 'E3' )->applyFromArray( $style_col );
-        $sheet->getStyle( 'F3' )->applyFromArray( $style_col );
-        $sheet->getStyle( 'G3' )->applyFromArray( $style_col );
-        $sheet->getStyle( 'H3' )->applyFromArray( $style_col );
-
-        // Get data from database
-        $data = $this->m_model->get_admin();
-
+        $sheet->setCellValue('A3', 'NO');
+        $sheet->setCellValue('B3', 'NAMA');
+        $sheet->setCellValue('C3', 'KEGIATAN');
+        $sheet->setCellValue('D3', 'DATE');
+        $sheet->setCellValue('E3', 'JAM MASUK');
+        $sheet->setCellValue('F3', 'JAM PULANG');
+        $sheet->setCellValue('G3', 'KETERANGAN IZIN');
+        $sheet->setCellValue('H3', 'STATUS');
+    
+        $sheet->getStyle('A3:H3')->applyFromArray($style_col);
+    
+        // Get data from the database
+        $data = $this->m_model->getDataKaryawan();
+    
         $no = 1;
         $numrow = 4;
-        foreach ( $data as $dataa ) {
-            $sheet->setCellValue( 'A'.$numrow, $no );
-            $sheet->setCellValue( 'B'.$numrow, $dataa->id );
-            $sheet->setCellValue( 'C'.$numrow, $dataa->username );
-            $sheet->setCellValue( 'D'.$numrow, $dataa->keterangan );
-            $sheet->setCellValue( 'E'.$numrow, $dataa->date );
-            $sheet->setCellValue( 'F'.$numrow, $dataa->jam_masuk );
-            $sheet->setCellValue( 'G'.$numrow, $dataa->jam_pulang );
-            $sheet->setCellValue( 'H'.$numrow, $dataa->status );
-
-            $sheet->getStyle( 'A'.$numrow )->applyFromArray( $style_row );
-            $sheet->getStyle( 'B'.$numrow )->applyFromArray( $style_row );
-            $sheet->getStyle( 'C'.$numrow )->applyFromArray( $style_row );
-            $sheet->getStyle( 'D'.$numrow )->applyFromArray( $style_row );
-            $sheet->getStyle( 'E'.$numrow )->applyFromArray( $style_row );
-            $sheet->getStyle( 'E'.$numrow )->applyFromArray( $style_row );
-            $sheet->getStyle( 'G'.$numrow )->applyFromArray( $style_row );
-            $sheet->getStyle( 'H'.$numrow )->applyFromArray( $style_row );
-
+        foreach ($data as $dataa) {
+            $sheet->setCellValue('A' . $numrow, $no);
+            $sheet->setCellValue('B' . $numrow, $dataa->username);
+            $sheet->setCellValue('C' . $numrow, $dataa->kegiatan);
+            $sheet->setCellValue('D' . $numrow, $dataa->date);
+            $sheet->setCellValue('E' . $numrow, $dataa->jam_masuk);
+            $sheet->setCellValue('F' . $numrow, $dataa->jam_pulang);
+            $sheet->setCellValue('G' . $numrow, $dataa->keterangan);
+            $sheet->setCellValue('H' . $numrow, $dataa->status);
+    
+            $sheet->getStyle('A' . $numrow . ':H' . $numrow)->applyFromArray($style_row);
+    
             $no++;
             $numrow++;
         }
-
-        $sheet->getColumnDimension( 'A' )->setWidth( 5 );
-        $sheet->getColumnDimension( 'B' )->setWidth( 25 );
-        $sheet->getColumnDimension( 'C' )->setWidth( 25 );
-        $sheet->getColumnDimension( 'D' )->setWidth( 20 );
-        $sheet->getColumnDimension( 'E' )->setWidth( 10 );
-        $sheet->getColumnDimension( 'F' )->setWidth( 25 );
-        $sheet->getColumnDimension( 'G' )->setWidth( 25 );
-        $sheet->getColumnDimension( 'H' )->setWidth( 15 );
-
-        $sheet->getDefaultRowDimension()->setRowHeight( -1 );
-
-        $sheet->getPageSetup()->setOrientation( \PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE );
-
-        $sheet->setTitle( 'LAPORAN DATA admin' );
-
-        header( 'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' );
-        header( 'Content-Disposition: attachment; filename="bulanan.xlsx"' );
-        header( 'Cache-Control: max-age=0' );
-
-        $writer = new Xlsx( $spreadsheet );
-        $writer->save( 'php://output' );
-}
+    
+        // Set column widths
+        $columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        foreach ($columns as $col) {
+            $sheet->getColumnDimension($col)->setWidth(15);
+        }
+    
+        // Set row heights
+        for ($i = 4; $i <= $numrow; $i++) {
+            $sheet->getRowDimension($i)->setRowHeight(20);
+        }
+    
+        $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+    
+        $sheet->setTitle('LAPORAN DATA admin');
+    
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="bulanan.xlsx"');
+        header('Cache-Control: max-age=0');
+    
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+    }
+    
 
     function laporan_harian() {
         cek_session_admin();
@@ -294,10 +285,10 @@ class Admin extends CI_Controller {
         $this->template->load( 'app/template', 'app/mod_laporan/view_harian', $data );
     }
 
-    public function profil_admin()
+    public function profile()
     {
         $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
-        $this->load->view('admin/profil_admin', $data); // Mengirimkan variabel $data ke tampilan
+        $this->load->view('admin/profile', $data); // Mengirimkan variabel $data ke tampilan
  }
     
  public function upload_img($value)
@@ -319,89 +310,76 @@ class Admin extends CI_Controller {
      }
  }
 
- public function aksi_update_profile()
+ public function aksi_ubah_profilee()
  {
      $image = $_FILES['foto']['name'];
      $foto_temp = $_FILES['foto']['tmp_name'];
+     $password_baru = $this->input->post('password_baru');
+     $konfirmasi_password = $this->input->post('konfirmasi_password');
+     $email = $this->input->post('email');
      $username = $this->input->post('username');
      $nama_depan = $this->input->post('nama_depan');
      $nama_belakang = $this->input->post('nama_belakang');
-     // $foto = $this->upload_img('foto');
+
      // Jika ada foto yang diunggah
      if ($image) {
          $kode = round(microtime(true) * 100);
          $file_name = $kode . '_' . $image;
-         $upload_path = './image/admin' . $file_name;
+         $upload_path = './image/admin/' . $file_name;
 
          if (move_uploaded_file($foto_temp, $upload_path)) {
              // Hapus image lama jika ada
-             $old_file = $this->m_model->get_foto_by_id($this->input->post('id'));
-             if ($old_file && file_exists(' ./image/admin' . $old_file)) {
-                 unlink(' ./image/admin' . $old_file);
+             $old_file = $this->m_model->get_foto_by_id($this->session->userdata('id'));
+             if ($old_file && file_exists('./image/admin/' . $old_file)) {
+                 unlink('./image/admin/' . $old_file);
              }
 
              $data = [
                  'image' => $file_name,
+                 'email' => $email,
                  'username' => $username,
                  'nama_depan' => $nama_depan,
                  'nama_belakang' => $nama_belakang,
              ];
          } else {
              // Gagal mengunggah image baru
-             redirect(base_url('admin/dasboard'));
+             redirect(base_url('admin/profile'));
          }
      } else {
          // Jika tidak ada image yang diunggah
          $data = [
+             'email' => $email,
              'username' => $username,
              'nama_depan' => $nama_depan,
              'nama_belakang' => $nama_belakang,
          ];
      }
 
+     // Kondisi jika ada password baru
+     if (!empty($password_baru)) {
+         // Pastikan password baru dan konfirmasi password sama
+         if ($password_baru === $konfirmasi_password) {
+             // Wadah password baru
+             $data['password'] = md5($password_baru);
+         } else {
+             $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama');
+             redirect(base_url('admin/profile'));
+         }
+     }
+
      // Eksekusi dengan model ubah_data
      $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
 
      if ($update_result) {
-         $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
+         $this->session->set_flashdata('sukses', '<div class="alert alert-success alert-dismissible fade show" role="alert">
      Berhasil Merubah Profile
              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
          </div>');
-         redirect(base_url('admin/profil_admin'));
+         redirect(base_url('admin/profile'));
      } else {
-         redirect(base_url('admin/profil_admin'));
+         redirect(base_url('admin/profile'));
      }
-}
-public function aksi_ubah_password()
-{
-
-    $password_baru = $this->input->post('password_baru');
-    $password_lama = $this->input->post('password_lama');
-    $konfirmasi_password = $this->input->post('konfirmasi_password');
-    
-
-        
-        if (!empty($password_baru) && strlen($password_baru) >= 8) {
-            if ( $password_baru === $konfirmasi_password) {
-                $data['password'] = md5($password_baru);
-            }
-        
-        $this->session->set_userdata($data);
-
-        $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
-        $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
-        Berhasil Merubah Password
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>');
-        redirect(base_url('admin/profil_admin'));
-        } else {
-            $this->session->set_flashdata('message','<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    Password anda kurang dari 8
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>');
-            redirect(base_url('admin/profil_admin'));
-        }
-}
+ }
 public function hapus_image()
  { 
     $data = array(
@@ -415,62 +393,22 @@ public function hapus_image()
         Berhasil Menghapus Profile
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
-        redirect(base_url('admin/profil_admin'));
+        redirect(base_url('admin/profile'));
     } else {
         $this->session->set_flashdata('error' , 'gagal...');
-        redirect(base_url('admin/profil_admin'));
+        redirect(base_url('admin/profile'));
     }
 }
 
-   public function aksi_password()
-   {
-       $password_baru = $this->input->post('password_baru');
-       $konfirmasi_password = $this->input->post('konfirmasi_password');
-  
-          //kondisi jika ada password baru
-          if (!empty($password_baru)) {
-            // Pastikan password baru dan konfirmasi password sama
-            if ($password_baru === $konfirmasi_password) {
-                // Enkripsi password baru dengan md5 (harap ganti dengan metode keamanan yang lebih kuat seperti bcrypt)
-                $hashed_password = md5($password_baru);
-        
-                // Perbarui data password pengguna di sesi
-                $this->session->set_userdata('password', $hashed_password);
-        
-                // Perbarui data password pengguna di database
-                $data['password'] = $hashed_password;
-        
-                // Simpan data pengguna ke database
-                $update_result = $this->m_model->ubah_data('user', $data, array('id' => $this->session->userdata('id')));
-        
-                if ($update_result) {
-                    redirect(base_url('admin/profil_admin'));
-                } else {
-                    // Handle error jika gagal menyimpan data ke database
-                    $this->session->set_flashdata('message', 'Terjadi kesalahan saat menyimpan data ke database.');
-                    redirect(base_url('admin/profil_admin'));
-                }
-            } else {
-                $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama');
-                redirect(base_url('admin/profil_admin'));
-            }
-        }
-        
-  
-          //untuk melakukan pembaruan data
-        //   $this->session->set_userdata($data);
-          $update_result = $this->m_model->ubah_data( 'user', $data, array( 'id' => $this->session->userdata( 'id' )));
-  
-          if ($update_result) {
-              redirect( base_url( 'admin/profil_admin' ) );
-          } else {
-              redirect( base_url( 'admin/profil_admin' ) );
-          }
- } 
  //function untuk menghapus
  public function hapus_admin( $id ) {
     $this->m_model->delete( 'absen', 'id', $id );
     redirect( base_url( 'admin/dashboard' ) );
 }  
+public function data_karyawan()
+  {
+    $data['user'] = $this->m_model->get_data('user')->result();
+    $this->load->view('admin/data_karyawan', $data);
+}
 }
 ?>
