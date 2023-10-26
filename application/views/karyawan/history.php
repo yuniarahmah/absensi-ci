@@ -67,12 +67,12 @@
 </div>
 <hr>
 
-<div class="how" style="widht:40%; height:35vh; margin-left:18%; ">
+<div class="how" style="widht:50%; margin-left:18%; ">
  <table class="table table-striped-columns">
   <div class="shadow p-3 mb-5 bg-body-tertiary rounded"><i class="fa-solid fa-clock-rotate-left"> History Karyawan</i>
 </div>
     <thead>
-   <tr class="table-secondary">
+   <tr class="table-dark">
        <th>NO</th>
        <th>Nama</th>
        <th>Kegiatan</th>
@@ -88,7 +88,7 @@
    <?php $no=0; foreach($karyawan as $row ): $no++ ?>
 
      <tr>
-       <th><?php echo $no ?></th>
+       <td><?php echo $no ?></td>
        <td><?php echo tampil_karyawan_byid($row->id_karyawan)?></td>
        <td><?php echo $row->kegiatan?></td>
        <td><?php echo $row->date?></td>

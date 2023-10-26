@@ -68,20 +68,26 @@
   <a href="<?php echo base_url('karyawan/history')?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> History</span></a>
 </div>
 </div>
-<?php foreach ($absen as $data):?>
-<form class="card w-50 p-5 shadow-lg " style="margin-left:23%;" method="post" enctype="multipart/from-data" action="<?php echo base_url('karyawan/aksi_ubah_karyawan')?>">
-  <input type="hidden" name="id" value="<?php echo $data->id?>">
-  <div class="card-body">
-    <b style="margin-left:20%;">UBAH KEGIATAN</b><br><br>
-    <div class="card" style="width: 30rem; margin-right:5%;">
-    <input type="text" name="kegiatan" value="<?php echo $data->kegiatan?>">
-  </div><br>
-  <button type="submit" name= "submit" class="btn btn-primary">ubah</button>
-</div>
+<form class="card w-50 p-5 shadow-lg " style="margin-left:23%;" method="post" enctype="multipart/from-data" action="<?php echo base_url('karyawan/aksi_absen')?>">
+        <?php echo $this->session->flashdata('message'); ?>
+        <input type="hidden" name="id" value="">
+        <div class="card-body">
+          <b style="margin-left:20%;">ABSEN</b>
+          <div class="card" style="width: 30rem; margin-right:5%;">
+          <textarea name="kegiatan" id="kegiatan" cols="30" rows="5"></textarea>
+        </div><br>
+        <button type="submit" name= "submit" class="btn btn-primary">ubah</button>
+    </div>
 </form>
-<?php endforeach;?>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+    <?php if ($this->session->flashdata('success_message')): ?>
+swal("Sukses", "<?php echo $this->session->flashdata('success_message'); ?>", "success");
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('error')): ?>
+swal("Kesalahan", "<?php echo $this->session->flashdata('error'); ?>", "error");
+<?php endif; ?>
     // Function to show SweetAlert confirmation
     function showLogoutConfirmation() {
         swal({

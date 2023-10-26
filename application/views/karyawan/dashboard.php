@@ -79,7 +79,7 @@
             <div class="card-header">
         </div>
             <div class="card-body">  
-              <font size="20"><?php echo $absen?>
+              <font size="20"><?php echo $user?>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png" style="width:10%;margin-left:65%;"></font> 
             </div>
           </div>
@@ -90,7 +90,7 @@
             <div class="card-header">
           </div>
             <div class="card-body">
-              <font size="15"><?php echo $user?>
+              <font size="15"><?php echo $absen?>
                 <img src="https://i.pinimg.com/originals/3a/68/9c/3a689c7e5ee4d67ac98240652e8c28c4.png" style="width:10%; margin-left:65%"></font>
             </div>
           </div>

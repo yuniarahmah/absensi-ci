@@ -564,9 +564,9 @@ nav.close~.dashboard .top {
 <div class="d-flex">
   <div class="w3-sidebar w3-bar-block w3-black" style="width:15%"><br>
   <h2 styl="color:white;">Admin <hr></h2>
-  <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-file-waveform"></i> Dashboard</span></a>
+  <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-clock-rotate-left"></i> Dashboard</span></a>
 
-  <a href="<?php echo base_url('admin/data_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Data Karyawan</span></a></a>
+  <a href="<?php echo base_url('admin/data_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-clipboard-list"></i> Data Karyawan</span></a></a>
 
   <a href="<?php echo base_url('admin/profile') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Profil</span></a></a>
 

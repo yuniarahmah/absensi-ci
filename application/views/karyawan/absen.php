@@ -74,7 +74,7 @@
   <div class="card-body">
     <b style="margin-left:20%;">ABSEN</b>
     <div class="card" style="width: 30rem; margin-right:5%;">
-    <input type="text" name="kegiatan" value="">
+    <textarea name="kegiatan" id="kegiatan" cols="30" rows="5"></textarea>
   </div><br>
   <button type="submit" name= "submit" class="btn btn-primary">ubah</button>
 </div>

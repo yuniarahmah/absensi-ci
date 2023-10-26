@@ -3,6 +3,9 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 class Karyawan extends CI_Controller {
 
@@ -41,8 +44,7 @@ class Karyawan extends CI_Controller {
 	//untuk memunculkan from menu izin dan absen 
     public function ubah_karyawan($id)
 {
-    $data['absen'] = $this->m_model->get_by_karyawan('absen', 'id', $id)->result();
-    $this->load->view('karyawan/ubah_karyawan', $data);
+    $this->load->view('karyawan/ubah_karyawan');
     }
 public function aksi_ubah_karyawan()
   {
@@ -55,7 +57,7 @@ public function aksi_ubah_karyawan()
     ('absen', $data, array('id' => $this->input->post('id')));
     if ($eksekusi) {
       $this->session->set_flashdata('sukses','<div class="alert alert-success alert-dismissible fade show" role="alert">
-      Berhasil Merubah Profile
+      Berhasil Merubah Data
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>');
       redirect(base_url('karyawan/history'));
@@ -92,7 +94,7 @@ public function aksi_ubah_karyawan()
 public function export()
   {
 
-    $spreadsheet = new Spreadsheet();
+     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
     $style_col = [
@@ -185,7 +187,7 @@ public function export()
         $this->load->view('karyawan/absen');
     }
 
-    public function aksi_absen()
+ public function aksi_absen()
     {        
         date_default_timezone_set('Asia/Jakarta');
         $waktu_sekarang = date('H:i:s');
@@ -372,7 +374,7 @@ public function aksi_ubah_profilee()
 
        if ($update_result) {
            $this->session->set_flashdata('sukses', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-       Berhasil Merubah Profile
+       Berhasil Merubah data
                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
            </div>');
            redirect(base_url('karyawan/profile'));
@@ -391,7 +393,7 @@ public function aksi_ubah_profilee()
    if($eksekusi) {
        
        $this->session->set_flashdata('sukses','<div class="alert alert-dark alert-dismissible fade show" role="alert">
-       Berhasil Menghapus Profile
+       Berhasil Menghapus foto profile
                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
            </div>');
        redirect(base_url('karyawan/profile'));
@@ -400,7 +402,10 @@ public function aksi_ubah_profilee()
        redirect(base_url('karyawan/profile'));
    }
 }
-
+    public function hapus_karyawan( $id ) {
+        $this->m_model->delete( 'absen', 'id_karyawan', $id );
+        redirect( base_url( 'karyawan/history' ) );
+    }
 
 }
 ?>

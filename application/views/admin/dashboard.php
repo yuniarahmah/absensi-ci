@@ -67,7 +67,7 @@
    <h2 style="color:white;">Admin <hr></h2>
   <a href="/absensii/admin/dashboard" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-clock-rotate-left"></i>  Dashboard</span></a>
 
-  <a href="<?php echo base_url('admin/data_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> Data Karyawan</span></a></a>
+  <a href="<?php echo base_url('admin/data_karyawan') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-clipboard-list"></i> Data Karyawan</span></a></a>
 
   <a href="<?php echo base_url('admin/profile') ?>" class="w3-bar-item w3-button"><span class="ms-1 d-none d-sm-inline"><i class="fa-solid fa-id-card"></i> profil</span></a></a>
   
@@ -121,7 +121,7 @@
                      
  <div class="shadow p-2 mb-3 bg-body-tertiary rounded">
                     <h1 class="flex justify-center mb-2 md:justify-start md:pl-5">
-                    <i class="fa-solid fa-note-sticky"></i> Data Karyawan
+                    <i class="fa-solid fa-note-sticky"></i> Absensi Karyawan
                     </h1>
                   </div>
                     </div>
@@ -130,52 +130,40 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-3 py-2 text-xs text-gray-500">NO</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KARYAWAN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KEGIATAN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">TANGGAL</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM MASUK</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">JAM PULANG</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">KETERANGAN IZIN</th>
-                                <th class="px-3 py-2 text-xs text-gray-500">STATUS</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">USERNAME</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">EMAIL</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">NAMA DEPAN</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">NAMA BELAKANG</th>
+                                <th class="px-3 py-2 text-xs text-gray-500">IMAGE</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
                             <?php $no=0; foreach ($absensi as $absen): $no++ ?>
                             <tr class="whitespace-nowrap">
-                                <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>
+                                <td class="px-3 py-4 text-sm text-gray-500"><?php echo $no ?></td>                                
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo tampil_karyawan_byid($absen->id_karyawan); ?>
+                                        <?php echo $absen->username; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->kegiatan; ?>
+                                        <?php echo $absen->email; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->date; ?>
+                                        <?php echo $absen->nama_depan; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->jam_masuk; ?>
+                                        <?php echo $absen->nama_belakang; ?>
                                     </div>
                                 </td>
                                 <td class="px-3 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <?php echo $absen->jam_pulang; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $absen->keterangan; ?>
-                                    </div>
-                                </td>
-                                <td class="px-3 py-4">
-                                    <div class="text-sm text-gray-900">
-                                        <?php echo $absen->status; ?>
+                                    <img src="<?php echo base_url('image/karyawan/' . $absen->image) ?>" width="50px" height="40px">
                                     </div>
                                 </td>
                             </tr>

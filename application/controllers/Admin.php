@@ -22,7 +22,7 @@ class Admin extends CI_Controller {
 
     public function dashboard()
  {
-    $data['absensi'] = $this->m_model->get_data('absen')->result();
+    $data['absensi'] = $this->m_model->get_data('user')->result();
         $this->load->view( 'admin/dashboard', $data );
     }
 
@@ -186,95 +186,200 @@ class Admin extends CI_Controller {
         $this->model->getbulanan( $bulan );
     }
 
-    public function export_admin_bulanan()
+    // public function export_admin_bulanan()
+    // {
+    //     $spreadsheet = new Spreadsheet();
+    //     $sheet = $spreadsheet->getActiveSheet();
+    
+    //     $style_col = [
+    //         'font' => ['bold' => true],
+    //         'alignment' => [
+    //             'horizontal' => Alignment::HORIZONTAL_CENTER,
+    //             'vertical' => Alignment::VERTICAL_CENTER
+    //         ],
+    //         'borders' => [
+    //             'top' => ['borderStyle' => Border::BORDER_THIN],
+    //             'right' => ['borderStyle' => Border::BORDER_THIN],
+    //             'bottom' => ['borderStyle' => Border::BORDER_THIN],
+    //             'left' => ['borderStyle' => Border::BORDER_THIN]
+    //         ]
+    //     ];
+    
+    //     $style_row = [
+    //         'alignment' => [
+    //             'vertical' => Alignment::VERTICAL_CENTER
+    //         ],
+    //         'borders' => [
+    //             'top' => ['borderStyle' => Border::BORDER_THIN],
+    //             'right' => ['borderStyle' => Border::BORDER_THIN],
+    //             'bottom' => ['borderStyle' => Border::BORDER_THIN],
+    //             'left' => ['borderStyle' => Border::BORDER_THIN]
+    //         ]
+    //     ];
+    
+    //     $sheet->setCellValue('A1', 'DATA admin');
+    //     $sheet->mergeCells('A1:H1');
+    //     $sheet->getStyle('A1')->getFont()->setBold(true);
+    
+    //     // Head
+    //     $sheet->setCellValue('A3', 'NO');
+    //     $sheet->setCellValue('B3', 'USERNAME');
+    //     $sheet->setCellValue('C3', 'KEGIATAN');
+    //     $sheet->setCellValue('D3', 'DATE');
+    //     $sheet->setCellValue('E3', 'JAM MASUK');
+    //     // $sheet->setCellValue('F3', 'JAM PULANG');
+    //     // $sheet->setCellValue('G3', 'KETERANGAN IZIN');
+    //     // $sheet->setCellValue('H3', 'STATUS');
+    
+    //     $sheet->getStyle('A3:H3')->applyFromArray($style_col);
+    
+    //     // Get data from the database
+    //     $data = $this->m_model->getDataKaryawan();
+    
+    //     $no = 1;
+    //     $numrow = 4;
+    //     foreach ($data as $dataa) {
+    //         $sheet->setCellValue('A' . $numrow, $no);
+    //         $sheet->setCellValue('B' . $numrow, $dataa->username);
+    //         $sheet->setCellValue('C' . $numrow, $dataa->email);
+    //         $sheet->setCellValue('D' . $numrow, $dataa->nama_depan);
+    //         $sheet->setCellValue('E' . $numrow, $dataa->nama_belakang);
+    //         // $sheet->setCellValue('F' . $numrow, $dataa->jam_pulang);
+    //         // $sheet->setCellValue('G' . $numrow, $dataa->keterangan);
+    //         // $sheet->setCellValue('H' . $numrow, $dataa->status);
+    
+    //         $sheet->getStyle('A' . $numrow . ':H' . $numrow)->applyFromArray($style_row);
+    
+    //         $no++;
+    //         $numrow++;
+    //     }
+    
+    //     // Set column widths
+    //     $columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    //     foreach ($columns as $col) {
+    //         $sheet->getColumnDimension($col)->setWidth(15);
+    //     }
+    
+    //     // Set row heights
+    //     for ($i = 4; $i <= $numrow; $i++) {
+    //         $sheet->getRowDimension($i)->setRowHeight(20);
+    //     }
+    
+    //     $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+    
+    //     $sheet->setTitle('LAPORAN DATA admin');
+    
+    //     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    //     header('Content-Disposition: attachment; filename="bulanan.xlsx"');
+    //     header('Cache-Control: max-age=0');
+    
+    //     $writer = new Xlsx($spreadsheet);
+    //     $writer->save('php://output');
+    // }
+    public function export_bulanan() 
     {
+
+        // Load autoloader Composer
+        require 'vendor/autoload.php';
+        
         $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-    
-        $style_col = [
-            'font' => ['bold' => true],
-            'alignment' => [
-                'horizontal' => Alignment::HORIZONTAL_CENTER,
-                'vertical' => Alignment::VERTICAL_CENTER
-            ],
-            'borders' => [
-                'top' => ['borderStyle' => Border::BORDER_THIN],
-                'right' => ['borderStyle' => Border::BORDER_THIN],
-                'bottom' => ['borderStyle' => Border::BORDER_THIN],
-                'left' => ['borderStyle' => Border::BORDER_THIN]
-            ]
-        ];
-    
-        $style_row = [
-            'alignment' => [
-                'vertical' => Alignment::VERTICAL_CENTER
-            ],
-            'borders' => [
-                'top' => ['borderStyle' => Border::BORDER_THIN],
-                'right' => ['borderStyle' => Border::BORDER_THIN],
-                'bottom' => ['borderStyle' => Border::BORDER_THIN],
-                'left' => ['borderStyle' => Border::BORDER_THIN]
-            ]
-        ];
-    
-        $sheet->setCellValue('A1', 'DATA admin');
-        $sheet->mergeCells('A1:H1');
-        $sheet->getStyle('A1')->getFont()->setBold(true);
-    
-        // Head
-        $sheet->setCellValue('A3', 'NO');
-        $sheet->setCellValue('B3', 'NAMA');
-        $sheet->setCellValue('C3', 'KEGIATAN');
-        $sheet->setCellValue('D3', 'DATE');
-        $sheet->setCellValue('E3', 'JAM MASUK');
-        $sheet->setCellValue('F3', 'JAM PULANG');
-        $sheet->setCellValue('G3', 'KETERANGAN IZIN');
-        $sheet->setCellValue('H3', 'STATUS');
-    
-        $sheet->getStyle('A3:H3')->applyFromArray($style_col);
-    
-        // Get data from the database
-        $data = $this->m_model->getDataKaryawan();
-    
+
+        // Buat lembar kerja aktif
+       $sheet = $spreadsheet->getActiveSheet();
+        // Data yang akan diekspor (contoh data)
+        $bulan = date('m');; // Ambil nilai bulan yang dipilih dari form
+        $data = $this->m_model->getbulanan($bulan);
+        
+        // Buat objek Spreadsheet
+        $headers = ['NO','NAMA KARYAWAN','KEGIATAN','TANGGAL','JAM MASUK', 'JAM PULANG' , 'KETERANGAN IZIN', 'STATUS'];
+        $rowIndex = 1;
+        foreach ($headers as $header) {
+            $sheet->setCellValueByColumnAndRow($rowIndex, 1, $header);
+            $rowIndex++;
+        }
+        
+        // Isi data dari database
+        $rowIndex = 2;
         $no = 1;
-        $numrow = 4;
-        foreach ($data as $dataa) {
-            $sheet->setCellValue('A' . $numrow, $no);
-            $sheet->setCellValue('B' . $numrow, $dataa->username);
-            $sheet->setCellValue('C' . $numrow, $dataa->kegiatan);
-            $sheet->setCellValue('D' . $numrow, $dataa->date);
-            $sheet->setCellValue('E' . $numrow, $dataa->jam_masuk);
-            $sheet->setCellValue('F' . $numrow, $dataa->jam_pulang);
-            $sheet->setCellValue('G' . $numrow, $dataa->keterangan);
-            $sheet->setCellValue('H' . $numrow, $dataa->status);
-    
-            $sheet->getStyle('A' . $numrow . ':H' . $numrow)->applyFromArray($style_row);
-    
+        foreach ($data as $rowData) {
+            $columnIndex = 1;
+            $nama_karyawan = '';
+            $kegiatan = '';
+            $tanggal = '';
+            $jam_masuk = '';
+            $jam_pulang = '';
+            $keterangan = ''; 
+            $status = ''; 
+            foreach ($rowData as $cellName => $cellData) {
+                if ($cellName == 'kegiatan') {
+                   $kegiatan = $cellData;
+                } else if($cellName == 'id_karyawan') {
+                    $nama_karyawan = tampil_karyawan_byid($cellData);
+                } elseif ($cellName == 'date') {
+                    $tanggal = $cellData;
+                } elseif ($cellName == 'jam_masuk') {
+                    if($cellData == NULL) {
+                        $jam_masuk = '-';
+                    }else {
+                        $jam_masuk = $cellData;
+                    }
+                } elseif ($cellName == 'jam_pulang') {
+                    if($cellData == NULL) {
+                        $jam_pulang = '-';
+                    }else {
+                        $jam_pulang = $cellData;
+                    }
+                } elseif ($cellName == 'keterangan') {
+                    $keterangan = $cellData;
+                } elseif ($cellName == 'status') {
+                   $status = $cellData;
+                }
+        
+                // Anda juga dapat menambahkan logika lain jika perlu
+                
+                // Contoh: $sheet->setCellValueByColumnAndRow($columnIndex, $rowIndex, $cellData);
+                $columnIndex++;
+            }
+            // Setelah loop, Anda memiliki data yang diperlukan dari setiap kolom
+            // Anda dapat mengisinya ke dalam lembar kerja Excel di sini
+            $sheet->setCellValueByColumnAndRow(1, $rowIndex, $no);
+            $sheet->setCellValueByColumnAndRow(2, $rowIndex, $nama_karyawan);
+            $sheet->setCellValueByColumnAndRow(3, $rowIndex, $kegiatan);
+            $sheet->setCellValueByColumnAndRow(4, $rowIndex, $tanggal);
+            $sheet->setCellValueByColumnAndRow(5, $rowIndex, $jam_masuk);
+            $sheet->setCellValueByColumnAndRow(6, $rowIndex, $jam_pulang);
+            $sheet->setCellValueByColumnAndRow(7, $rowIndex, $keterangan);
+            $sheet->setCellValueByColumnAndRow(8, $rowIndex, $status);
             $no++;
-            $numrow++;
+        
+            $rowIndex++;
         }
-    
-        // Set column widths
-        $columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-        foreach ($columns as $col) {
-            $sheet->getColumnDimension($col)->setWidth(15);
+        // Auto size kolom berdasarkan konten
+        foreach (range('A', $sheet->getHighestDataColumn()) as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
         }
-    
-        // Set row heights
-        for ($i = 4; $i <= $numrow; $i++) {
-            $sheet->getRowDimension($i)->setRowHeight(20);
-        }
-    
-        $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
-    
-        $sheet->setTitle('LAPORAN DATA admin');
-    
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="bulanan.xlsx"');
-        header('Cache-Control: max-age=0');
-    
+        
+        // Set style header
+        $headerStyle =[
+            'font'=> ['bold' => true],
+            'alignment'=> [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment ::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment ::VERTICAL_CENTER
+        ]];
+        $sheet->getStyle('A1:' . $sheet->getHighestDataColumn() . '1')->applyFromArray($headerStyle);
+        
+        // Konfigurasi output Excel
         $writer = new Xlsx($spreadsheet);
+        $filename = ' REKAP_BULANAN.xlsx'; // Nama file Excel yang akan dihasilkan
+        
+        // Set header HTTP untuk mengunduh file Excel
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        
+        // Outputkan file Excel ke browser
         $writer->save('php://output');
+        
     }
     
 

@@ -8,6 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
+<style>
+@media only screen and (max-width: 600px) {
+  body {
+   
+  }
+}
+</style>
 <body>
     
 <nav class="navbar bg-body-tertiary" style="position:fixed; width:100%;" >
@@ -71,9 +78,10 @@
   <?php echo $this->session->flashdata('message'); ?>
   <input type="hidden" name="id" value="">
   <div class="card-body">
-    <b style="margin-left:20%;">IZIN</b>
+    <b style="margin-left:30%;">IZIN</b>
     <div class="card" style="width: 30rem; margin-right:5%;">
-    <input type="text" name="kegiatan" value="">
+    <!-- <input type="text-area" name="kegiatan" value=""> -->
+    <textarea name="kegiatan" id="kegiatan" cols="20" rows="5" class="text"></textarea>
   </div><br>
   <button type="submit" name= "submit" class="btn btn-primary">ubah</button>
 </div>

@@ -109,7 +109,7 @@ body{
                             </span>
                         </div>
           </div><br>
-          <p style="color:white"> belum punya akun<a href="auth/register_k"> silahkan register </a></p>
+          <p style="color:white"> belum punya akun<a href="register_k"> silahkan register </a></p>
             <button type="submit" name="submit"> Login </button>
         </form>
       </div>

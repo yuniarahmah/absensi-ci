@@ -54,7 +54,7 @@ class M_model extends CI_Model {
         }
     }
    public function getDataKaryawan() {
-        $this->db->select('absen.*, user.username' );
+        $this->db->select('user.*, user.username' );
         $this->db->where('role', 'karyawan');
         $this->db->join('user', 'user.id = absen.id_karyawan', 'left');
         $query = $this->db->get('absen');
