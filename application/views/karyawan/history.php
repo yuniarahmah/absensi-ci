@@ -155,7 +155,7 @@ function pulang(id) {
           // Redirect to the URL after confirmation
           window.location.href = '<?= base_url("karyawan/pulang/") ?>' + id;
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          swalWithBootstrapButtons.fire('Dibatalkan', 'Tidak Jadi Pulang :)', 'error');
+          swalWithBootstrapButtons.fire('Dibatalkan', 'Tidak Jadi Pulang :D', 'error');
         }
       });
   }
@@ -163,12 +163,6 @@ function pulang(id) {
 </script>
 
   <script>
-    //     function pulang(id){
-    //       var yes = confirm('Yakin pulang?');
-    //       if(yes == true) {
-    //         window.location.href = "<?php echo base_url('karyawan/pulang/')?>" + id;
-    //     }
-    // }
     function hapus(id) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {

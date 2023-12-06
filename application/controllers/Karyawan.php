@@ -402,10 +402,10 @@ public function aksi_ubah_profilee()
        redirect(base_url('karyawan/profile'));
    }
 }
-    public function hapus_karyawan( $id ) {
-        $this->m_model->delete( 'absen', 'id_karyawan', $id );
-        redirect( base_url( 'karyawan/history' ) );
+    public function hapus_karyawan($id)
+    {
+        $this->m_model->delete('absen', 'id', $id);
+        redirect(base_url('karyawan/history'));
     }
-
 }
 ?>

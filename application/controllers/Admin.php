@@ -477,7 +477,7 @@ class Admin extends CI_Controller {
 
      if ($update_result) {
          $this->session->set_flashdata('sukses', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-     Berhasil Merubah Profile
+     Berhasil Merubah data
              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
          </div>');
          redirect(base_url('admin/profile'));

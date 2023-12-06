@@ -658,14 +658,10 @@ nav.close~.dashboard .top {
                                                     <button class="btn btn-outline-secondary" type="button" id="toggleKonfirmasiPassword"><i class="fas fa-eye-slash"></i></button>
                                                     </div>
                                                 </div>
-                                                <div class="button">
                                                     <button style="margin-right:10%" type="submit" class="btn btn-sm btn-dark col-6" name=" submit">Ubah</button>
-                                                        <a class="btn btn-danger col-3" href="<?php echo base_url('karyawan/hapus_image'); ?>">
-                                                            Hapus
-                                                            Foto</a>
-                                                </div>
+                                                        <a class="btn btn-danger col-4" href="<?php echo base_url('karyawan/hapus_image'); ?>">
+                                                            Hapus Foto</a>
                                             </div>
-                                           
                                     </div>
                                 </div>
                                 <?php endforeach; ?>
